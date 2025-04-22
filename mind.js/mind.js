@@ -169,7 +169,28 @@ experienceObserver.observe(experience, {
   attributes: true,
   attributeFilter: ["class"],
 });
+//캐릭터
 
+
+const character = document.getElementById("character");
+const characterText = character.querySelector(".txt");
+
+const characterObserver = new MutationObserver((mutations) => {
+  mutations.forEach((mutation) => {
+    const isActive = character.classList.contains("active");
+
+    if (isActive) {
+      characterText.classList.add("glow");
+    } else {
+      characterText.classList.remove("glow");
+    }
+  });
+});
+
+characterObserver.observe(character, {
+  attributes: true,
+  attributeFilter: ["class"],
+});
 
 
   // 🎯 버튼 클릭 이벤트
