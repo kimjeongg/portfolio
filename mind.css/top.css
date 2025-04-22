@@ -1,0 +1,153 @@
+@charset "utf-8";
+
+
+
+#design_skill {
+    top: 800px;
+    left: 800px;
+    position: relative;
+}
+
+#design_skill .txt {
+    position: absolute;
+    right: 500px;
+    bottom: 300px;
+    width: 580px;
+    height: 214px;
+    border: 5px solid var(--yellow);
+    border-radius: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    transition: box-shadow 1.5s ease-in-out;
+}
+
+#design_skill .txt.glow {
+    box-shadow: 3px 0px 30px 0px #EEBC1A, -3px 0px 50px 0px #EEBC1A inset, 5px 0px 10px 0px #EEBC1A;
+}
+
+
+
+#design_skill li.first {
+    position: absolute;
+    left: 740px;
+    bottom: 170px;
+    transform: rotate(var(--angle));
+    --angle: -8.262deg;
+}
+
+#design_skill li.first img {
+    width: 144px;
+}
+
+#design_skill li.two {
+    position: absolute;
+    left: 600px;
+    bottom: 410px;
+    transform: rotate(var(--angle));
+    --angle: -4.367deg;
+}
+
+#design_skill li.three {
+    position: absolute;
+    left: 780px;
+    top: 300px;
+    transform: rotate(var(--angle));
+    --angle: 13.142deg;
+}
+
+#design_skill li.four {
+    position: absolute;
+    left: 1000px;
+    top: 200px;
+    transform: rotate(var(--angle));
+    --angle: 0deg;
+}
+
+#design_skill li.five {
+    position: absolute;
+    left: 1200px;
+    top: 250px;
+    transform: rotate(var(--angle));
+    --angle: -7.035deg;
+}
+
+#design_skill li.six {
+    position: absolute;
+    left: 1340px;
+    top: 235px;
+    transform: rotate(var(--angle));
+    --angle: 12.693deg;
+}
+
+#design_skill li {
+    opacity: 0;
+    transform: translateY(60px) scale(0.2) rotate(var(--angle));
+    transition: transform 6s ease-out, opacity 2s ease-out;
+    pointer-events: auto;
+}
+
+#design_skill li.show {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(var(--angle));
+}
+
+
+
+#experience {
+    top: 800px;
+    left: 2000px;
+
+}
+
+#experience .txt {
+    position: absolute;
+    left: 300px;
+    bottom: 300px;
+    border: 5px solid var(--blue);
+    border-radius: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    transition: box-shadow 1.5s ease-in-out;
+    width: 650px;
+    height: 171px;
+}
+
+#experience .txt.glow {
+    box-shadow: 3px 0px 30px 0px #4833FF, -3px 0px 50px 0px #4833FF inset, 5px 0px 10px 0px #4833FF;
+}
+
+
+
+
+#experience ul {
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 360px;
+    /* width: 100%; */
+    position: absolute;
+    width: 350px;
+}
+
+#experience .ex1 {
+    background-image: url(../mind.img/메모\ 1.png);
+    left: 760px;
+    top: 100px;
+
+}
+
+#experience .ex2 {
+    background-image: url(../mind.img/메모2\ 1.png);
+    left: 1200px;
+    top: 110px;
+    /* width: ; */
+}
+
+#experience .ex3 {
+    background-image: url(../mind.img/메모\ 2.png);
+    left: 1200px;
+    top: 550px;
+}

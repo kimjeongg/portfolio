@@ -1,0 +1,368 @@
+@charset "utf-8";
+
+footer {
+    height: 100vh;
+    font-family: var(--pretend);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-size: cover;
+    background-image: url(../img/footer_bg.jpg);
+    position: relative;
+    overflow: visible;
+    pointer-events: auto;
+
+}
+
+/* 
+footer .inner {
+    height: 100vh;
+} */
+
+
+.footer_top {
+    /* background: powderblue; */
+    position: relative;
+    height: calc(100vh - 50px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 100px;
+    overflow: visible;
+}
+
+
+.footer_top .txt {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 90px;
+    position: relative;
+    z-index: 1;
+    mix-blend-mode: difference;
+    user-select: none;
+    /* pointer-events: none;  */
+}
+
+
+.footer_top .small {
+    color: var(--font-gray);
+    display: block;
+    font-weight: 300;
+    font-size: 24px;
+}
+
+/* 왼쪽 */
+.footer_top .txt ul.left {
+    display: flex;
+    flex-direction: column;
+    font-size: 23px;
+    gap: 8px;
+    padding-top: 15px;
+    color: var(--footerFont-color);
+    font-weight: 400;
+}
+
+.footer_top .left li.right_txt {
+    margin-left: 70px;
+}
+
+.footer_top .left li:nth-child(4) {
+    margin-top: 50px;
+}
+
+.footer_top .left li:nth-child(5) {
+    margin-left: 70px;
+}
+
+.footer_top .left li:nth-child(6) {
+    margin-left: 110px;
+    margin-bottom: 50px;
+}
+
+.footer_top .left li:nth-child(8) {
+    margin-left: 100px;
+}
+
+.footer_top .left li:nth-child(9) {
+    margin-left: 140px;
+}
+
+
+
+.footer_top .center {
+    perspective: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 150px;
+    text-transform: uppercase;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+}
+
+/* 중앙 */
+.center h2 {
+    color: var(--footerFont-color);
+    font-family: var(--Anton);
+    font-size: 150px;
+    font-weight: 400;
+    line-height: 150px;
+    text-align: center;
+}
+
+/* 오른쪽  */
+.footer_top .txt ul.right {
+    font-size: 20px;
+    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: var(--footerFont-color);
+    width: 300px;
+}
+
+.footer_top .txt ul.right li:nth-child(4) {
+    color: var(--footerFont-color);
+    font-weight: 500;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.footer_top .txt ul.right li:nth-child(5) {
+    font-size: 15px;
+}
+
+.right p.right_txt1 {
+    color: var(--font-gray);
+    line-height: 1.4;
+    font-weight: 300;
+}
+
+.right p.right_txt2 {
+    display: block;
+}
+
+.right p.right_txt3 {
+    color: var(--font-gray);
+    font-size: 18px;
+    gap: 8px;
+    font-weight: 300;
+
+}
+
+
+
+
+
+.footer_top .txt .char {
+    display: inline-block;
+    opacity: 0;
+    transform: rotateX(-80deg) translateY(20px);
+    transform-origin: left bottom;
+    transition: opacity 0.1s ease, transform 0.1s ease;
+
+
+    user-select: none;
+    pointer-events: none;
+
+}
+
+.footer_top .txt .char.on {
+    opacity: 1;
+    transform: rotateX(0deg) translateY(0);
+}
+
+
+
+
+.footer_top .char.space {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation-delay: 0s !important;
+}
+
+
+
+
+
+
+/* 떨어지는 프레임  footer_top 기준   */
+
+
+.footer_top .drop-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    /* 전체는 터치 안 되게, 내부 tag-container만 auto */
+}
+
+canvas#matter-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 10;
+    pointer-events: auto;
+}
+
+
+
+.footer_top .tag {
+    position: absolute;
+    /* top: 0;
+    left: 10%; */
+    transform: translateZ(0);
+    padding: 10px 20px;
+    font-size: 35px;
+    font-weight: 600;
+
+    clip-path: polygon(2% 0%, 98% 3%, 100% 95%, 0% 100%);
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+
+    color: var(--black-color);
+    background-color: rgba(255, 134, 74);
+    opacity: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* 온이안걸리면 드래그가 안됌  */
+    cursor: default;
+    /* user-select: none; */
+
+
+    /* 글자 색 변하는거  */
+    mix-blend-mode: normal;
+
+    cursor: grab !important;
+    pointer-events: auto !important;
+    user-select: none;
+
+
+
+}
+
+
+.tag.on {
+    cursor: grab;
+}
+
+.tag.on:active {
+    cursor: grabbing;
+}
+
+.footer_top .center a:hover~.drop-wrapper .tag {
+    cursor: default;
+}
+
+
+
+.footer_top .txt li.hovered,
+footer .botton,
+.footer_top .txt h2.hovered {
+    text-shadow: 0 0 6px rgba(255, 108, 61, 0.5);
+    transition: 0.2s;
+}
+
+
+/* 버튼 */
+.botton {
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    z-index: 99;
+}
+
+.botton a {
+    display: flex;
+    width: 200px;
+    height: 60px;
+    transition: 2s;
+    transform-style: preserve-3d;
+    transform: rotateX(0deg);
+    font-size: 22px;
+    font-weight: 600;
+
+    /* 떨어지는 프레임때문에  */
+    position: relative;
+    z-index: 20;
+    pointer-events: auto;
+    /* 버튼 호버 안됐을때 드래그 되게  */
+    /* cursor: not-allowed; */
+    cursor: pointer;
+
+    perspective: 1000px;
+    perspective-origin: center;
+}
+
+.botton a:hover {
+    transform: rotateX(-360deg);
+    perspective: none;
+
+}
+
+.botton a span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffff;
+    background: rgba(37, 77, 0,0.7);
+    text-transform: uppercase;
+    font-size: 25px;
+    letter-spacing: 2px;
+    transition: 0.001s;
+    border: 2px solid #fff;
+    box-shadow: inset 0 10px 30px rgba(0, 0, 0, 0.1)
+}
+
+.botton a:hover span {
+    color: #ffff;
+    background: #5b8a1a;
+    border: 2px solid #fff;
+}
+
+.botton a span:nth-child(1) {
+    transform: rotateX(360deg) translateZ(28px);
+}
+
+.botton a span:nth-child(2) {
+    transform: rotateX(270deg) translateZ(30px);
+}
+
+.botton a span:nth-child(3) {
+    transform: rotateX(180deg) translateZ(28px);
+}
+
+.botton a span:nth-child(4) {
+    transform: rotateX(90deg) translateZ(30px);
+}
+
+
+
+
+
+/* bottom */
+.footer_bottom {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--font-gray);
+    border-top: 1px solid var(--font-gray);
+}

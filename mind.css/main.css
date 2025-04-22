@@ -1,0 +1,214 @@
+ @charset "utf-8";
+
+ html,
+ body {
+   overflow: hidden;
+   width: 100%;
+   height: 100%;
+   background-color: var(--light-black);
+   font-family: var(--pretend);
+   color: #fff;
+ }
+
+ .view {
+   width: 100vw;
+   height: 100vh;
+   overflow: hidden;
+   position: relative;
+ }
+
+ .canvas {
+   width: 2050px;
+   height: 2050px;
+   position: absolute;
+   /* background: #BDBDBD; */
+   cursor: grab;
+   transition: transform 1s ease;
+   pointer-events: auto;
+ }
+
+ /* 기본 상태는 전부 작게 */
+ .section {
+   width: 100%;
+   height: 100vh;
+   /* background: #B5ADAD; */
+   position: absolute;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 24px;
+   font-weight: bold;
+   transform: scale(0.3);
+   pointer-events: auto;
+   transition: transform 0.5s ease;
+   z-index: 1;
+   background: var(--light-black);
+ }
+
+ /* 선택됐을 때만 크게 확대 */
+ .section.active {
+   transform: scale(1) !important;
+   z-index: 10;
+   opacity: 1;
+   pointer-events: auto;
+ }
+
+ .txt{
+  font-family: var(--Druk);
+  color: var(--white);
+  font-size: 55px;
+  text-transform: uppercase;
+ }
+
+ /* 메인 */
+ #main {
+   top: 1400px;
+   left: 1400px;
+   background: var(--light-black);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+ }
+
+
+ #main .content {
+   width: 1500px;
+   height: 900px;
+   border-radius: 146px;
+   border: 3px solid var(--main);
+   background: var(--light-black);
+   box-shadow: -2.189px -2.189px 58.384px 0px #FF9B28 inset, 2.189px 2.189px 58.384px 0px rgba(255, 155, 40, 0.85);
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 0 100px;
+ }
+
+ #main .content .left {
+   display: flex;
+   flex-direction: column;
+   height: 100%;
+   align-items: center;
+   justify-content: center;
+   gap: 50px;
+   width: 650px;
+
+ }
+
+ #main .content .left img {
+   width: 320px;
+   height: 500px;
+ }
+
+ #main .content .left .bot_txt {
+   font-weight: 400;
+   font-size: 27px;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   gap: 20px;
+
+ }
+
+ #main .content .left .bot_txt p {
+   font-size: 24px;
+   line-height: 1.5;
+ }
+
+ #main .content .left .bot_txt span {
+   font-weight: 800;
+   color: var(--main)
+ }
+
+
+
+
+
+ #main .content .right ul {
+   display: flex;
+   flex-direction: column;
+   gap: 80px;
+   width: 500px;
+ }
+
+ #main .content .right h3 {
+   font-weight: 700;
+   font-size: 30px;
+   font-family: var(--Druk);
+   text-transform: uppercase;
+   color: var(--main);
+ }
+
+ #main .content .right p {
+   font-size: 29px;
+   font-weight: 400;
+   margin-left: 50px;
+   margin-top: 10px;
+ }
+
+
+
+
+
+
+
+
+
+
+ .btn-group {
+   position: fixed;
+   bottom: 10px;
+   left: 50%;
+   transform: translateX(-50%);
+   display: flex;
+   gap: 5px;
+   z-index: 1000;
+ }
+
+ .btn-group button {
+   display: block;
+   margin: 6px 0;
+   padding: 8px 14px;
+   background: #333;
+   color: white;
+   border: none;
+   cursor: pointer;
+   border-radius: 4px;
+ }
+
+ svg {
+   position: absolute;
+   left: 50%;
+   top: 50%;
+   transform: translate(-50%, -50%);
+   z-index: 0;
+   width: 3000px;
+   height: 3000px;
+   pointer-events: none;
+ }
+
+ path {
+   fill: none;
+   stroke-width: 4;
+   stroke-dasharray: 8 10;
+   stroke-dashoffset: 1000;
+   position: absolute;
+   opacity: 0;
+   pointer-events: none;
+ }
+
+ #path1 {
+   stroke: #FFD700;
+ }
+
+ #path2 {
+   stroke: #A0522D;
+ }
+
+ #path3 {
+   stroke: #7B68EE;
+ }
+
+ #path4 {
+   stroke: var(--blue);
+ }

@@ -1,0 +1,89 @@
+@charset "utf-8";
+
+
+#character {
+    top: 2000px;
+    left: 800px;
+    background: #ddd;
+    position: relative;
+}
+
+#character .txt {
+    position: absolute;
+    left: 50%;
+    top: 100px;
+    border: 5px solid var(--bora);
+    border-radius: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    transition: box-shadow 1.5s ease-in-out;
+    width: 640px;
+    height: 140px;
+}
+
+#character .txt.glow {
+    box-shadow: 3px 0px 30px 0px #640898, -3px 0px 50px 0px #640898 inset, 5px 0px 50px 0px #640898;
+}
+
+#character img{
+    width: 400px;
+    position: absolute;
+    left: 50%;
+    top: 300px;
+}
+#character li p{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 330px;
+    height: 100px;
+    font-size: 23px;
+    font-weight: 300;
+}
+#character li p strong{
+    font-family: var(--Druk);
+}
+#character li.first{
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+#character li.two{
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+#character li.three{
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+#character li.four{
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+#character li.five{
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+#character li.six{
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+
+
+
+
+
+
+#hobby {
+    top: 2000px;
+    left: 2000px;
+    background: #777;
+}

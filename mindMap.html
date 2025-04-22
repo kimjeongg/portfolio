@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="portfolio">
+  <meta name="keywords" content="">
+  <meta name="author" content="kin jeong e">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mindmap Navigation</title>
+
+  <link rel="stylesheet" href="mind.css/reset.css">
+  <link rel="stylesheet" href="mind.css/common.css">
+  <link rel="stylesheet" href="mind.css/main.css">
+  <link rel="stylesheet" href="mind.css/top.css">
+  <link rel="stylesheet" href="mind.css/bottom.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+
+
+</head>
+
+<body>
+
+  <div class="btn-group">
+    <button onclick="zoomFromMain('design_skill', '#path1')">디자인</button>
+    <button onclick="zoomFromMain('experience', '#path2')">경험</button>
+    <button onclick="zoomFromMain('character', '#path3')">캐릭터</button>
+    <button onclick="zoomFromMain('hobby', '#path4')">취미</button>
+    <button onclick="zoomTo('main', null)">메인 보기</button>
+    <button onclick="resetView()">전체 보기</button>
+    <button onclick="resetView()">홈</button>
+  </div>
+
+  <div class="view" id="view">
+    <div class="canvas" id="canvas">
+      <svg>
+        <!-- 좌상단 DESIGN -->
+        <path id="path1" d="M 2800 2000 Q 1600 1200 600 750" />
+
+        <!-- 우상단 EXPERIENCE -->
+        <path id="path2" d="M 2800 2000 Q 3000 1200 2700 750" />
+
+        <!-- 좌하단 CHARACTER -->
+        <path id="path4" d="M 2800 2000 Q 1600 2800 600 2350" />
+
+        <!-- 우하단 HOBBY -->
+        <path id="path3" d="M 2800 2000 Q 3200 2800 2700 2350" />
+      </svg>
+
+      <div class="section" id="main">
+        <div class="content">
+          <div class="left">
+            <img src="mind.img/KakaoTalk_20250422_005739941.jpg" alt="my">
+            <div class="bot_txt">
+              <h2>“당연한 것을 의심하고, <span>사용자의 시선</span>으로 다시 설계합니다.”</h2>
+              <p>틀을 깨는 창의적인 시도도, 결국은<span> 고객을 위한 방향</span>으로<br>나아가야<span> 진짜 디자인</span>이라 생각합니다.</p>
+            </div>
+          </div><!-- //.left -->
+          <div class="right">
+            <ul>
+              <li>
+                <h3>name</h3>
+                <p>김정이</p>
+                <p>Jeong e Kim</p>
+              </li>
+              <li>
+                <h3>brith</h3>
+                <p>2003.09.29</p>
+              </li>
+              <li>
+                <h3>mail</h3>
+                <p>@</p>
+              </li>
+              <li>
+                <h3>instagram</h3>
+                <p>@</p>
+              </li>
+            </ul>
+          </div><!-- //.right -->
+        </div>
+      </div>
+      <div class="section" id="design_skill">
+        <div class="txt">design<br>skill</div>
+        <ul>
+          <li class="first">
+            <img src="mind.img/js.png" alt="js">
+          </li>
+          <li class="three">
+            <img src="mind.img/html.png" alt="">
+          </li>
+          <li class="six">
+            <img src="mind.img/ps.png" alt="">
+          </li>
+          <li class="four">
+            <img src="mind.img/figma.png" alt="">
+          </li>
+          <li class="two">
+            <img src="mind.img/css.png" alt="">
+          </li>
+          <li class="five">
+            <img src="mind.img/ai.png" alt="">
+          </li>
+        </ul>
+      </div>
+      <div class="section" id="experience">
+        <div class="txt">
+          exprience
+        </div>
+        <ul class="ex1">
+          <li>
+            <h3>2022.07 ~ 2023.08</h3>
+            <p>에끌로 에스테틱 - 사원</p>
+          </li>
+          <li>
+            <h3>2023.10~2024.12</h3>
+            <p>소사벌 휴먼 피부과 - 주임</p>
+          </li>
+        </ul>
+        <ul class="ex2">
+          <li>2021 피부미용 국가자격증</li>
+          <li>2021 코디네이터 1급</li>
+          <li>2024 2종 운전면허</li>
+          <li>2025 ui ux 웹디 기능사</li>
+        </ul>
+        <ul class="ex3">
+          <li>
+            <h3>2024.12~2025.6 </h3>
+            <p>비전고등학교 졸업</p>
+          </li>
+          <li>
+            <h3>2024.12~2025.6 </h3>
+            <p>비전고등학교 졸업</p>
+          </li>
+          <li>
+            <h3>2024.12~2025.6 </h3>
+            <p>이젠아카데미 uiux 프론트엔드 부트캠프</p>
+          </li>
+        </ul>
+      </div>
+      <div class="section" id="character">
+        <div class="txt">character</div>
+        <img src="mind.img/f6f4924d42e97012a296926e92854b47.jpg" alt="">
+        <ul>
+          <li class="first">
+            <p>
+              <strong>Ambitious</strong><br>항상 더 높은 목표를 설정하고 도전
+            </p>
+          </li>
+          <li class="two">
+            <p>
+              <strong>Pioneering Spirit</strong><br>틀에 갇히지 않고 새로운 길을 찾음
+            </p>
+          </li>
+          <li class="three">
+            <p>
+              <strong>Efficiency-Driven</strong><br>시간 낭비를 싫어하고 최적의 방법을 찾음
+            </p>
+          </li>
+          <li class="four">
+            <p>
+              <strong>Continuous<br>Self-Improvement</strong><br>항상 성장하려는 노력
+            </p>
+          </li>
+          <li class="five">
+            <p>
+              <strong>Leadership</strong><br>강한 주도권과 조직 운영 능력
+            </p>
+          </li>
+          <li class="six">
+            <p>
+              <strong>Goal-Oriented</strong><br>원하는 결과를 얻을 때까지 멈추지 않음
+            </p>
+          </li>
+        </ul>
+      </div>
+      <div class="section" id="hobby">
+        <div class="txt"></div>
+        <ul>
+          <li class="go_trip">
+            <div class="txt"></div>
+          </li>
+          <li class="rewatching_movie">
+            <div class="txt"></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  </div>
+  <script src="mind.js/mind.js"></script>
+</body>
+
+</html>
