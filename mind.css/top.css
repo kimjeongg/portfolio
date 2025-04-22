@@ -111,9 +111,10 @@
     align-items: center;
     justify-content: center;
     background: #000;
+    font-size: 40px;
     transition: box-shadow 1.5s ease-in-out;
-    width: 650px;
-    height: 171px;
+    width: 450px;
+    height: 120px;
 }
 
 #experience .txt.glow {
@@ -136,8 +137,22 @@
     background-image: url(../mind.img/메모\ 1.png);
     left: 760px;
     top: 100px;
-
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
+#experience .ex1 h3{
+    font-size: 17px;
+    font-family:var(--Audiowide) ;
+}
+
+
+
+
+
+
+
+
 
 #experience .ex2 {
     background-image: url(../mind.img/메모2\ 1.png);
