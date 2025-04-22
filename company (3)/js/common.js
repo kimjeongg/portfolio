@@ -217,7 +217,7 @@ gsap.timeline({
         pinSpacing: true,
         pinReparent: true,             // 부모 transform 문제 해결
     }
-}).fromTo('.vid_box video', { scale: 0.65, transformOrigin: "center center" }, { scale: 1, ease: "power2.out", duration: 2 });
+}).fromTo('.vid_box iframe', { scale: 0.65, transformOrigin: "center center" }, { scale: 1, ease: "power2.out", duration: 2 });
 
 
 //trust 섹션 애니메이션
