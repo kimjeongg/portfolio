@@ -26,13 +26,14 @@
     box-shadow: 3px 0px 30px 0px #640898, -3px 0px 50px 0px #640898 inset, 5px 0px 50px 0px #640898;
 }
 
-#character img{
+#character img {
     width: 400px;
     position: absolute;
     left: 50%;
     top: 300px;
 }
-#character li p{
+
+#character li p {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -41,35 +42,42 @@
     font-size: 23px;
     font-weight: 300;
 }
-#character li p strong{
+
+#character li p strong {
     font-family: var(--Druk);
 }
-#character li.first{
+
+#character li.first {
     position: absolute;
     left: 0;
     top: 0;
 }
-#character li.two{
+
+#character li.two {
     position: absolute;
     left: 0;
     top: 0;
 }
-#character li.three{
+
+#character li.three {
     position: absolute;
     left: 0;
     top: 0;
 }
-#character li.four{
+
+#character li.four {
     position: absolute;
     left: 0;
     top: 0;
 }
-#character li.five{
+
+#character li.five {
     position: absolute;
     left: 0;
     top: 0;
 }
-#character li.six{
+
+#character li.six {
     position: absolute;
     left: 0;
     top: 0;
@@ -84,5 +92,6 @@
 #hobby {
     top: 2000px;
     left: 2000px;
-    background: #777;
+    background-image: url(../img/hobby.PNG) ;
+    background-size: cover;
 }
