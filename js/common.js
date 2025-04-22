@@ -20,7 +20,10 @@ $(function () {
     $('header').toggleClass('on');
     $('.gnb_overlay').toggleClass('on');
   });
-
+  $('.gnb_overlay').click(function () {
+    $('header').removeClass('on');
+    $(this).removeClass('on');
+  });
 
   gsap.registerPlugin(ScrollTrigger);
 
