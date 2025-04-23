@@ -25,7 +25,14 @@ $(function () {
     $(this).removeClass('on');
   });
 
+
+
+
+
+  
   gsap.registerPlugin(ScrollTrigger);
+
+  
 
   // 1. 배경을 pin으로 고정
   ScrollTrigger.create({
@@ -35,6 +42,9 @@ $(function () {
     pin: ".bg_pin",
     pinSpacing: false, // pinned 된 만큼 여백 안 만들기
   });
+
+  
+
 
   // 2. 카드마다 배경 이미지 변경
   const bgPin = document.querySelector(".bg_pin");

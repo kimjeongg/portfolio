@@ -261,6 +261,7 @@ body.in{
     display: flex;
     align-items: center;
     /* padding: 0 100px; */
+    transition: .6s;
 }
 .bg_white{
     width: 800px;

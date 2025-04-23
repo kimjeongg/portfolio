@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>RGB Trail Glitch Cursor - Circle Version</title>
+  <style>
+    body {
+      cursor: none;
+      background: #000;
+      margin: 0;
+      font-family: monospace;
+      overflow: hidden;
+    }
+
+    a.glitch-zone {
+      font-size: 2rem;
+      padding: 1rem 2rem;
+      background: #0ff;
+      color: #000;
+      text-decoration: none;
+      border: none;
+      position: relative;
+      z-index: 1;
+      cursor: none;
+      display: inline-block;
+      margin: 40vh auto;
+    }
+
+    .cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background: #0ff;
+      border-radius: 50%;
+      mix-blend-mode: difference;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 10000;
+    }
+
+    .cursor-trail {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 9998;
+      opacity: 0.4;
+    }
+
+    .trail-r { background: rgba(255,0,64,0.45); }
+    .trail-g { background: rgba(0,255,128,0.45); }
+    .trail-b { background: rgba(0,128,255,0.45); }
+
+    .cursor-text {
+      position: fixed;
+      font-size: 24px;
+      font-weight: bold;
+      color: #0ff;
+      mix-blend-mode: difference;
+      pointer-events: none;
+      z-index: 10000;
+      display: none;
+      transform: translate(-50%, -50%) scale(0.8);
+      opacity: 0;
+    }
+
+    .cursor-text span { display: inline-block; }
+
+    .cursor-text.active {
+      display: flex;
+      animation: glitchFade 0.35s ease-out forwards;
+    }
+
+    .cursor-text.glitch span {
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .cursor-text.glitch span.active {
+      opacity: 0.4;
+    }
+
+    @keyframes glitchFade {
+      0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor"></div>
+  <div class="cursor-text"></div>
+  <a href="https://example.com" class="glitch-zone" data-text="CLICK!">CLICK ME</a>
+
+  <script>
+    const cursor = document.querySelector(".cursor");
+    const textCursor = document.querySelector(".cursor-text");
+    const glitchZone = document.querySelector(".glitch-zone");
+    let isTextMode = false;
+
+    let lastX = 0, lastY = 0, isFirst = true;
+
+    window.addEventListener("mousemove", (e) => {
+      if (!isTextMode) {
+        cursor.style.left = `${e.clientX}px`;
+        cursor.style.top = `${e.clientY}px`;
+
+        if (!isFirst && (Math.abs(e.clientX - lastX) > 2 || Math.abs(e.clientY - lastY) > 2)) {
+          createTrail(e.clientX - 2, e.clientY - 2, 'trail-r');
+          createTrail(e.clientX + 2, e.clientY + 2, 'trail-g');
+          createTrail(e.clientX, e.clientY - 2, 'trail-b');
+        }
+
+        lastX = e.clientX;
+        lastY = e.clientY;
+        isFirst = false;
+      }
+
+      textCursor.style.left = `${e.clientX}px`;
+      textCursor.style.top = `${e.clientY}px`;
+    });
+
+    function createTrail(x, y, trailClass) {
+      const trail = document.createElement("div");
+      trail.className = `cursor-trail ${trailClass}`;
+      trail.style.left = `${x}px`;
+      trail.style.top = `${y}px`;
+      document.body.appendChild(trail);
+
+      setTimeout(() => {
+        trail.style.transition = "opacity 0.35s, transform 0.35s";
+        trail.style.opacity = "0";
+        trail.style.transform = "translate(-50%, -50%) scale(1.4)";
+      }, 0);
+
+      setTimeout(() => trail.remove(), 400);
+    }
+
+    glitchZone.addEventListener("mouseenter", () => {
+      const text = glitchZone.getAttribute("data-text");
+      cursor.style.display = "none";
+      textCursor.innerHTML = "";
+      text.split("").forEach(char => {
+        const span = document.createElement("span");
+        span.textContent = char;
+        textCursor.appendChild(span);
+      });
+      textCursor.classList.add("active");
+      isTextMode = true;
+    });
+
+    glitchZone.addEventListener("mouseleave", () => {
+      cursor.style.display = "block";
+      textCursor.classList.remove("active");
+      textCursor.style.opacity = "0";
+      textCursor.innerHTML = "";
+      isTextMode = false;
+    });
+
+    glitchZone.addEventListener("click", (e) => {
+      e.preventDefault();
+      const spans = textCursor.querySelectorAll("span");
+      textCursor.classList.add("glitch");
+
+      spans.forEach(span => {
+        const dx = (Math.random() - 0.5) * 100;
+        const dy = (Math.random() - 0.5) * 100;
+        const rot = (Math.random() - 0.5) * 180;
+        span.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg)`;
+        span.classList.add("active");
+      });
+
+      setTimeout(() => {
+        window.location.href = glitchZone.getAttribute("href");
+      }, 400);
+    });
+  </script>
+</body>
+</html>
