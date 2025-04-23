@@ -1,5 +1,9 @@
 $(function () {
 
+  function preventScroll(e) {
+    e.preventDefault();
+  }
+
   const $ham = $('header .dot_ham');
   $ham.hide(); // 처음엔 숨김
 
@@ -91,6 +95,26 @@ $(function () {
     el.classList.add('loose');
   }, 1000); // 1초 후 실행
 
+
+  if (window.location.hash === '#scroll') {
+    // splash 제거
+    document.querySelector('.splash')?.remove();
+  
+    // 스크롤 해제
+    window.removeEventListener("wheel", window.preventScroll, { passive: false });
+    window.removeEventListener("touchmove", window.preventScroll, { passive: false });
+  
+    // body 초기화
+    document.body.classList.remove('in');
+    $('.loose').addClass('on');
+  
+    // 스크롤 위치 이동
+    setTimeout(() => {
+      const target = document.querySelector('#scroll') || document.querySelector('.values');
+      target?.scrollIntoView({ behavior: 'auto' });
+    }, 0);
+  }
+  
 
 
 
