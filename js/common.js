@@ -94,7 +94,7 @@ $(function () {
   
     // body 초기화
     document.body.classList.remove('in');
-    $('.loose').addClass('on');
+    $('.loose').addClass('on')
   
     // 스크롤 위치 이동
     setTimeout(() => {
