@@ -1,12 +1,13 @@
 $(function () {
    
-    // 스크롤 막기
-    window.addEventListener("wheel", preventScroll, { passive: false });
-    window.addEventListener("touchmove", preventScroll, { passive: false });
-
-    function preventScroll(e) {
+    window.preventScroll = function (e) {
         e.preventDefault();
-    }
+    };
+
+    // 스크롤 막기
+    window.addEventListener("wheel", window.preventScroll, { passive: false });
+    window.addEventListener("touchmove", window.preventScroll, { passive: false });
+
 
 
     const text = document.getElementById('text');
