@@ -103,8 +103,8 @@
 
 #experience .txt {
     position: absolute;
-    left: 300px;
-    bottom: 300px;
+    left: 500px;
+    bottom: 150px;
     border: 5px solid var(--blue);
     border-radius: 60px;
     display: flex;
@@ -131,38 +131,91 @@
     /* width: 100%; */
     position: absolute;
     width: 350px;
+    color: #000000;
+
 }
 
 #experience .ex1 {
     background-image: url(../mind.img/메모\ 1.png);
-    left: 760px;
-    top: 100px;
+    left: 600px;
+    top: 80px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-}
-#experience .ex1 h3{
-    font-size: 17px;
-    font-family:var(--Audiowide) ;
+    gap: 50px;
+
 }
 
+#experience li:nth-child(1) {
+    padding-top: 110px;
+    padding-left: 40px;
+}
 
+#experience li:nth-child(2) {
+    padding-left: 40px;
+}
 
+#experience .ex1 h3 {
+    font-size: 22px;
+    font-family: var(--Audiowide);
+    font-weight: 400;
+    margin-bottom: 10px;
+}
 
+#experience .ex1 p {
+    font-weight: 500;
+    font-size: 20px;
 
-
-
+}
 
 
 #experience .ex2 {
     background-image: url(../mind.img/메모2\ 1.png);
-    left: 1200px;
-    top: 110px;
-    /* width: ; */
+    left: 1000px;
+    top: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
-
+#experience .ex2 li{
+    font-size: 19px;
+    font-weight: 400;
+    padding-left: 60px;
+}
+#experience .ex2 li span{
+    font-size: 22px;
+    font-family: var(--Audiowide);
+    font-weight: 400;
+}
 #experience .ex3 {
     background-image: url(../mind.img/메모\ 2.png);
     left: 1200px;
     top: 550px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+#experience .ex3 li:nth-child(1) {
+    padding-top: 80px;
+    padding-left: 40px;
+    
+}
+
+#experience .ex3 li:nth-child(2) {
+    padding-left: 40px;
+}
+#experience .ex3 li:nth-child(3) {
+    padding-left: 40px;
+}
+#experience .ex3 h3 {
+    font-size: 22px;
+    font-family: var(--Audiowide);
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+#experience .ex3 p {
+    font-weight: 500;
+    font-size: 20px;
+
 }

@@ -193,6 +193,29 @@ characterObserver.observe(character, {
 });
 
 
+//취미 
+
+const hobby = document.getElementById("hobby");
+const hobbyText = hobby.querySelector(".txt");
+
+const hobbyObserver = new MutationObserver((mutations) => {
+  mutations.forEach((mutation) => {
+    const isActive = hobby.classList.contains("active");
+
+    if (isActive) {
+      hobbyText.classList.add("glow");
+    } else {
+      hobbyText.classList.remove("glow");
+    }
+  });
+});
+
+hobbyObserver.observe(hobby, {
+  attributes: true,
+  attributeFilter: ["class"],
+});
+
+
   // 🎯 버튼 클릭 이벤트
   document.querySelector('.btn-group').addEventListener('click', (e) => {
     const action = e.target.innerText.trim();
