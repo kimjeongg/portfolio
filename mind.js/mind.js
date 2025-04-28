@@ -216,35 +216,46 @@ hobbyObserver.observe(hobby, {
 });
 
 
-  // 🎯 버튼 클릭 이벤트
-  document.querySelector('.btn-group').addEventListener('click', (e) => {
-    const action = e.target.innerText.trim();
+// 기존 드래그 이동, 줌 함수들 다 있고
 
-    switch (action) {
-      case "디자인":
-        zoomFromMain('design_skill', '#path1');
-        break;
-      case "경험":
-        zoomFromMain('experience', '#path2');
-        break;
-      case "캐릭터":
-        zoomFromMain('character', '#path4');
-        break;
-      case "취미":
-        zoomFromMain('hobby', '#path3');
-        break;
-      case "메인 보기":
-        zoomTo('main');
-        break;
-      case "전체 보기":
-        resetView();
-        break;
-    }
-  });
+// 👉 여기!! 버튼 클릭 이벤트 추가하는 거야
+const btnGroup = document.querySelector('.btn-group');
+
+btnGroup.addEventListener('click', (e) => {
+  if (e.target.tagName !== "BUTTON" && e.target.tagName !== "A") return;
+
+  btnGroup.querySelectorAll('button, a').forEach(btn => btn.classList.remove('on'));
+
+  e.target.classList.add('on');
+
+  const action = e.target.innerText.trim().toLowerCase().replace(/\s/g, "");
+
+  switch (action) {
+    case "skill":
+      zoomFromMain('design_skill', '#path1');
+      break;
+    case "experience":
+      zoomFromMain('experience', '#path2');
+      break;
+    case "character":
+      zoomFromMain('character', '#path3');
+      break;
+    case "hobby":
+      zoomFromMain('hobby', '#path4');
+      break;
+    case "mainview":
+      zoomTo('main');
+      break;
+    case "allview":
+      resetView();
+      break;
+  }
+});
 
   // 🎯 초기 상태: 전체 보기 후 메인 확대
   window.onload = () => {
     resetView();
     setTimeout(() => zoomTo('main'), 1000);
   };
+
 });

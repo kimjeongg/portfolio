@@ -53,11 +53,11 @@
    pointer-events: auto;
  }
 
- .txt{
-  font-family: var(--Druk);
-  color: var(--white);
-  font-size: 55px;
-  text-transform: uppercase;
+ .txt {
+   font-family: var(--Druk);
+   color: var(--white);
+   font-size: 55px;
+   text-transform: uppercase;
  }
 
  /* 메인 */
@@ -77,12 +77,14 @@
    border-radius: 146px;
    border: 3px solid var(--main);
    background: var(--light-black);
-   box-shadow: -2.189px -2.189px 58.384px 0px #FF9B28 inset, 2.189px 2.189px 58.384px 0px rgba(255, 155, 40, 0.85);
    display: flex;
    align-items: center;
    justify-content: space-between;
    padding: 0 100px;
  }
+ #main .content.glow {
+  box-shadow: -2.189px -2.189px 58.384px 0px #FF9B28 inset, 2.189px 2.189px 58.384px 0px rgba(255, 155, 40, 0.85);
+}
 
  #main .content .left {
    display: flex;
@@ -147,33 +149,107 @@
  }
 
 
-
-
-
-
-
-
-
-
  .btn-group {
    position: fixed;
    bottom: 10px;
    left: 50%;
    transform: translateX(-50%);
    display: flex;
-   gap: 5px;
+   gap: 17px;
    z-index: 1000;
+   width: auto;
  }
 
- .btn-group button {
-   display: block;
+ .btn-group button,
+ .btn-group a {
    margin: 6px 0;
-   padding: 8px 14px;
-   background: #333;
+   padding: 10px 15px;
+   background-color: var(--light-black);
    color: white;
-   border: none;
    cursor: pointer;
-   border-radius: 4px;
+   border-radius: 20px;
+   width: auto;
+   font-family: var(--Orbitron);
+   font-size: 17px;
+   font-weight: 800;
+   text-transform: uppercase;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+ }
+
+ .btn-group a {
+   border: 2px solid #FF9B28;
+   transition: .6s;
+ }
+
+ .btn-group button.skill {
+   border: 2px solid #EEBC1A;
+   transition: .6s;
+ }
+
+ .btn-group button.on.skill {
+   box-shadow: 0px 0px 15px 0px #EEBC1A, -2px 0px 15px 0px #EEBC1A inset, 4px 0px 15px;
+   transform: scale(1.1);
+
+ }
+
+ .btn-group button.ex {
+   border: 2px solid #4833FF;
+   transition: .6s;
+
+
+ }
+
+ .btn-group button.on.ex {
+   box-shadow: 0px 0px 15px 0px #4833FF, -2px 0px 15px 0px #4833FF inset, 4px 0px 15px 0px #4833FF;
+   transform: scale(1.1);
+
+   transform: scale(1.1);
+ }
+
+ .btn-group button.ch {
+   border: 2px solid #640898;
+   transition: .6s;
+
+
+ }
+
+ .btn-group button.on.ch {
+   box-shadow: 0px 0px 15px 0px #5B3D6B, -2px 0px 15px 0px rgba(91, 61, 107, 0.84) inset, 4px 0px 15px 0px #5B3D6B;
+   transform: scale(1.1);
+ }
+
+ .btn-group button.ho {
+   border: 2px solid #B3332E;
+   transition: .6s;
+
+
+
+ }
+
+ .btn-group button.on.ho {
+   box-shadow: 0px 0px 15px 0px #B3332E, -2px 0px 15px 0px #B3332E inset, 4px 0px 15px 0px #B3332E;
+ }
+
+ .btn-group button.ma,
+ .btn-group button.all {
+   border: 2px solid #FF9B28;
+   transition: .6s;
+
+
+ }
+
+ .btn-group button.on.ma,
+ .btn-group button.on.all {
+   box-shadow: 0px 0px 15px 0px #FF9B28, -2px 0px 15px 0px #FF9B28 inset, 4px 0px 15px 0px #FF9B28;
+   transform: scale(1.1);
+ }
+
+
+ .btn-group a.on {
+   box-shadow: 0px 0px 15px 0px #FF9B28, -2px 0px 15px 0px #FF9B28 inset, 4px 0px 15px 0px #FF9B28;
+   transform: scale(1.1);
  }
 
  svg {
