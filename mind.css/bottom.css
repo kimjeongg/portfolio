@@ -326,9 +326,11 @@
     left: 2000px;
     position: relative;
     display: flex;
+    padding: 0 50px 20px 50px;
+
 }
 
-#hobby .txt {
+#hobby>.txt {
     position: absolute;
     left: 40%;
     top: 50px;
@@ -344,18 +346,14 @@
     font-size: 30px;
 }
 
-#hobby .txt.glow {
+#hobby>.txt.glow {
 
     box-shadow: 2px 0px 10px 0px #E15231, -2px 0px 20px 0px #E15231 inset, 4px 0px 20px 0px #B3332E;
 }
 
-#hobby ul {
-    width: 100%;
-    height: 100%;
-    display: flex;
-}
 
-#hobby .go_trip img {
+
+#hobby img.right {
 
     position: absolute;
     right: 100px;
@@ -363,10 +361,257 @@
     width: 40%;
 }
 
-#hobby .rewatching_movie img {
+#hobby img.left {
 
     position: absolute;
     left: 100px;
     bottom: 0;
     width: 40%;
+}
+
+/* go trip */
+#hobby .go_trip {
+    width: 50%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    position: relative;
+
+}
+
+#hobby .go_trip .txt {
+    width: 200px;
+    height: 60px;
+    font-size: 16px;
+    position: absolute;
+    left: 550px;
+    top: 210px;
+    background: var(--right-black);
+    border: 3.5px solid var(--red);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 5px 0px #E15231, 0px 0px 5px 0px #E15231 inset, 0px 0px 5px 0px #B3332E;
+}
+
+#hobby .go_trip .one {
+    width: 400px;
+    position: absolute;
+    left: 220px;
+    top: 250px;
+}
+
+#hobby .go_trip .two {
+    width: 380px;
+    position: absolute;
+    left: 60px;
+    bottom: 30px;
+}
+
+#hobby .go_trip .three {
+    width: 200px;
+    position: absolute;
+    left: 130px;
+    bottom: 350px;
+}
+
+#hobby .go_trip .four {
+    width: 300px;
+    position: absolute;
+    left: 450px;
+    bottom: 0px;
+}
+
+#hobby .go_trip .five {
+    width: 300px;
+    position: absolute;
+    left: 540px;
+    top: 300px;
+}
+
+#hobby .go_trip .six {
+    width: 100px;
+    position: absolute;
+    left: 260px;
+    top: 150px;
+}
+
+#hobby .go_trip .seven {
+    width: 180px;
+    position: absolute;
+    left: 300px;
+    top: 120px;
+}
+
+#hobby .go_trip .eit {
+    width: 380px;
+
+    position: absolute;
+    left: 650px;
+    top: 260px;
+}
+
+
+
+
+
+
+
+/* movie */
+#hobby .re_movie {
+    width: 50%;
+    height: 100%;
+    right: 0;
+    top: 0;
+
+}
+
+#hobby .re_movie .txt {
+    width: 250px;
+    height: 70px;
+    font-size: 15px;
+    position: absolute;
+    right: 550px;
+    top: 250px;
+    background: var(--right-black);
+    border: 3.5px solid var(--red);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0px 0px 5px 0px #E15231, 0px 0px 5px 0px #E15231 inset, 0px 0px 5px 0px #B3332E;
+}
+
+#hobby .re_movie ul {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+}
+
+#hobby .re_movie ul li {
+    position: absolute;
+    flex: 1;
+}
+
+#hobby .re_movie ul .note {
+    left: 0;
+    top: 0;
+}
+
+#hobby .re_movie ul .note .sticker_txt {
+    background-image: url(../mind.img/노트북_tit.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 90px;
+    width: 210px;
+    position: absolute;
+    left: 200px;
+    top: 430px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#hobby .re_movie ul .note .sticker_txt p {
+    text-align: left;
+    line-height: 1.3;
+    transform: rotate(8deg);
+    font-size: 13px;
+    font-family: var(--Druk);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    color: #000;
+}
+
+#hobby .re_movie ul .note img.fir {
+    width: 300px;
+    position: absolute;
+    left: 80px;
+    top: 500px;
+
+}
+
+#hobby .re_movie ul .note img.sec {
+    width: 310px;
+    position: absolute;
+    left: 200px;
+    top: 550px;
+}
+
+
+
+
+#hobby .re_movie ul .conan {
+    left: 0;
+    top: 0;
+}
+
+#hobby .re_movie ul .conan .sticker_txt {
+    background-image: url(../mind.img/conan_tit.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 60px;
+    width: 160px;
+    position: absolute;
+    left: 500px;
+    top: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+#hobby .re_movie ul .conan .sticker_txt p {
+    text-align: left;
+    line-height: 1.2;
+    font-size: 14px;
+    font-family: var(--Druk);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    color: #000;
+    margin-left: 30px;
+}
+
+#hobby .re_movie ul .conan img {
+    position: absolute;
+    left: 530px;
+    top: 480px;
+    width: 200px;
+}
+
+
+#hobby .re_movie ul .begin {
+    left: 0;
+    top: 0;
+}
+
+#hobby .re_movie ul .begin .sticker_txt {
+    background-image: url(../mind.img/비긴어게인_tit.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 300px;
+    display: none;
+
+}
+
+#hobby .re_movie ul .begin .sticker_txt p {}
+
+#hobby .re_movie ul .begin img.firs {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+}
+
+#hobby .re_movie ul .begin img.seco {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
 }
