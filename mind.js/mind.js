@@ -26,44 +26,63 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 🎯 Path 따라 확대 이동
   function zoomFromMain(targetId, pathId) {
-    document.querySelectorAll('.section').forEach(s => {
-      s.classList.remove('active');
-    });
-
+    // ✅ 버튼 클릭 순간 모든 section active 제거
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  
+    const main = document.getElementById('main');
     const target = document.getElementById(targetId);
     const path = document.querySelector(pathId);
     const length = path.getTotalLength();
+  
+  // 2) main 위치 기준으로 먼저 이동
+  const mainRect = main.getBoundingClientRect();
+  const mainCenterX = mainRect.left + mainRect.width / 2;
+  const mainCenterY = mainRect.top + mainRect.height / 2;
+  const mainOffsetX = window.innerWidth / 2 - mainCenterX;
+  const mainOffsetY = window.innerHeight / 2 - mainCenterY;
 
-    gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
+  initialX += mainOffsetX;
+  initialY += mainOffsetY;
 
-    gsap.to(path, {
-      strokeDashoffset: 0,
-      duration: 1.2,
-      onComplete: () => {
-        const rect = target.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const offsetX = window.innerWidth / 2 - centerX;
-        const offsetY = window.innerHeight / 2 - centerY;
+  // ✅ 메인으로 순간 이동 (딜레이 없이)
+  gsap.set(canvas, {
+    x: initialX,
+    y: initialY
+  });
+  canvas.style.transform = `translate(${initialX}px, ${initialY}px)`;
 
-        initialX += offsetX;
-        initialY += offsetY;
+  // 3) path 애니메이션 준비
+  gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
 
-        gsap.to(canvas, {
-          x: initialX,
-          y: initialY,
-          duration: 1,
-          ease: "power2.out",
-          onUpdate: () => {
-            canvas.style.transform = `translate(${initialX}px, ${initialY}px)`;
-          },
-          onComplete: () => {
-            target.classList.add('active');
-          }
-        });
-      }
-    });
-  }
+  // 4) path를 따라서 이동
+  gsap.to(path, {
+    strokeDashoffset: 0,
+    duration: 1.2,
+    onComplete: () => {
+      const rect = target.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const offsetX = window.innerWidth / 2 - centerX;
+      const offsetY = window.innerHeight / 2 - centerY;
+
+      initialX += offsetX;
+      initialY += offsetY;
+
+      gsap.to(canvas, {
+        x: initialX,
+        y: initialY,
+        duration: 1,
+        ease: "power2.out",
+        onUpdate: () => {
+          canvas.style.transform = `translate(${initialX}px, ${initialY}px)`;
+        },
+        onComplete: () => {
+          target.classList.add('active'); // 최종 target만 active!
+        }
+      });
+    }
+  });
+}
 
   // 🎯 특정 섹션으로 확대 이동
   function zoomTo(sectionId) {
@@ -90,6 +109,9 @@ document.addEventListener("DOMContentLoaded", function () {
       ease: "power2.out",
       onUpdate: () => {
         canvas.style.transform = `translate(${initialX}px, ${initialY}px)`;
+      },
+      onComplete: () => {
+        section.classList.add('active'); // 이동 끝나고 딱 추가
       }
     });
   }
@@ -113,6 +135,31 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
+
+//메인
+
+const main = new MutationObserver((mutations) => {
+  mutations.forEach((mutation) => {
+    const target = mutation.target;
+
+    if (target.id === "main") {
+      const content = target.querySelector(".content");
+
+      if (target.classList.contains("active")) {
+        // ✅ 활성화 됐을 때
+        content.classList.add("glow");
+      } else {
+        // ❌ 비활성화 됐을 때
+        content.classList.remove("glow");
+      }
+    }
+  });
+});
+
+main.observe(document.getElementById("main"), {
+  attributes: true,
+  attributeFilter: ["class"],
+});
 
 
   // 스킬 
@@ -216,6 +263,9 @@ hobbyObserver.observe(hobby, {
 });
 
 
+
+
+
 // 기존 드래그 이동, 줌 함수들 다 있고
 
 // 👉 여기!! 버튼 클릭 이벤트 추가하는 거야
@@ -252,10 +302,17 @@ btnGroup.addEventListener('click', (e) => {
   }
 });
 
-  // 🎯 초기 상태: 전체 보기 후 메인 확대
-  window.onload = () => {
-    resetView();
-    setTimeout(() => zoomTo('main'), 1000);
-  };
+window.onload = () => {
+  resetView();
+  setTimeout(() => {
+    zoomTo('main');
+    // ✅ mainview 버튼도 on
+    const mainBtn = document.querySelector('.btn-group .ma');
+    if (mainBtn) {
+      btnGroup.querySelectorAll('button, a').forEach(btn => btn.classList.remove('on'));
+      mainBtn.classList.add('on');
+    }
+  }, 1000);
+};
 
 });

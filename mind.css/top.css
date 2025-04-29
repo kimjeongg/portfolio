@@ -106,7 +106,7 @@
     left: 500px;
     bottom: 150px;
     border: 5px solid var(--blue);
-    border-radius: 60px;
+    border-radius: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
