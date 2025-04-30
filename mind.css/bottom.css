@@ -351,23 +351,19 @@
     box-shadow: 2px 0px 10px 0px #E15231, -2px 0px 20px 0px #E15231 inset, 4px 0px 20px 0px #B3332E;
 }
 
-
-
-#hobby img.right {
-
-    position: absolute;
-    right: 100px;
-    bottom: 100px;
-    width: 40%;
+#hobby .go_trip,
+#hobby .re_movie {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
-#hobby img.left {
-
-    position: absolute;
-    left: 100px;
-    bottom: 0;
-    width: 40%;
+#hobby.active .go_trip,
+#hobby.active .re_movie {
+    opacity: 1;
+    visibility: visible;
 }
+
 
 /* go trip */
 #hobby .go_trip {
@@ -402,11 +398,32 @@
     top: 250px;
 }
 
+@keyframes collageFloat {
+    0% {
+      transform: translate(0px, 0px) rotate(0deg);
+    }
+    25% {
+      transform: translate(2px, -3px) rotate(-1deg);
+    }
+    50% {
+      transform: translate(-3px, 2px) rotate(1.5deg);
+    }
+    75% {
+      transform: translate(1px, -2px) rotate(-1deg);
+    }
+    100% {
+      transform: translate(0px, 0px) rotate(0deg);
+    }
+  }
+  
+  
 #hobby .go_trip .two {
     width: 380px;
     position: absolute;
     left: 60px;
     bottom: 30px;
+/*     animation: collageFloat 5s ease-in-out infinite;*/
+    transform-origin: center center; 
 }
 
 #hobby .go_trip .three {
@@ -430,11 +447,32 @@
     top: 300px;
 }
 
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spins {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
 #hobby .go_trip .six {
     width: 100px;
     position: absolute;
     left: 260px;
     top: 150px;
+    animation: spins 3s linear infinite;
 }
 
 #hobby .go_trip .seven {
@@ -442,6 +480,7 @@
     position: absolute;
     left: 300px;
     top: 120px;
+    animation: spin 3s linear infinite;
 }
 
 #hobby .go_trip .eit {
@@ -450,6 +489,14 @@
     position: absolute;
     left: 650px;
     top: 260px;
+/*     animation: collageFloat 5s ease-in-out infinite;
+    transform-origin: center center; */
+}
+#hobby .go_trip .na{
+    width: 80px;
+    position: absolute;
+    left: 880px;
+    top: 360px;
 }
 
 
@@ -464,7 +511,7 @@
     height: 100%;
     right: 0;
     top: 0;
-
+    /* display: none; */
 }
 
 #hobby .re_movie .txt {
@@ -472,7 +519,7 @@
     height: 70px;
     font-size: 15px;
     position: absolute;
-    right: 550px;
+    right: 650px;
     top: 250px;
     background: var(--right-black);
     border: 3.5px solid var(--red);
@@ -509,8 +556,8 @@
     height: 90px;
     width: 210px;
     position: absolute;
-    left: 200px;
-    top: 430px;
+    left: 180px;
+    top: 470px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -535,11 +582,20 @@
 
 }
 
+@keyframes danceWiggle {
+    0%   { transform: rotate(0deg) translate(0, 0) scale(1); }
+    25%  { transform: rotate(3deg) translate(3px, -2px) scale(1.03); }
+    50%  { transform: rotate(-2deg) translate(-3px, 1px) scale(1.01); }
+    75%  { transform: rotate(2deg) translate(2px, -1px) scale(1.04); }
+    100% { transform: rotate(0deg) translate(0, 0) scale(1); }
+  }
+
 #hobby .re_movie ul .note img.sec {
     width: 310px;
     position: absolute;
     left: 200px;
     top: 550px;
+    animation: danceWiggle 1.2s steps(1, end) infinite;
 }
 
 
@@ -559,7 +615,7 @@
     width: 160px;
     position: absolute;
     left: 500px;
-    top: 480px;
+    top: 550px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -577,16 +633,36 @@
     margin-left: 30px;
 }
 
-#hobby .re_movie ul .conan img {
+#hobby .re_movie ul .conan img.f {
     position: absolute;
     left: 530px;
-    top: 480px;
+    top: 560px;
     width: 200px;
+}
+#hobby .re_movie ul .conan img.s {
+    position: absolute;
+    left: 590px;
+    top: 20px;
+    width: 200px;
+    animation: spins 3s linear infinite;
+}
+#hobby .re_movie ul .conan img.e{
+    position: absolute;
+    left: 100px;
+    top: 300px;
+    width: 150px;
+}
+#hobby .re_movie ul .conan img.a{
+    position: absolute;
+    left: 50px;
+    top: 360px;
+    width: 90px;
+    opacity: 0.2;
 }
 
 
 #hobby .re_movie ul .begin {
-    left: 0;
+    right: 0;
     top: 0;
 }
 
@@ -595,23 +671,38 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    width: 300px;
-    display: none;
+    height: 60px;
+    width: 180px;
+    position: absolute;
+    right: 360px;
+    top: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
 
 }
 
-#hobby .re_movie ul .begin .sticker_txt p {}
+#hobby .re_movie ul .begin .sticker_txt p {
+    text-align: left;
+    font-size: 14px;
+    font-family: var(--Druk);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    color: #000;
+}
 
 #hobby .re_movie ul .begin img.firs {
     position: absolute;
-    left: 0;
-    top: 0;
-    display: none;
+    width: 175px;
+    right: 380px;
+    top: 280px;
+    z-index: 1;
 }
 
 #hobby .re_movie ul .begin img.seco {
     position: absolute;
-    left: 0;
-    top: 0;
-    display: none;
+    width: 250px;
+    right: 190px;
+    top: 210px;
 }
