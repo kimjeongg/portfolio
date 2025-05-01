@@ -60,9 +60,9 @@
 #design_skill li.four {
     position: absolute;
     left: 1000px;
-    top: 200px;
+    top: 150px;
     transform: rotate(var(--angle));
-    --angle: 0deg;
+    --angle: 5deg;
 }
 
 #design_skill li.five {
@@ -75,8 +75,8 @@
 
 #design_skill li.six {
     position: absolute;
-    left: 1340px;
-    top: 235px;
+    left: 1360px;
+    top: 220px;
     transform: rotate(var(--angle));
     --angle: 12.693deg;
 }
@@ -142,7 +142,6 @@
 }
 
 #experience .ex1 {
-    background-image: url(../mind.img/메모\ 1.png);
     left: 600px;
     top: 80px;
     display: flex;
@@ -175,7 +174,6 @@
 
 
 #experience .ex2 {
-    background-image: url(../mind.img/메모2\ 1.png);
     left: 1000px;
     top: 200px;
     display: flex;
@@ -193,7 +191,6 @@
     font-weight: 400;
 }
 #experience .ex3 {
-    background-image: url(../mind.img/메모\ 2.png);
     left: 1200px;
     top: 550px;
     display: flex;

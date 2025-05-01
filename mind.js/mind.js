@@ -122,8 +122,8 @@ document.addEventListener("DOMContentLoaded", function () {
       s.classList.remove('active');
     });
 
-    initialX = -1800;
-    initialY = -1500;
+    initialX = -1500;
+    initialY = -1400;
 
     gsap.to(canvas, {
       x: initialX,
@@ -137,48 +137,33 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   //메인
-  const main = new MutationObserver((mutations) => {
+  // ✅ 메인 섹션 활성화 시 glow 효과
+  const mainObserver = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
       const target = mutation.target;
-  
-      if (target.id === "design_skill") {
-        const text = target.querySelector(".txt");
-        const icons = target.querySelectorAll("li");
+      if (target.id === "main") {
+        const content = target.querySelector(".content");
+        if (!content) return;
   
         if (target.classList.contains("active")) {
-          // 텍스트에 glow 효과 추가
-          text.classList.add("glow");
-  
-          // li 아이콘들이 뒤에서 나오면서 바운스
-          icons.forEach((icon, i) => {
-            // 아이템들이 나타날 때 바운스 효과
-            gsap.fromTo(icon,
-              { 
-                opacity: 0,  // 처음에는 투명
-                y: -100,       // 위에서 떨어지도록 설정
-                rotation: -5    // 살짝 회전
-              },
-              {
-                opacity: 1,  // 완전 가시화
-                y: 0,          // 원래 위치로 떨어짐
-                rotation: 0,    // 회전은 없애기
-                duration: 0.6,  // 바운스 효과 길이
-                ease: "bounce.out",  // 바운스 효과
-                delay: 0.5 + i * 0.2 // 순차적으로 등장
-              }
-            );
-          });
+          content.classList.add("glow");
         } else {
-          // 비활성화 시 원복
-          text.classList.remove("glow");
-          icons.forEach((icon) => {
-            gsap.set(icon, { opacity: 0, y: -100, rotation: -5 });
-          });
+          content.classList.remove("glow");
         }
       }
-  
     });
   });
+  
+  const mainSection = document.getElementById("main");
+  if (mainSection) {
+    mainObserver.observe(mainSection, {
+      attributes: true,
+      attributeFilter: ["class"]
+    });
+  }
+  
+  
+
 
 
   /* 
@@ -215,57 +200,63 @@ document.addEventListener("DOMContentLoaded", function () {
  */
   
   // MutationObserver로 active 클래스 변경을 감지하여 애니메이션 실행
-  main.observe(document.getElementById("design_skill"), {
+/*   main.observe(document.getElementById("design_skill"), {
     attributes: true,
     attributeFilter: ["class"], // "active" 클래스 변화만 감지
-  });
+  }); */
   
 
 
   // 스킬 
-
   const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
       const target = mutation.target;
-
+  
       if (target.id === "design_skill") {
         const text = target.querySelector(".txt");
-        const icons = target.querySelectorAll("li");
-      
+        const icons = target.querySelectorAll("#design_skill li");
+  
         if (target.classList.contains("active")) {
-          // 텍스트 glow 효과는 그대로
+          // 텍스트에 glow 효과 추가
           text.classList.add("glow");
-      
-          // li 요소 바운스 효과 (위치 유지)
+  
           icons.forEach((icon, i) => {
+            const angle = getComputedStyle(icon).getPropertyValue('--angle');
+          
             gsap.fromTo(icon,
-              { scale: 0, autoAlpha: 0 },
               {
-                scale: 1,
+                autoAlpha: 0,
+                y: -150,
+                rotation: parseFloat(angle) - 5 // 살짝 기울여서 등장
+              },
+              {
                 autoAlpha: 1,
-                duration: 0.6,
+                y: 0,
+                rotation: parseFloat(angle),
+                duration: 0.9,
                 ease: "bounce.out",
-                delay: 0.2 + i * 0.1
+                delay: 0.3 + i * 0.15
               }
             );
           });
-      
+          
+  
         } else {
-          // 비활성화 시 원상복귀
+          // 비활성화 시 원복
           text.classList.remove("glow");
           icons.forEach((icon) => {
-            gsap.set(icon, { scale: 0, autoAlpha: 0 });
+            gsap.set(icon, { autoAlpha: 0, y: -100, rotation: -5 });
           });
         }
       }
-      
     });
   });
-
+  
   observer.observe(document.getElementById("design_skill"), {
     attributes: true,
     attributeFilter: ["class"],
   });
+  
 
   //경험
 
