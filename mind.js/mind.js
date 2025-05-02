@@ -262,23 +262,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const experience = document.getElementById("experience");
   const experienceText = experience.querySelector(".txt");
-
+  const ulLists = experience.querySelectorAll("ul");
+  
+  function revealUlsSequentially() {
+    ulLists.forEach((ul, index) => {
+      setTimeout(() => {
+        ul.classList.add("reveal");
+      }, index * 400); // 각 ul이 400ms 간격으로 등장
+    });
+  }
+  
   const experienceObserver = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
+    mutations.forEach(() => {
       const isActive = experience.classList.contains("active");
-
+  
       if (isActive) {
         experienceText.classList.add("glow");
+        revealUlsSequentially();
       } else {
         experienceText.classList.remove("glow");
+        ulLists.forEach(ul => ul.classList.remove("reveal"));
       }
     });
   });
-
+  
   experienceObserver.observe(experience, {
     attributes: true,
     attributeFilter: ["class"],
   });
+  
   //캐릭터
 
 

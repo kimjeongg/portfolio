@@ -82,7 +82,7 @@
 }
 
 #design_skill li {
-/*     opacity: 0;
+    /*     opacity: 0;
     transform: translateY(60px) scale(0.2) rotate(var(--angle));
     transition: transform 6s ease-out, opacity 2s ease-out;
     pointer-events: auto; */
@@ -92,14 +92,12 @@
 }
 
 #design_skill li.show {
- /*    opacity: 1;
+    /*    opacity: 1;
     transform: translateY(0) scale(1) rotate(var(--angle)); */
     opacity: 1;
     transform: translateY(0) scale(1) rotate(var(--angle));
-    transition: transform 0.6s ease-out, opacity 0.6s ease-out; 
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
 }
-
-
 
 #experience {
     top: 800px;
@@ -134,28 +132,41 @@
     background-repeat: no-repeat;
     background-size: cover;
     height: 360px;
-    /* width: 100%; */
     position: absolute;
     width: 350px;
-    color: #000000;
-
+    color: #fff;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.6s ease-out, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
 }
 
+  #experience ul.reveal {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+  }
+  
+
+
 #experience .ex1 {
-    left: 600px;
-    top: 80px;
+    left: 300px;
+    top: 220px;
     display: flex;
     flex-direction: column;
     gap: 50px;
-
+    background-image: url(../mind.img/메모\ 1.png);
+    background-size: contain;
+    width: 500px;
+    padding-left: 80px;
 }
 
-#experience li:nth-child(1) {
+#experience .ex1 li:nth-child(1) {
     padding-top: 110px;
     padding-left: 40px;
 }
 
-#experience li:nth-child(2) {
+#experience .ex1 li:nth-child(2) {
     padding-left: 40px;
 }
 
@@ -167,58 +178,81 @@
 }
 
 #experience .ex1 p {
-    font-weight: 500;
-    font-size: 20px;
-
+    font-size: 18px;
+    font-weight: 300;
 }
+
+
+
+
+
+
+
 
 
 #experience .ex2 {
-    left: 1000px;
-    top: 200px;
+    left: 900px;
+    top: 120px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    background-image: url(../mind.img/메모\ 2.png);
+    background-size: contain;
+    width: 600px;
+    padding-left: 100px;
 }
-#experience .ex2 li{
-    font-size: 19px;
-    font-weight: 400;
-    padding-left: 60px;
-}
-#experience .ex2 li span{
-    font-size: 22px;
-    font-family: var(--Audiowide);
-    font-weight: 400;
-}
-#experience .ex3 {
-    left: 1200px;
-    top: 550px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
 
-}
-#experience .ex3 li:nth-child(1) {
+
+#experience .ex2 li:nth-child(1) {
     padding-top: 80px;
     padding-left: 40px;
-    
+
 }
 
-#experience .ex3 li:nth-child(2) {
+#experience .ex2 li:nth-child(2) {
     padding-left: 40px;
 }
-#experience .ex3 li:nth-child(3) {
+
+#experience .ex2 li:nth-child(3) {
     padding-left: 40px;
 }
-#experience .ex3 h3 {
+#experience .ex2 li:nth-child(3)  p{
+    line-height: 1.2;
+}
+#experience .ex2 h3 {
     font-size: 22px;
     font-family: var(--Audiowide);
     font-weight: 500;
     margin-bottom: 10px;
 }
 
-#experience .ex3 p {
-    font-weight: 500;
-    font-size: 20px;
+#experience .ex2 p {
+    font-size: 18px;
+    font-weight: 300;
 
+
+}
+
+#experience .ex3 {
+    left: 1100px;
+    top: 520px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-image: url(../mind.img/메모3.png);
+    background-size: contain;
+    width: 500px;
+    padding-left: 110px;
+    padding-top: 100px;
+}
+
+
+#experience .ex3 li {
+    font-size: 18px;
+    font-weight: 300;
+}
+#experience .ex3 li span {
+    font-size: 23px;
+    font-family: var(--Audiowide);
+    font-weight: 400;
 }
