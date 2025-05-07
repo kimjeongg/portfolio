@@ -29,6 +29,9 @@
 
 
 }
+body{
+    cursor: none;
+}
 
 .wrap {
     width: 100%;

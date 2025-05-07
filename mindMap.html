@@ -26,11 +26,11 @@
 
   <div class="btn-group">
     <button class="all">all&nbsp;view</button>
+    <button class="ma">main&nbsp;view</button>
     <button class="skill">skill</button>
     <button class="ex">experience</button>
     <button class="ch">character</button>
     <button class="ho">hobby</button>
-    <button class="ma">main&nbsp;view</button>
     <a href="./index.html#scroll" class=" ">
       home
     </a>
@@ -158,38 +158,12 @@
         <div class="txt">character</div>
         <!-- <img src="mind.img/character.png" alt="" class="mal"> -->
         <ul>
-          <li class="first wobble-vertical">
-            <p>
-              <strong>Ambitious</strong>
-              항상 더 높은 목표를 설정하고 도전
-            </p>
-          </li>
-          <li class="two wobble-vertical">
-            <p>
-              <strong>Pioneering Spirit</strong>
-              틀에 갇히지 않고 새로운 길을 찾음
-            </p>
-          </li>
-          <li class="three wobble-vertical">
-            <p>
-              <strong>Efficiency-Driven</strong>시간 낭비를 싫어하고 최적의 방법을 찾음
-            </p>
-          </li>
-          <li class="four wobble-vertical">
-            <p>
-              <strong>Continuous<br>Self-Improvement</strong>항상 성장하려는 노력
-            </p>
-          </li>
-          <li class="five wobble-vertical">
-            <p>
-              <strong>Leadership</strong>강한 주도권과 조직 운영 능력
-            </p>
-          </li>
-          <li class="six wobble-vertical">
-            <p>
-              <strong>Goal-Oriented</strong>원하는 결과를 얻을 때까지 멈추지 않음
-            </p>
-          </li>
+          <li class="first"><div class="char-wrap"><p><strong>Ambitious</strong>항상 더 높은 목표를 설정하고 도전</p></div></li>
+          <li class="two"><div class="char-wrap"><p><strong>Pioneering Spirit</strong>틀에 갇히지 않고 새로운 길을 찾음</p></div></li>
+          <li class="three"><div class="char-wrap"><p><strong>Efficiency-Driven</strong>시간 낭비를 싫어하고 최적의 방법을 찾음</p></div></li>
+          <li class="four"><div class="char-wrap"><p><strong>Continuous Self-Improvement</strong>항상 성장하려는 노력</p></div></li>
+          <li class="five"><div class="char-wrap"><p><strong>Leadership</strong>강한 주도권과 조직 운영 능력</p></div></li>
+          <li class="six"><div class="char-wrap"><p><strong>Goal-Oriented</strong>원하는 결과를 얻을 때까지 멈추지 않음</p></div></li>
         </ul>
       </div>
       <div class="section" id="hobby">
@@ -238,8 +212,16 @@
       </div>
     </div>
   </div>
-  </div>
+  <img id="cursor-hand" src="mind.img/커서.png" alt="손 커서">
+
+<!-- 커스텀 커서 (발 왼쪽, 오른쪽) -->
+<div id="custom-cursor">
+  <img src="mind.img/커서.png" id="hand-open" />
+  <img src="mind.img/커서-주먹.png" id="hand-closed" />
+  <div class="cursor-tooltip" id="drag-tooltip">전체 보기에서만 드래그 가능</div>
+</div>
   <script src="mind.js/mind.js"></script>
+  
 </body>
 
 </html>

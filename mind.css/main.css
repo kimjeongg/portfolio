@@ -8,6 +8,7 @@
    background-color: var(--light-black);
    font-family: var(--pretend);
    color: #fff;
+   cursor: none;
  }
 
  .view {
@@ -15,6 +16,7 @@
    height: 100vh;
    overflow: hidden;
    position: relative;
+   cursor: none;
  }
 
  .canvas {
@@ -22,10 +24,11 @@
    height: 2050px;
    position: absolute;
    /* background: #BDBDBD; */
-   cursor: grab;
+   /*    cursor: grab; */
    transition: transform 1s ease;
    pointer-events: auto;
  }
+
 
  /* 기본 상태는 전부 작게 */
  .section {
@@ -168,7 +171,7 @@
  .btn-group button,
  .btn-group a {
    margin: 6px 0;
-   padding: 10px 13px;
+   padding: 12px 15px;
    background-color: var(--light-black);
    color: white;
    cursor: pointer;
@@ -183,8 +186,12 @@
    justify-content: center;
  }
 
+
+
  .btn-group a {
-   border: 2px solid #FF9B28;
+   background-color: #FF9B28;
+   border: 2px solid #ffac4e;
+   transform: scale(1.1);
    transition: .6s;
  }
 
@@ -209,19 +216,17 @@
  .btn-group button.on.ex {
    box-shadow: 0px 0px 15px 0px #4833FF, -2px 0px 15px 0px #4833FF inset, 4px 0px 15px 0px #4833FF;
    transform: scale(1.1);
-
-   transform: scale(1.1);
  }
 
  .btn-group button.ch {
-   border: 2px solid #640898;
+   border: 2px solid #5B3D6B;
    transition: .6s;
 
 
  }
 
  .btn-group button.on.ch {
-   box-shadow: 0px 0px 15px 0px #5B3D6B, -2px 0px 15px 0px rgba(91, 61, 107, 0.84) inset, 4px 0px 15px 0px #5B3D6B;
+   box-shadow: 0px 0px 15px 0px #640898, -2px 0px 15px 0px #640898 inset, 4px 0px 15px 0px #640898;
    transform: scale(1.1);
  }
 
@@ -235,18 +240,26 @@
 
  .btn-group button.on.ho {
    box-shadow: 0px 0px 15px 0px #B3332E, -2px 0px 15px 0px #B3332E inset, 4px 0px 15px 0px #B3332E;
+   transform: scale(1.1);
  }
 
- .btn-group button.ma,
+
  .btn-group button.all {
-   border: 2px solid #FF9B28;
+   border: 2px solid #3AFF8B;
+   /* 밝은 초록색 */
    transition: .6s;
-
-
  }
 
- .btn-group button.on.ma,
  .btn-group button.on.all {
+   box-shadow: 0px 0px 15px 0px #3AFF8B, -2px 0px 15px 0px #3AFF8B inset, 4px 0px 15px 0px #3AFF8B;
+   transform: scale(1.1);
+ }
+
+ .btn-group button.ma {
+   border: 2px solid #FFE066;
+ }
+
+ .btn-group button.on.ma {
    box-shadow: 0px 0px 15px 0px #FF9B28, -2px 0px 15px 0px #FF9B28 inset, 4px 0px 15px 0px #FF9B28;
    transform: scale(1.1);
  }
@@ -319,12 +332,58 @@
    top: 1900px;
    /* width: 500px;
     */
-    height: 430px;
+   height: 430px;
  }
 
  img.hobb {
    position: absolute;
    left: 2430px;
    top: 1930px;
-    height: 430px;
+   height: 430px;
  }
+
+ /* 커서 */
+ #custom-cursor {
+   position: fixed;
+   pointer-events: none;
+   z-index: 9999;
+   left: 0;
+   top: 0;
+   width: 0;
+   height: 0;
+ }
+
+ /* 손들 위치 - 중심 기준 */
+ #hand-open,
+ #hand-closed {
+   position: absolute;
+   width: 80px;
+   top: -30px;
+   left: -40px;
+ }
+
+ /* 기본 손 보이게, 주먹 손 숨김 */
+ #hand-open {
+   display: block;
+ }
+
+ #hand-closed {
+   display: none;
+ }
+
+
+ .cursor-tooltip {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(105, 157, 0, 0.85);
+  color: #fff;
+  font-size: 20px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}

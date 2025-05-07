@@ -2,70 +2,21 @@
 
 
 
-  .cursor {
-    position: fixed;
-    width: 30px;
-    height: 30px;
-    background: #A259FF;
-    border-radius: 50%;
-    mix-blend-mode: difference;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    z-index: 10000;
-  }
+#main-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 80px;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
 
-  .cursor-trail {
-    position: fixed;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    z-index: 9998;
-    opacity: 0.4;
-  }
-
-  .trail-r { background: rgba(255,0,64,0.45); }
-  .trail-g { background: rgba(0,255,128,0.45); }
-  .trail-b { background: rgba(0,128,255,0.45); }
-
-  .cursor-text {
-    position: fixed;
-    font-size: 30px;
-    font-weight: bold;
-    color: #0ff;
-    mix-blend-mode: difference;
-    pointer-events: none;
-    z-index: 10000;
-    display: none;
-    left: 0; top: 0;
-    transform: translate(-50%, -50%) scale(0.8);
-    opacity: 0;
-    white-space: nowrap;       
-  }
-
-  .cursor-text span { display: inline-block; }
-
-  .cursor-text.active {
-    display: flex;
-    animation: glitchFade 0.35s ease-out forwards;
-  }
-
-  .cursor-text.glitch span {
-    transition: transform 0.3s, opacity 0.3s;
-  }
-
-  .cursor-text.glitch span.active {
-    opacity: 0.4;
-  }
-
-  @keyframes glitchFade {
-    0% {
-      transform: translate(-50%, -50%) scale(0.8);
-      opacity: 0;
-    }
-    100% {
-      transform: translate(-50%, -50%) scale(1);
-      opacity: 1;
-    }
-  }
+#main-cursor img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  user-select: none;
+  pointer-events: none;
+}
