@@ -289,7 +289,9 @@
    position: absolute;
    opacity: 0;
    pointer-events: none;
+    display: none;
  }
+ 
 
  #path1 {
    stroke: #FFD700;

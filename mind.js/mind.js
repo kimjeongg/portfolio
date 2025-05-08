@@ -11,6 +11,17 @@ document.addEventListener("DOMContentLoaded", function () {
   let clickStartX = 0;
   let clickStartY = 0;
 
+  const handleMouseUp = () => {
+    isDragging = false;
+    handOpen.style.display = 'block';
+    handClosed.style.display = 'none';
+  };
+
+  document.addEventListener('mouseup', handleMouseUp);
+  document.addEventListener('mouseleave', handleMouseUp);
+  window.addEventListener('mouseup', handleMouseUp);
+
+
   // 커서 이동
   document.addEventListener('mousemove', (e) => {
     cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
@@ -27,6 +38,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const allBtn = document.querySelector('.btn-group .all');
     const isAllView = allBtn && allBtn.classList.contains('on');
     if (!isAllView) return;
+
+    e.preventDefault();
+
     isDragging = true;
     startX = e.pageX - initialX;
     startY = e.pageY - initialY;
@@ -124,34 +138,44 @@ document.addEventListener("DOMContentLoaded", function () {
     const path = document.querySelector(pathId);
     const length = path.getTotalLength();
 
-    const mainRect = main.getBoundingClientRect();
-    const mainCenterX = mainRect.left + mainRect.width / 2;
-    const mainCenterY = mainRect.top + mainRect.height / 2;
-    const mainOffsetX = window.innerWidth / 2 - mainCenterX;
-    const mainOffsetY = window.innerHeight / 2 - mainCenterY;
-    initialX += mainOffsetX;
-    initialY += mainOffsetY;
+    // 1️⃣ 절대 좌표 기준으로 재계산 (기존 += 방식 제거)
+    const canvasRect = canvas.getBoundingClientRect();
+    const targetRect = target.getBoundingClientRect();
 
+    const targetCenterX = targetRect.left + targetRect.width / 2;
+    const targetCenterY = targetRect.top + targetRect.height / 2;
+    const canvasCenterX = canvasRect.left + canvasRect.width / 2;
+    const canvasCenterY = canvasRect.top + canvasRect.height / 2;
+
+    const offsetX = window.innerWidth / 2 - targetCenterX;
+    const offsetY = window.innerHeight / 2 - targetCenterY;
+
+    initialX += offsetX;
+    initialY += offsetY;
+
+    // 2️⃣ path 애니메이션
     gsap.set(canvas, { x: initialX, y: initialY });
     canvas.style.transform = `translate(${initialX}px, ${initialY}px)`;
 
-    gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
+    gsap.set(path, {
+      strokeDasharray: length,
+      strokeDashoffset: length,
+      opacity: 1, // path 보이게
+    });
+
     gsap.to(path, {
       strokeDashoffset: 0,
-      duration: 1.2,
+      duration: 0.6,
+      ease: "power2.out",
       onComplete: () => {
-        const rect = target.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const offsetX = window.innerWidth / 2 - centerX;
-        const offsetY = window.innerHeight / 2 - centerY;
-        initialX += offsetX;
-        initialY += offsetY;
 
+        path.style.display = "none";
+
+        // 3️⃣ 확대 + 정중앙 이동
         gsap.to(canvas, {
           x: initialX,
           y: initialY,
-          duration: 1,
+          duration: 0.6,
           ease: "power2.out",
           onUpdate: () => {
             canvas.style.transform = `translate(${initialX}px, ${initialY}px)`;
@@ -163,6 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
+
 
   function zoomTo(sectionId) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -204,19 +229,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
   btnGroup.addEventListener('click', (e) => {
     if (e.target.tagName !== "BUTTON" && e.target.tagName !== "A") return;
+
+    // GNB 상태 초기화
     btnGroup.querySelectorAll('button, a').forEach(btn => btn.classList.remove('on'));
     e.target.classList.add('on');
+
     const action = e.target.innerText.trim().toLowerCase().replace(/\s/g, "");
 
     switch (action) {
-      case "skill": zoomFromMain('design_skill', '#path1'); break;
-      case "experience": zoomFromMain('experience', '#path2'); break;
-      case "character": zoomFromMain('character', '#path3'); break;
-      case "hobby": zoomFromMain('hobby', '#path4'); break;
-      case "mainview": zoomTo('main'); break;
-      case "allview": resetView(); break;
+      case "skill":
+        zoomFromMain('design_skill', '#path1');
+        break;
+      case "experience":
+        zoomFromMain('experience', '#path2');
+        break;
+      case "character":
+        zoomFromMain('character', '#path3');
+        break;
+      case "hobby":
+        zoomFromMain('hobby', '#path4');
+        break;
+      case "mainview": zoomFromMain('main', '#pathMain'); break;
+
+      case "allview":
+        resetView();
+        break;
     }
   });
+
 
   window.onload = () => {
     resetView();
@@ -288,99 +328,93 @@ document.addEventListener("DOMContentLoaded", function () {
     hobby: () => {
       const hobby = document.getElementById("hobby");
       const hobbyText = hobby.querySelector(".txt");
-    
+  
       return new MutationObserver((mutations) => {
         mutations.forEach(() => {
           const isActive = hobby.classList.contains("active");
-    
+  
           if (isActive) {
             hobbyText.classList.add("glow");
-    
+  
             const tl = gsap.timeline();
-    
-            // 1. go_trip 제목
-            tl.fromTo("#hobby .go_trip .txt",
-              { autoAlpha: 0, y: -200, rotation: -5 },
-              { autoAlpha: 1, y: 0, rotation: 0, duration: 0.9, ease: "bounce.out" }
-            )
-    
-            // 2. go_trip 이미지들
-            .fromTo("#hobby .go_trip img",
-              { autoAlpha: 0, y: 30 },
-              {
+  
+            tl.fromTo("#hobby .go_trip .txt", { autoAlpha: 0, y: -200, rotation: -5 }, { autoAlpha: 1, y: 0, rotation: 0, duration: 0.9, ease: "bounce.out" })
+              .fromTo("#hobby .go_trip img", { autoAlpha: 0, y: 30 }, {
                 autoAlpha: 1,
                 y: 0,
-                duration: 0.3,
-                stagger: 0.1,
+                duration: 0.6,
+                stagger: 0.15,
                 ease: "power2.out",
                 onComplete: () => {
                   const target = document.querySelector('#hobby .go_trip .two');
                   const crown = document.querySelector('#hobby .go_trip .na');
-    
-                  function sharpSquareStep(el) {
+  
+                  if (!target.dataset.animated) {
                     const tl = gsap.timeline({ repeat: -1 });
-                    tl.to(el, { x: -3, y: -3, duration: 0.01, delay: 0.3 })
-                      .to(el, { x: 3, y: -3, duration: 0.01, delay: 0.3 })
-                      .to(el, { x: -2, y: 2, duration: 0.01, delay: 0.2 })
-                      .to(el, { x: 3, y: 3, duration: 0.01, delay: 0.3 })
-                      .to(el, { x: 0, y: 0, duration: 0.01, delay: 0.2 });
+                    tl.to(target, { x: -3, y: -3, duration: 0.01, delay: 0.3 })
+                      .to(target, { x: 3, y: -3, duration: 0.01, delay: 0.3 })
+                      .to(target, { x: -2, y: 2, duration: 0.01, delay: 0.2 })
+                      .to(target, { x: 3, y: 3, duration: 0.01, delay: 0.3 })
+                      .to(target, { x: 0, y: 0, duration: 0.01, delay: 0.2 });
+                    target.dataset.animated = true;
                   }
-    
-                  function crownJitter(el) {
+  
+                  if (!crown.dataset.animated) {
                     const tl = gsap.timeline({ repeat: -1 });
-                    tl.to(el, { y: -5, rotation: -5, duration: 0.01, delay: 0.3 })
-                      .to(el, { y: -3, rotation: 3, duration: 0.01, delay: 0.3 })
-                      .to(el, { y: -6, rotation: -4, duration: 0.01, delay: 0.3 })
-                      .to(el, { y: 0, rotation: 0, duration: 0.01, delay: 0.3 });
+                    tl.to(crown, { y: -5, rotation: -5, duration: 0.01, delay: 0.3 })
+                      .to(crown, { y: -3, rotation: 3, duration: 0.01, delay: 0.3 })
+                      .to(crown, { y: -6, rotation: -4, duration: 0.01, delay: 0.3 })
+                      .to(crown, { y: 0, rotation: 0, duration: 0.01, delay: 0.3 });
+                    crown.dataset.animated = true;
                   }
-    
-                  sharpSquareStep(target);
-                  crownJitter(crown);
                 }
               })
-    
-            // 3. re_movie 제목
-            .fromTo("#hobby .re_movie .txt",
-              { autoAlpha: 0, y: -200, rotation: -5 },
-              { autoAlpha: 1, y: 0, rotation: 0, duration: 0.9, ease: "bounce.out" }
-            )
-    
-            // 4. re_movie 이미지들
-            .fromTo("#hobby .re_movie .sticker_txt, #hobby .re_movie img",
-              { autoAlpha: 0, y: 30 },
-              {
+              .fromTo("#hobby .re_movie .txt", { autoAlpha: 0, y: -200, rotation: -5 }, { autoAlpha: 1, y: 0, rotation: 0, duration: 0.9, ease: "bounce.out" })
+              .fromTo("#hobby .re_movie .sticker_txt, #hobby .re_movie img", { autoAlpha: 0, y: 30 }, {
                 autoAlpha: 1,
                 y: 0,
                 duration: 0.9,
-                stagger: 0.1,
+                stagger: 0.15,
                 ease: "power2.out",
                 onComplete: () => {
                   const poster = document.querySelector('#hobby .re_movie ul .begin img.seco');
                   const conanTape = document.querySelector('#hobby .re_movie ul .conan .sticker_txt');
-    
-                  function collageJitter(el) {
+  
+                  if (!poster.dataset.animated) {
                     const tl = gsap.timeline({ repeat: -1 });
-                    tl.to(el, { rotation: -2, x: -1, y: 1, duration: 0.01, delay: 0.4 })
-                      .to(el, { rotation: 2, x: 2, y: -1, duration: 0.01, delay: 0.4 })
-                      .to(el, { rotation: -1, x: -1, y: 0, duration: 0.01, delay: 0.4 })
-                      .to(el, { rotation: 0, x: 0, y: 0, duration: 0.01, delay: 0.4 });
+                    tl.to(poster, { rotation: -2, x: -1, y: 1, duration: 0.01, delay: 0.4 })
+                      .to(poster, { rotation: 2, x: 2, y: -1, duration: 0.01, delay: 0.4 })
+                      .to(poster, { rotation: -1, x: -1, y: 0, duration: 0.01, delay: 0.4 })
+                      .to(poster, { rotation: 0, x: 0, y: 0, duration: 0.01, delay: 0.4 });
+                    poster.dataset.animated = true;
                   }
-    
-                  function tapeJitter(el) {
+  
+                  if (!conanTape.dataset.animated) {
                     const tl = gsap.timeline({ repeat: -1 });
-                    tl.to(el, { rotation: 2, x: 1, y: -0.5, duration: 0.01, delay: 0.35 })
-                      .to(el, { rotation: -2, x: -1.5, y: 1, duration: 0.01, delay: 0.35 })
-                      .to(el, { rotation: 1, x: 0.5, y: -1, duration: 0.01, delay: 0.35 })
-                      .to(el, { rotation: 0, x: 0, y: 0, duration: 0.01, delay: 0.35 });
+                    tl.to(conanTape, { rotation: 2, x: 1, y: -0.5, duration: 0.01, delay: 0.35 })
+                      .to(conanTape, { rotation: -2, x: -1.5, y: 1, duration: 0.01, delay: 0.35 })
+                      .to(conanTape, { rotation: 1, x: 0.5, y: -1, duration: 0.01, delay: 0.35 })
+                      .to(conanTape, { rotation: 0, x: 0, y: 0, duration: 0.01, delay: 0.35 });
+                    conanTape.dataset.animated = true;
                   }
-    
-                  collageJitter(poster);
-                  tapeJitter(conanTape);
                 }
               });
-    
           } else {
             hobbyText.classList.remove("glow");
+            const jitterTargets = [
+              "#hobby .go_trip .na",
+              "#hobby .go_trip .two",
+              "#hobby .re_movie ul .begin img.seco",
+              "#hobby .re_movie ul .conan .sticker_txt"
+            ];
+  
+            gsap.killTweensOf(jitterTargets);
+            gsap.set(jitterTargets, { x: 0, y: 0, rotation: 0 });
+  
+            jitterTargets.forEach(sel => {
+              const el = document.querySelector(sel);
+              if (el && el.dataset.animated) delete el.dataset.animated;
+            });
           }
         });
       });
@@ -397,12 +431,12 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   };
-
+  
   Object.entries(sectionObservers).forEach(([id, fn]) => {
     const el = document.getElementById(id);
     if (el) fn().observe(el, { attributes: true, attributeFilter: ["class"] });
   });
-
+  
 
 
 
