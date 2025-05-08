@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("mousemove", (e) => {
     gsap.to(cursor, {
       x: e.clientX,
-      y: e.clientY,
+      y: e.clientY + 30,
       duration: 0.1,
       ease: "power2.out"
     });

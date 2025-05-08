@@ -1,5 +1,5 @@
 $(function () {
-   
+
     window.preventScroll = function (e) {
         e.preventDefault();
     };
@@ -27,7 +27,7 @@ $(function () {
             ease: "power2.out"
         });
     }, 500);
-    
+
     text.innerHTML = text.innerText.split('').map(char => `<span class="char">${char}</span>`).join('');
     const chars = document.querySelectorAll('.char');
 
@@ -88,25 +88,61 @@ $(function () {
     let currentY = 0;
 
     // 커서 움직임 감지
+    /*     document.addEventListener("mousemove", (e) => {
+            targetX = e.clientX / window.innerWidth;
+            targetY = e.clientY / window.innerHeight;
+        }); */
+
+    // 프레임마다 조금씩 따라가게 업데이트
+    /* function animateGlow() {
+      currentX += (targetX - currentX) * 0.2;
+      currentY += (targetY - currentY) * 0.2;
+    
+      const posX = 10 + currentX * 80;
+      const posY = 10 + currentY * 80;
+    
+      document.querySelectorAll('.char').forEach(char => {
+        char.style.backgroundImage = `radial-gradient(
+          circle at ${posX}% ${posY}%,
+          rgba(255, 255, 255, 1) 0%,
+          rgba(210, 210, 210, 0.8) 15%,
+          rgba(120, 120, 120, 0.4) 35%,
+          rgba(120, 120, 120, 1) 65%
+        )`;
+      });
+    
+      requestAnimationFrame(animateGlow);
+    }
+        
+        
+       animateGlow();
+     */
+
+
     document.addEventListener("mousemove", (e) => {
         targetX = e.clientX / window.innerWidth;
         targetY = e.clientY / window.innerHeight;
     });
 
-    // 프레임마다 조금씩 따라가게 업데이트
-    function animateGlow() {
-        // 보간 (Lerp) 적용
+    function animateLight() {
         currentX += (targetX - currentX) * 0.1;
         currentY += (targetY - currentY) * 0.1;
 
+        const px = window.innerWidth * (currentX - 0.5) * 1.5 + window.innerWidth / 2;
+        const py = window.innerHeight * (currentY - 0.5) * 1.5 + window.innerHeight / 2;
+
         document.querySelectorAll('.char').forEach(char => {
-            char.style.backgroundPosition = `${currentX * 100 + 50}% ${currentY * 100 + 50}%`;
+            char.style.backgroundImage = `radial-gradient(circle at ${px}px ${py}px,
+ #1a1a1a 0%,
+  #444444 20%,
+  #777777 40%,
+  #aaaaaa 60%,
+  #ffffff 100%`;
         });
 
-        requestAnimationFrame(animateGlow);
+        requestAnimationFrame(animateLight);
     }
-
-    animateGlow();
+    animateLight();
 
 
 
