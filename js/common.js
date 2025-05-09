@@ -1,5 +1,6 @@
 $(function () {
 
+  gsap.registerPlugin(ScrollTrigger);
 
   const $ham = $('header .dot_ham');
   $ham.hide(); // 처음엔 숨김
@@ -26,15 +27,38 @@ $(function () {
     $(this).removeClass('on');
   });
 
-  gsap.registerPlugin(ScrollTrigger);
+
+  const cards = gsap.utils.toArray(".scroll ul li");
+  const cardHeight = 400;
+  const gap = 250;
+  const totalCards = cards.length;
+  const scrollHeight = (cardHeight + gap) * totalCards + window.innerHeight * 0.8;
+  document.querySelector(".scroll").style.height = `${scrollHeight}px`;
+
+  cards.forEach((card) => {
+    ScrollTrigger.create({
+      trigger: card,
+      start: "top center+=50",
+      end: "bottom center",
+      onEnter: () => card.classList.add("on"),
+      onLeaveBack: () => card.classList.remove("on"),
+      toggleActions: "play reverse play reverse"
+    });
+  });
 
   // 1. 배경을 pin으로 고정
   ScrollTrigger.create({
     trigger: ".scroll",
     start: "top top",
-    end: "bottom bottom",
+    end: "bottom+=100",
     pin: ".bg_pin",
-    pinSpacing: false, // pinned 된 만큼 여백 안 만들기
+    pinSpacing: true,
+    onLeave: () => {
+      document.querySelector(".bg_pin").style.display = "none";
+    },
+    onEnterBack: () => {
+      document.querySelector(".bg_pin").style.display = "block";
+    }
   });
 
   // 2. 카드마다 배경 이미지 변경
@@ -44,10 +68,9 @@ $(function () {
     "url('img/onTour_bg.jpg')",
     "url('img/coffeeBean_bg.jpg')",
     "url('img/dlatl.jpg')",
-    "url('img/dlatl.jpg')",
-    "url('img/dlatl.jpg')"
+    "url('img/coffeeBean_bg.jpg')",
+    "url('img/onTour_bg.jpg')"
   ];
-  const cards = gsap.utils.toArray(".scroll ul li");
   const ul = document.querySelector(".project_wrap");
 
   const total = cards.length;
@@ -55,8 +78,8 @@ $(function () {
 
   ScrollTrigger.create({
     trigger: ul,
-    start: "top center+=100",
-    end: () => `+=${cards.length * 650}`,
+    start: "top center-=100",
+    end: () => `+=${(cardHeight + gap) * totalCards - window.innerHeight * 0.5}`,
     scrub: 1,
     markers: false,
     onUpdate: self => {

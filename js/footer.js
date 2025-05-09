@@ -82,15 +82,13 @@ $(function () {
   canvas.style.pointerEvents = "auto"; // canvas가 pointer 이벤트를 받을 수 있도록 설정
 
   canvas.addEventListener("wheel", function (event) {
-    // 스크롤 방향에 따라 처리
-    if (event.deltaY < 0) {
+    if (event.deltaY < 0 && window.scrollY > 10) {
       window.scrollTo({
         top: scrollTarget,
-        behavior: 'smooth' // 부드럽게 스크롤
+        behavior: 'smooth'
       });
+      event.preventDefault(); // 위로 스크롤할 때만 막기
     }
-
-    event.preventDefault(); // 기본 스크롤 방지
   });
 
   canvas.width = window.innerWidth;

@@ -11,7 +11,7 @@ footer {
     position: relative;
     overflow: visible;
     pointer-events: auto;
-
+    z-index: 10; 
 }
 
 /* 
@@ -39,7 +39,7 @@ footer .inner {
     padding-top: 90px;
     position: relative;
     z-index: 1;
-    mix-blend-mode: difference;
+    mix-blend-mode: normal;
     user-select: none;
     /* pointer-events: none;  */
 }
@@ -163,8 +163,7 @@ footer .inner {
     transform: rotateX(-80deg) translateY(20px);
     transform-origin: left bottom;
     transition: opacity 0.1s ease, transform 0.1s ease;
-
-
+    background: transparent !important;
     user-select: none;
     pointer-events: none;
 
@@ -201,6 +200,7 @@ footer .inner {
     height: 100%;
     pointer-events: none;
     /* 전체는 터치 안 되게, 내부 tag-container만 auto */
+    overflow: hidden;
 }
 
 canvas#matter-canvas {
