@@ -286,7 +286,7 @@ body.in {
     display: flex;
     align-items: center;
     /* padding: 0 100px; */
-    transition: opacity 0.5s ease;
+    transition: opacity 0.6s ease;
 }
 
 .bg_white {
@@ -305,24 +305,24 @@ body.in {
     /* padding-top: 100px; */
     display: flex;
     flex-direction: column;
-    gap: 250px;
+    gap:250px;
     /* 배경보다 위에 카드 나오게 */
 }
 
 /*  기본 li */
 .scroll ul li {
-    width: 800px;
+    width: 750px;
     height: auto;
     border-radius: 30px;
     opacity: 0.4;
     color: var(--black-color);
     display: flex;
     /* justify-content: center; */
-    padding: 25px 30px;
+    padding: 26px 75px 26px 25px;
     position: relative;
     flex-direction: column;
     transition: all 0.2s ease;
-    gap: 25px;
+    gap: 20px;
     font-family: var(--pretend);
 }
 
@@ -356,35 +356,31 @@ body.in {
 .scroll ul li .top_txt {
     display: flex;
     align-items: flex-start;
-    gap: 20px;
+    gap: 16px;
     justify-content: flex-start;
+/*     padding: ; */
 }
 
 .scroll ul li .num {
-    width: 35px;
-    height: 35px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
     background-color: var(--light-black);
-
     display: flex;
     align-items: center;
     justify-content: center;
-
-    font-size: 25px;
+    font-size: 28px;
     line-height: 1;
 }
 
 .scroll ul li .num p {
-    margin: 0;
-    padding: 0;
-    font-size: 20px;
-    line-height: 1;
     font-family: var(--Audiowide);
     color: var(--mint);
 }
 
 .scroll ul li .title_fill span {
-    font-size: 40px;
+    font-size: 27px;
+    letter-spacing: 1px;
     font-family: var(--Druk);
     text-transform: uppercase;
     color: var(--white-color);
@@ -398,7 +394,7 @@ body.in {
 .scroll ul li .title_fill {
     position: relative;
     display: inline-block;
-    padding: 10px 20px;
+    padding: 18px 15px;
     overflow: hidden;
     background: transparent;
 }
@@ -410,7 +406,7 @@ body.in {
     left: 0;
     height: 100%;
     width: 0%;
-    background-color: var(--font-gray);
+    background-color: #05361D;
     z-index: 1;
     transition: width 0.6s ease;
 }
@@ -458,7 +454,7 @@ body.in {
     left: 0;
     height: 100%;
     width: 0%;
-    background-color: #445C6D;
+    background-color: var(--font-gray);
     z-index: 1;
     transition: width 0.6s ease;
 }
@@ -469,7 +465,7 @@ body.in {
 /* .under_txt  */
 .scroll ul li .center_txt {
     display: flex;
-    padding: 0px 52px;
+    padding: 0px 51px;
     flex-direction: column;
     align-items: flex-start;
     gap: px;
@@ -477,7 +473,7 @@ body.in {
 }
 
 .scroll ul li .center_txt p {
-    font-size: 28px;
+    font-size: 25px;
     text-transform: uppercase;
     font-weight: 400;
     line-height: 1.2;
@@ -509,28 +505,29 @@ body.in {
 }
 
 
-.scroll ul li .center_txt .middle_txt {
+.scroll ul li .middle_txt {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 15px;
     width: 100%;
-    padding-top: 25px;
+    padding-top: 30px;
+    padding-left: 50px;
 }
 
-.scroll ul li .center_txt .middle_txt p {
+.scroll ul li .middle_txt p {
     color: var(--black-color);
-    font-size: 24px;
-    font-weight: 400;
+    font-size: 20px;
+    font-weight: 500;
     border-bottom: 1px solid #ccc;
     padding-bottom: 10px;
     width: 100%;
     display: block;
 }
 
-.scroll ul li .center_txt .middle_txt span {
+.scroll ul li .middle_txt span {
     color: #ABA6B1;
-    font-size: 18.124px;
+    font-size: 19px;
     font-style: normal;
     font-weight: 400;
 }
@@ -541,6 +538,7 @@ body.in {
     justify-content: flex-end;
     align-items: flex-end;
     align-self: stretch;
+    padding-top: 25px;
 }
 
 .scroll ul li .bottom_txt .button {
