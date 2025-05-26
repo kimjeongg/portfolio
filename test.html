@@ -1,0 +1,253 @@
+<!-- Horizontal Scroll Project Section with GSAP Motion + Twisted Text + Flicker + Wheel Scroll + Internal Interactions -->
+<section class="horizontal-scroll-wrapper">
+  <div class="project-track">
+
+    <!-- Project Card 1 -->
+    <section class="project-card ontour">
+      <div class="project-bg"></div>
+      <div class="card-inner">
+        <div class="visual">
+          <img src="img/ontour_mockup.png" alt="Ontour App UI">
+          <span class="label glitch">CREATIVE DIRECTION</span>
+        </div>
+        <div class="info">
+          <h2 class="title orange twist-text flicker">ONTOUR – TRAVELAPP</h2>
+          <p class="desc">1인가구와 외국인을 위한 AI 일정 추천 여행앱</p>
+          <ul class="tags">
+            <li>#UX리서치</li>
+            <li>#AI추천</li>
+            <li>#모바일퍼스트</li>
+          </ul>
+          <div class="btn-group">
+            <a href="#" class="btn white">WEB SITE</a>
+            <a href="#" class="btn orange">LANDING PAGE</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project Card 2 -->
+    <section class="project-card nivea">
+      <div class="project-bg"></div>
+      <div class="card-inner">
+        <div class="visual">
+          <img src="img/nivea_mockup.png" alt="NIVEA Website UI">
+          <span class="label glitch">UI/UX RETHINK</span>
+        </div>
+        <div class="info">
+          <h2 class="title blue twist-text flicker">NIVEA – REDESIGN</h2>
+          <p class="desc">미니멀하고 신뢰감 있는 UX 중심의 리뉴얼 프로젝트</p>
+          <ul class="tags">
+            <li>#리디자인</li>
+            <li>#미니멀</li>
+            <li>#접근성강화</li>
+          </ul>
+          <div class="btn-group">
+            <a href="#" class="btn white">CASE STUDY</a>
+            <a href="#" class="btn blue">FIGMA VIEW</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</section>
+
+<style>
+.horizontal-scroll-wrapper {
+  overflow: hidden;
+  height: 100vh;
+  background: #111;
+  position: relative;
+}
+.project-track {
+  display: flex;
+  height: 100%;
+  width: max-content;
+  transition: transform 0.3s ease;
+}
+.project-card {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(50px);
+}
+.project-card.on {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.8s ease;
+}
+.card-inner {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+  max-width: 1200px;
+}
+.visual {
+  position: relative;
+  flex-shrink: 0;
+  transform: rotate(-2deg);
+}
+.visual img {
+  width: 400px;
+  border-radius: 20px;
+  filter: brightness(1.1);
+}
+.label {
+  position: absolute;
+  top: -20px;
+  left: -30px;
+  background: rgba(255, 107, 0, 0.8);
+  color: #fff;
+  padding: 0.4em 0.8em;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transform: rotate(-10deg);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.info .title {
+  font-size: 2.4rem;
+  font-family: 'Bebas Neue', sans-serif;
+  color: #fff;
+}
+.info .desc {
+  color: #ccc;
+  margin-top: 1rem;
+  max-width: 500px;
+  line-height: 1.5;
+  opacity: 0;
+}
+.tags {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  opacity: 0;
+}
+.tags li {
+  background: #222;
+  padding: 0.4em 0.8em;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: #fff;
+}
+.btn-group {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.btn {
+  padding: 0.8em 1.6em;
+  font-weight: bold;
+  border: 2px solid #fff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+.btn.white { color: #fff; background: transparent; }
+.btn.orange { background: #FF6B00; color: #111; border: none; }
+.btn.blue { background: #2978D9; color: #fff; border: none; }
+.btn:hover { transform: scale(1.05); }
+.title.orange { color: #FF6B00; }
+.title.blue { color: #2978D9; }
+.twist-text { display: inline-block; transform: rotate(-2deg) skew(-5deg); position: relative; z-index: 2; }
+
+/* Flicker animation */
+@keyframes flicker {
+  0% { opacity: 0.2; }
+  10% { opacity: 1; }
+  20% { opacity: 0.1; }
+  30% { opacity: 1; }
+  100% { opacity: 1; }
+}
+.flicker {
+  animation: flicker 0.6s ease-in-out forwards;
+}
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Animate internal elements
+  document.querySelectorAll('.project-card').forEach((card) => {
+    const title = card.querySelector(".title");
+    const desc = card.querySelector(".desc");
+    const tags = card.querySelectorAll(".tags li");
+    const buttons = card.querySelectorAll(".btn-group");
+
+    ScrollTrigger.create({
+      trigger: card,
+      start: 'left center',
+      end: 'right center',
+      onEnter: () => {
+        card.classList.add('on');
+        title.classList.add('flicker');
+        gsap.fromTo(title, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" });
+        gsap.fromTo(desc, { y: 30, opacity: 0 }, { y: 0, opacity: 1, delay: 0.2, duration: 0.5 });
+        gsap.fromTo(tags, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, stagger: 0.1, delay: 0.3 });
+        gsap.fromTo(buttons, { opacity: 0 }, { opacity: 1, delay: 0.6, duration: 0.4 });
+      },
+      scrub: true
+    });
+  });
+
+  // Mouse wheel horizontal scroll
+  const wrapper = document.querySelector('.horizontal-scroll-wrapper');
+  wrapper.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    wrapper.scrollLeft += e.deltaY;
+  }, { passive: false });
+
+  let lastScrollX = 0;
+let lastTime = Date.now();
+
+gsap.ticker.add(() => {
+  const currentScroll = wrapper.scrollLeft;
+  const now = Date.now();
+  const delta = now - lastTime;
+  const speed = (currentScroll - lastScrollX) / delta;
+
+  const skew = gsap.utils.clamp(-10, 10, speed * 100);
+  const scale = gsap.utils.clamp(0.95, 1.2, 1 + Math.abs(speed * 1.5));
+
+  document.querySelectorAll(".project-card").forEach(card => {
+    const title = card.querySelector(".title");
+    const img = card.querySelector("img");
+
+    if (title) {
+      gsap.to(title, {
+        skewX: skew,
+        scaleX: scale,
+        transformOrigin: "center",
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    }
+
+    if (img) {
+      gsap.to(img, {
+        scaleX: scale,
+        skewX: -skew / 2,
+        transformOrigin: "center",
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    }
+  });
+
+  lastScrollX = currentScroll;
+  lastTime = now;
+});
+
+</script>
