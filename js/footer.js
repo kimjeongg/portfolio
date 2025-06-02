@@ -77,7 +77,7 @@ $(function () {
 
 
   // scrollTarget을 계산하는 코드 (바닐라 JS)
-  let scrollTarget = document.querySelector('.scroll').offsetTop;
+  let scrollTarget = document.querySelector('.container').offsetTop;
 
   canvas.style.pointerEvents = "auto"; // canvas가 pointer 이벤트를 받을 수 있도록 설정
 

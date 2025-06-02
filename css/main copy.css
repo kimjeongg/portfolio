@@ -1,0 +1,338 @@
+@charset "utf-8";
+
+
+
+
+
+
+.wrap {
+    background-color: var(--black-color);
+}
+
+.splash {
+    width: 100%;
+    height: 100vh;
+    background-color: var(--black-color);
+    font-family: var(--Anton);
+    font-weight: 400;
+    text-transform: lowercase;
+    font-size: 100px;
+    position: fixed;
+    overflow: hidden;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    /* opacity: 0; */
+}
+
+.splash .txt {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+}
+
+#particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 8;
+    left: 0;
+    top: 0;
+    /* filter: drop-shadow(0 0 6px rgba(0,200,255,0.6)); */
+    filter: blur(1px) brightness(1.5);
+}
+
+.splash .txt h1 {
+    position: relative;
+    color: #fff;
+    /*     background: radial-gradient(117.08% 101.11% at 101.11% 50%, #6F6F6F 0%, #FFF 48.36%, #999 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+   */
+}
+
+/* .splash .char {
+    display: inline-block;
+    color: transparent;
+    background-image: radial-gradient(circle at center, white 30%, #666 80%);
+    background-size: 200% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: brightness(1.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    transition: background-position 0.2s ease;
+} */
+
+
+.splash .char {
+    display: inline-block;
+    font-weight: 300;
+    font-size: 100px;
+    background: radial-gradient(circle at center,
+            #1a1a1a 0%,
+            #444444 15%,
+            #777777 40%,
+            #aaaaaa 70%,
+            #ffffff 100%);
+    background-size: 800% 800%;
+    background-position: center center;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#brokenGlass {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('../img/12.png');
+    /* 깨진 유리 텍스처 */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9;
+    left: 0;
+    top: 0;
+    /* 텍스트 뒤, 파티클 위 */
+}
+
+.blackout {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s;
+}
+
+.values {
+    height: 100vh;
+    background-image: url(../img/values_bg.jpg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    /* clip-path: circle(0% at 50% 50%); */
+    /* transform-origin: center; */
+    overflow: hidden;
+    /* 혹시 내부가 삐져나오는 경우 방지 */
+    /* will-change: clip-path, transform; */
+    position: relative;
+    pointer-events: auto;
+}
+
+.values::before {
+    content: "";
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1300px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 94, 0, 0.377), transparent 100%);
+    filter: blur(60px);
+    z-index: 1;
+}
+
+.values .txt_neon {
+    position: relative;
+    z-index: 1;
+
+}
+
+.values .txt_neon h1 {
+    font-family: var(--Marquee);
+    font-size: 140px;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 150px;
+}
+
+.values .txt_neon h1 {
+    animation: jackpots 1s 0s ease infinite;
+    -moz-animation: jackpots 1s 0s ease infinite;
+    /* Firefox */
+    -webkit-animation: jackpots 1s 0s ease infinite;
+    /* Safari and Chrome */
+    -o-animation: jackpots 1s 0s ease infinite;
+    /* Opera */
+}
+
+@keyframes jackpots {
+
+    /* 🔦 깜빡 2번 */
+    10%,
+    30%,
+    50% {
+        text-shadow:
+            -.1vw 0vw .1vw #705C12, -.15vw 0vw .2vw #705C12, -.2vw 0vw .2vw #705C12,
+            -.1vw 0vw .1vw #5C0704, -.2vw 0vw .1vw #5C0704, -.4vw 0vw .1vw #5C0704,
+            -.4vw 0vw .2vw #5C0704, .2vw 0vw .5vw #5C0704;
+        color: #705C12;
+    }
+
+    /* 🔆 켜짐 상태 (시작 + 깜빡 사이 + 깜빡 이후) */
+    0%,
+    20%,
+    40%,
+    60%,
+    100% {
+        text-shadow:
+            -.1vw 0vw .1vw #FED128, -.15vw 0vw .2vw #FED128, -.2vw 0vw .2vw #FED128,
+            -.1vw 0vw 3vw #F0130B, -.2vw 0vw 3vw #F0130B, -.4vw 0vw 3vw #F0130B,
+            -.4vw 0vw .8vw #F0130B, .2vw 0vw 10vw #F0130B;
+        color: #FED128;
+    }
+}
+
+
+
+
+@keyframes preDropShake {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    20% {
+        transform: rotate(-10deg);
+    }
+
+    50% {
+        transform: rotate(-5deg);
+    }
+
+    80% {
+        transform: rotate(-15deg);
+    }
+
+    100% {
+        transform: rotate(-15deg) translateY(0px);
+        /* 툭 떨어지듯이! */
+    }
+}
+
+.loose {
+    display: inline-block;
+    transform-origin: top right;
+
+}
+
+.loose.on {
+    animation: preDropShake 1.5s ease-in;
+    animation-fill-mode: forwards;
+}
+
+
+.values a#btn {
+    color: #fff;
+    border: 2px solid;
+    border-radius: 3px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+    font-size: 20px;
+    text-transform: uppercase;
+    width: 250px;
+    height: 65px;
+    padding: 5px 10px;
+    font-weight: 600;
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 0px 3px rgba(0, 0, 0, 0.2);
+    opacity: 0.4;
+    /* backface-visibility: hidden;
+    transform-style: preserve-3d;
+    transform: translateZ(0); 
+    position: relative;
+    z-index: 10; */
+
+}
+
+.values a#btn:hover {
+    color: var(--white-color);
+    opacity: 1;
+}
+
+
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #0f0f0f;
+    font-family: 'Pretendard', sans-serif;
+    overflow: hidden;
+    color: white;
+}
+
+.container {
+    display: flex;
+    width: 300vw;
+    height: 100vh;
+    transition: transform 0.7s ease;
+}
+
+.project {
+    width: 100vw;
+    height: 100vh;
+    padding: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+    transform: scale(0.9);
+    opacity: 0.6;
+}
+
+.project-content {
+    width: 80%;
+    display: flex;
+    gap: 60px;
+    align-items: center;
+}
+
+.project img {
+    width: 500px;
+    border-radius: 20px;
+}
+
+.text-box h2 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.text-box p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.text-box button {
+    padding: 10px 20px;
+    font-weight: bold;
+    color: black;
+    background: #ff6a00;
+    border: none;
+    cursor: pointer;
+}
