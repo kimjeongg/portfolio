@@ -1,12 +1,15 @@
 $(function () {
 
-    window.preventScroll = function (e) {
+    function preventScroll(e) {
         e.preventDefault();
-    };
+    }
 
-    // 스크롤 막기
-    window.addEventListener("wheel", window.preventScroll, { passive: false });
-    window.addEventListener("touchmove", window.preventScroll, { passive: false });
+    window.addEventListener("wheel", preventScroll, { passive: false });
+    window.addEventListener("touchmove", preventScroll, { passive: false });
+
+    // splash 애니메이션 끝난 뒤에 정확히 해제 가능
+    window.removeEventListener("wheel", preventScroll);
+    window.removeEventListener("touchmove", preventScroll);
 
 
 

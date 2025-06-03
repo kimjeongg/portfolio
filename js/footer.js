@@ -1,7 +1,9 @@
 
 $(function () {
 
-
+  window.addEventListener("wheel", function (e) {
+    console.log("✅ window wheel fired", e.deltaY);
+  });
 
   /*  글자 모션 */
   gsap.registerPlugin(ScrollTrigger);
@@ -22,6 +24,7 @@ $(function () {
         [...text].forEach(char => {
           const span = document.createElement("span");
           span.classList.add("char");
+          
 
           // 공백은 그대로 삽입하되 스타일은 별도로 빼기 위해 클래스 추가
           if (char === " ") {
@@ -74,23 +77,26 @@ $(function () {
   const canvas = document.getElementById("matter-canvas");
   const tags = document.querySelectorAll(".tag");
 
-
+  /* console.log("✅ canvas:", canvas); */
 
   // scrollTarget을 계산하는 코드 (바닐라 JS)
   let scrollTarget = document.querySelector('.container').offsetTop;
 
   canvas.style.pointerEvents = "auto"; // canvas가 pointer 이벤트를 받을 수 있도록 설정
 
-  canvas.addEventListener("wheel", function (event) {
-    if (event.deltaY < 0 && window.scrollY > 10) {
-      window.scrollTo({
-        top: scrollTarget,
-        behavior: 'smooth'
-      });
-      event.preventDefault(); // 위로 스크롤할 때만 막기
-    }
-  });
 
+
+
+  /*   canvas.addEventListener("wheel", function (event) {
+      if (event.deltaY < 0 && window.scrollY > 10) {
+        window.scrollTo({
+          top: scrollTarget,
+          behavior: 'smooth'
+        });
+        event.preventDefault(); // 위로 스크롤할 때만 막기
+      }
+    });
+   */
   canvas.width = window.innerWidth;
   canvas.height = footer.offsetHeight;
 

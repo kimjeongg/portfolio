@@ -1,5 +1,5 @@
 $(function () {
-  gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
   const $ham = $('header .dot_ham');
   $ham.hide();
@@ -47,6 +47,7 @@ $(function () {
   }
 
   function goToSection(index) {
+
     if (index < 0 || index >= sections.length || isTransitioning) return;
     isTransitioning = true;
 
@@ -102,11 +103,6 @@ $(function () {
     }
 
 
-    // ✅ footer 진입 시 가로 슬라이드 막기
-    if (footerRect.top < window.innerHeight * 0.9 && delta < 0) {
-      e.preventDefault();
-      return;
-    }
 
 
     // ✅ container 마지막 → footer 진입
@@ -119,7 +115,11 @@ $(function () {
     }
 
     // ✅ container 첫 섹션 → values 복귀
-    if (currentSection === 0 && delta < 0) {
+    if (
+      currentSection === 0 &&
+      delta < 0 &&
+      document.body.classList.contains('in') // ⭐ 슬라이드 모드일 때만
+    ) {
       document.body.classList.remove('in');
       values.scrollIntoView({ behavior: 'smooth' });
       isTransitioning = true;
@@ -127,45 +127,49 @@ $(function () {
       return;
     }
 
+    /* footer -> container */
+    if (
+      !document.body.classList.contains('in') &&
+      footerRect.top < window.innerHeight &&
+      footerRect.top > -100 &&
+      delta < 0
+    ) {
+      console.log("🔥 footer → container 복귀 조건 발동");
 
-// ✅ footer → container 복귀 (위로 스크롤 시)
-if (
-  !document.body.classList.contains('in') &&
-  footerRect.top > window.innerHeight * 0.3 && // footer가 충분히 보일 때
-  delta < 0
-) {
-  e.preventDefault(); // 기본 스크롤 차단
-  isTransitioning = true;
-  document.body.classList.add('in');
+      e.preventDefault();
+      isTransitioning = true;
 
-  // 강제 위치 이동
-  window.scrollTo({
-    top: container.offsetTop,
-    behavior: 'auto'
-  });
+      // ✅ 먼저 스크롤만 이동시키고, body.in은 나중에 추가해야 함
+      gsap.to(window, {
+        scrollTo: container,
+        duration: 0.6,
+        ease: "power2.out",
+        onComplete: () => {
+          document.body.classList.add('in'); // ← 애니메이션 끝난 뒤 슬라이드 모드 진입
+          console.log("✅ goToSection 실행됨", sections.length - 1);
+          goToSection(sections.length - 1);
+          isTransitioning = false;
+        }
+      });
 
-  // 가로 슬라이드 진입 설정
-  setTimeout(() => {
-    goToSection(0); // or currentSection
-    isTransitioning = false;
-  }, 100);
-  return;
-}
+      return;
+    }
+
 
 
 
     // ✅ footer → container 복귀 (위로 스크롤 시)
-/*     if (!document.body.classList.contains('in') && footerRect.top < window.innerHeight && delta < 0) {
-      e.preventDefault();
-      isTransitioning = true;
-      document.body.classList.add('in');
-      window.scrollTo({ top: container.offsetTop, behavior: 'auto' });
-      setTimeout(() => {
-        goToSection(0);
-        isTransitioning = false;
-      }, 100);
-      return;
-    } */
+    /*     if (!document.body.classList.contains('in') && footerRect.top < window.innerHeight && delta < 0) {
+          e.preventDefault();
+          isTransitioning = true;
+          document.body.classList.add('in');
+          window.scrollTo({ top: container.offsetTop, behavior: 'auto' });
+          setTimeout(() => {
+            goToSection(0);
+            isTransitioning = false;
+          }, 100);
+          return;
+        } */
 
 
     // ✅ container 외부면 가로 슬라이드 무시

@@ -272,16 +272,10 @@
 
 
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+
 
 body {
     background: #0f0f0f;
-    font-family: 'Pretendard', sans-serif;
-    overflow: hidden;
     color: white;
 }
 
