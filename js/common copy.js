@@ -1,19 +1,47 @@
 $(function () {
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+  const wrapper = document.getElementById('wrapper');
+  const sections = document.querySelectorAll('.project');
+  const values = document.querySelector('.values');
+  const container = document.querySelector('.container');
+  const footer = document.querySelector('footer');
+
+
 
   const $ham = $('header .dot_ham');
   $ham.hide();
 
-  $(window).on('scroll', function () {
-    const triggerTop = $('.values').offset().top;
-    const scrollTop = $(window).scrollTop();
+  const splash = document.getElementById('splash');
 
-    if (scrollTop >= triggerTop - 100) {
-      $ham.fadeIn(300);
-    } else {
-      $ham.fadeOut(300);
-    }
-  });
+  // ✅ IntersectionObserver 설정
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      const isSplashVisible = splash.getBoundingClientRect().bottom > 0;
+
+      if (entry.isIntersecting && !isSplashVisible) {
+        $ham.fadeIn(300);
+      } else {
+        $ham.fadeOut(300);
+      }
+    },
+    { threshold: 0.2 }
+  );
+
+  observer.observe(values);
+
+  // ✅ 페이지 로딩 시 .values가 이미 보이는 경우 강제 체크
+  const valuesRect = values.getBoundingClientRect();
+  const splashRect = splash.getBoundingClientRect();
+  const isSplashVisible = splashRect.bottom > 0;
+
+  if (
+    valuesRect.top < window.innerHeight &&
+    valuesRect.bottom > 0 &&
+    !isSplashVisible
+  ) {
+    $ham.show(); // 바로 보이게 처리
+  }
+
 
   $('.dot_ham').click(function () {
     $('header').toggleClass('on');
@@ -25,11 +53,7 @@ $(function () {
     $(this).removeClass('on');
   });
 
-  const wrapper = document.getElementById('wrapper');
-  const sections = document.querySelectorAll('.project');
-  const values = document.querySelector('.values');
-  const container = document.querySelector('.container');
-  const footer = document.querySelector('footer');
+
 
   let currentSection = 0;
   let isTransitioning = false;

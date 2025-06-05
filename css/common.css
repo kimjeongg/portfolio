@@ -36,7 +36,9 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+html, body, a, button, input, textarea, select, label {
+  cursor: none !important;
+}
 html,
 body {
     overflow: hidden;
@@ -91,6 +93,7 @@ header .dot_ham {
     transition: .3s;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     position: relative;
+    z-index: 99999;
 
 }
 

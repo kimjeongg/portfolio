@@ -5,18 +5,51 @@
 #main-cursor {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 30px;
   width: 80px;
   height: 80px;
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
+
 }
 
-#main-cursor img {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
+#main-cursor .cusor {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: var(--orang);
   user-select: none;
   pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+#main-cursor.intro .cusor {
+  width: 80px;
+  height: 40px;
+  border-radius: 100px;
+  background: rgba(255, 155, 40, 0.80);
+  color: var(--white-color);
+  font-weight: 500;
+  font-size:15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+
+.cursor-text {
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+
+#main-cursor.hover .cusor {
+  width: 40px;
+  height: 40px;
+  background-color: var(--orang);
+  opacity: 0.5;
+  /* 그대로 두되 커지기만 */
 }

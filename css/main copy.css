@@ -23,6 +23,7 @@
     left: 0;
     top: 0;
     /* opacity: 0; */
+      cursor: none !important;
 }
 
 .splash .txt {
@@ -277,6 +278,7 @@
 body {
     background: #0f0f0f;
     color: white;
+    
 }
 
 .container {
