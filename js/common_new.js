@@ -67,6 +67,7 @@ $(function () {
       sec.style.backgroundSize = "cover";
       sec.style.backgroundPosition = "center";
       sec.style.backgroundRepeat = "no-repeat";
+      console.log(index);
     });
   }
 
