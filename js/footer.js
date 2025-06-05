@@ -2,7 +2,7 @@
 $(function () {
 
   window.addEventListener("wheel", function (e) {
-    console.log("✅ window wheel fired", e.deltaY);
+    // console.log("✅ window wheel fired", e.deltaY);
   });
 
   /*  글자 모션 */
