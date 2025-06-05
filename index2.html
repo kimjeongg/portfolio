@@ -10,22 +10,19 @@
     <title>Jeong-E portfolio</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/main copy.css">
+    <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/cursor.css">
 
-    <!-- GSAP Core & Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script> <!-- ✅ 이거 추가 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
-
-    <!-- 기타 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script> <!-- ✅ 드래그 효과용 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script> <!-- 선택 -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+
     <script src="js/intro.js"></script>
-    <script src="js/common copy.js"></script>
+    <script src="js/common.js"></script>
     <script src="js/footer.js"></script>
 
 </head>
@@ -79,39 +76,118 @@
             </a>
 
         </section><!-- //.values -->
-
-        <div id="wrapper" class="container">
-            <section class="project" style="background:#111;">
-                <div class="project-content">
-                    <!--  <img src="https://via.placeholder.com/500x300?text=BOB+ISSUE" alt="BOB ISSUE" /> -->
-                    <div class="text-box">
-                        <h2>BOB ISSUE</h2>
-                        <p>1인 가구를 위한 밀키트 플랫폼. 한국인의 식문화를 담아낸 감성 중심 설계.</p>
-                        <button>VIEW CASE</button>
+        <section class="scroll" id="scroll">
+            <div class="bg_pin"></div>
+            <ul class="project_wrap">
+                <li class="on">
+                    <div class="top_txt">
+                        <div class="num">
+                            <p>1</p>
+                        </div>
+                        <div class="title_fill"><span>MILKIT platform</span>
+                        </div>
                     </div>
-                </div>
-            </section>
-            <section class="project" style="background:#161616;">
-                <div class="project-content">
-                    <!-- <img src="https://via.placeholder.com/500x300?text=ONTOUR" alt="ONTOUR" /> -->
-                    <div class="text-box">
-                        <h2>ON TOUR</h2>
-                        <p>AI 여행 동반자, 사용자 맞춤형 일정 생성 + 저장 + 공유가 가능한 여행 플랫폼.</p>
-                        <button>VIEW CASE</button>
+                    <div class="center_txt">
+                        <p>1인 가구와 외국인을 위한 <br> <span>K-푸드 밀키트 구독형 웹사이트</span></p>
                     </div>
-                </div>
-            </section>
-            <section class="project" style="background:#1a1a1a;">
-                <div class="project-content">
-                    <!-- <img src="https://via.placeholder.com/500x300?text=BLOOP" alt="BLOOP" /> -->
-                    <div class="text-box">
-                        <h2>BLOOP</h2>
-                        <p>팬과 아티스트의 감정이 교차하는 디지털 공명 플랫폼. 소리처럼 반응하고 기록됩니다.</p>
-                        <button>VIEW CASE</button>
+                    <div class="middle_txt">
+                        <p>팀 프로젝트 (기획, UX 리서치, 반응형 웹디자인)</p>
+                        <span># K푸드&nbsp;&nbsp;&nbsp;# 밀키트&nbsp;&nbsp;&nbsp;# 글로벌UX&nbsp;&nbsp;&nbsp;# 반응형웹&nbsp;&nbsp;&nbsp;# 리서치기반기획</span>
                     </div>
-                </div>
-            </section>
-        </div><!-- container -->
+                    <div class="bottom_txt">
+                        <div class="button">
+                            <a href="#">website</a>
+                            <a href="#">plan</a>
+                        </div>
+                </li>
+                <li class="">
+                    <div class="top_txt">
+                        <div class="num">
+                            <p>2</p>
+                        </div>
+                        <div class="title_fill"><span>B-Art Museum Redesign</span>
+                        </div>
+                    </div>
+                    <div class="center_txt">
+                        <p>AI 기반 이미지와 인터랙션 중심 <br> <span>미술관 리디자인</span></p>
+                        <div class="middle_txt">
+                            <p>1인 프로젝트 (UI 리디자인, 인터랙션 중심)</p>
+                            <span># 미술관리디자인&nbsp;&nbsp;# AI활용&nbsp;&nbsp;# 인터랙션중심&nbsp;&nbsp;# 문화UX&nbsp;&nbsp;#
+                                비상업프로젝트</span>
+                        </div>
+                    </div>
+                    <div class="bottom_txt">
+                        <div class="button">
+                            <a href="#">website</a>
+                        </div>
+                </li>
+                <li class="">
+                    <div class="top_txt">
+                        <div class="num">
+                            <p>3</p>
+                        </div>
+                        <div class="title_fill"><span>ONTOUR-TRAVELAPP</span>
+                        </div>
+                    </div>
+                    <div class="center_txt">
+                        <p>AI 일정 추천부터 친구와 공유까지 가능한 <br> <span>스마트 여행 앱</span></p>
+                        <div class="middle_txt">
+                            <p>팀 프로젝트 (UX 기획, 프로토타입 디자인)</p>
+                            <span># AI여행플래너&nbsp;&nbsp;# 장소추천&nbsp;&nbsp;# 커뮤니티기능&nbsp;&nbsp;# UX설계&nbsp;&nbsp;#
+                                모바일앱</span>
+                        </div>
+                    </div>
+                    <div class="bottom_txt">
+                        <div class="button">
+                            <a href="#">prototype</a>
+                            <a href="#">landing</a>
+                        </div>
+                </li>
+                <li class="">
+                    <div class="top_txt">
+                        <div class="num">
+                            <p>4</p>
+                        </div>
+                        <div class="title_fill"><span> CAFFEE BEAN RENEWAL</span>
+                        </div>
+                    </div>
+                    <div class="center_txt">
+                        <p>사용자 경험 개선을 중심으로 리디자인한 <br><span>커피 브랜드 메인 페이지</span> </p>
+                        <div class="middle_txt">
+                            <p>1인 프로젝트 (UX 기획, UI 디자인 100%)</p>
+                            <span># 리뉴얼&nbsp;&nbsp;# 커피빈&nbsp;&nbsp;# UI경험기반&nbsp;&nbsp;# 브랜딩&nbsp;&nbsp;# 반응형웹</span>
+                        </div>
+                    </div>
+                    <div class="bottom_txt">
+                        <div class="button">
+                            <a href="#">website</a>
+                            <a href="#">landing</a>
+                        </div>
+                </li>
+                <li class="">
+                    <div class="top_txt">
+                        <div class="num">
+                            <p>5</p>
+                        </div>
+                        <div class="title_fill"><span>ai-chat comunity</span>
+                        </div>
+                    </div>
+                    <div class="center_txt">
+                        <p>1인 가구와 외국인을 위한 <br> <span>K-푸드 밀키트 구독형 웹사이트</span></p>
+                        <div class="middle_txt">
+                            <p>팀 프로젝트 ( ux기획, ui 디자인 100%)</p>
+                            <span># K푸드&nbsp;&nbsp;# 밀키트&nbsp;&nbsp;# 글로벌UX&nbsp;&nbsp;# 반응형웹&nbsp;&nbsp;#
+                                리서치기반기획</span>
+                        </div>
+                    </div>
+                    <div class="bottom_txt">
+                        <div class="button">
+                            <a href="#">website</a>
+                            <a href="#">plan</a>
+                        </div>
+                </li>
+            </ul>
+        </section><!-- //.scroll -->
 
         <footer id="footer">
             <!-- <div class="inner"> -->
@@ -172,9 +248,7 @@
             <!-- </div>//.inner -->
         </footer>
         <div id="main-cursor">
-            <div class="cusor">
-                 <span class="cursor-text"></span> 
-            </div>
+            <img src="img/기본-커서.png" alt="custom cursor" />
         </div>
     </div><!-- ../wrap -->
     <script src="js/cusor.js"></script>
