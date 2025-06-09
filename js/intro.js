@@ -8,10 +8,10 @@ $(function () {
     window.addEventListener("touchmove", preventScroll, { passive: false });
 
     // splash 애니메이션 끝난 뒤에 정확히 해제 가능
-    window.removeEventListener("wheel", preventScroll);
-    window.removeEventListener("touchmove", preventScroll);
-
-
+    /*    window.removeEventListener("wheel", preventScroll);
+       window.removeEventListener("touchmove", preventScroll);
+   
+    */
 
     const text = document.getElementById('text');
     const broken = document.getElementById('brokenGlass');
@@ -207,6 +207,7 @@ $(function () {
                     // 다시 허용
                     window.removeEventListener("wheel", preventScroll);
                     window.removeEventListener("touchmove", preventScroll);
+                     ScrollTrigger.refresh();
                 }
             }, "-=0.5");
 
