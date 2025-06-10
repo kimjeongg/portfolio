@@ -54,11 +54,10 @@ body::-webkit-scrollbar {
 }
 
 body.in {
-    overflow: hidden;
+  overflow: hidden;
 }
-
 body:not(.in) {
-    overflow-y: auto;
+  overflow: hidden; /* ✅ auto → hidden 으로 통일 */
 }
 
 .wrap {
