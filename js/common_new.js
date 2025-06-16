@@ -14,6 +14,67 @@ $(function () {
   let currentSection = 0;
   let isTransitioning = false;
 
+
+  // 페이지네이션 생성 및 제어
+  const pagination = document.querySelector('.pagination');
+ function createPagination() {
+  pagination.innerHTML = '';
+  sections.forEach((_, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'page-btn' + (i === 0 ? ' active' : '');
+    btn.textContent = (i - 1); // 숫자 대신 원하는 텍스트로 변경 가능
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      goToSection(i);
+    });
+    pagination.appendChild(btn);
+  });
+}
+function updatePagination(index) {
+  document.querySelectorAll('.pagination .page-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', i === index);
+  });
+}
+
+
+
+
+  // 페이지네이션 보이기/숨기기
+  function showPagination(show) {
+    pagination.style.display = show ? 'flex' : 'none';
+  }
+
+  // 초기화
+  createPagination();
+  showPagination(false);
+
+  // goToSection에서 페이지네이션 업데이트
+  const originalGoToSection = goToSection;
+  goToSection = function (index) {
+    if (index < 0 || index >= sections.length) return;
+    originalGoToSection(index);
+    updatePagination(index);
+  };
+
+  // 가로 섹션 진입/이탈 시 페이지네이션 표시
+  function handlePaginationVisibility() {
+    if (document.body.classList.contains('in')) {
+      showPagination(true);
+    } else {
+      showPagination(false);
+    }
+  }
+  document.addEventListener('DOMContentLoaded', handlePaginationVisibility);
+  window.addEventListener('scroll', handlePaginationVisibility);
+  window.addEventListener('resize', handlePaginationVisibility);
+
+  // body의 class 변경 시에도 감지
+  const bodyObserver = new MutationObserver(handlePaginationVisibility);
+  bodyObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+
+
+
   // 👇 전역에서 디버깅 가능하도록 등록할 함수
   function goToSection(index) {
     if (index === currentSection || isTransitioning) return; // 중복 방지
@@ -62,11 +123,11 @@ $(function () {
   }
 
   try {
-  updateScales(0);
-} catch (e) {
-  console.warn('updateScales 실패:', e);
-}
-  const observer = new IntersectionObserver(
+    updateScales(0);
+  } catch (e) {
+    console.warn('updateScales 실패:', e);
+  }
+/*   const observer = new IntersectionObserver(
     ([entry]) => {
       const isSplashVisible = splash.getBoundingClientRect().bottom > 0;
       if (entry.isIntersecting && !isSplashVisible) {
@@ -88,7 +149,22 @@ $(function () {
     !isSplashVisible
   ) {
     $ham.show();
+  } */
+  function updateHamVisibility() {
+    const footerRect = footer.getBoundingClientRect();
+    // footer가 화면에 100px 이상 보이면 숨김
+    if (footerRect.top < window.innerHeight - 100) {
+      $ham.fadeOut(300);
+    } else {
+      $ham.fadeIn(300);
+    }
   }
+
+  window.addEventListener('scroll', updateHamVisibility);
+  window.addEventListener('resize', updateHamVisibility);
+  document.addEventListener('DOMContentLoaded', updateHamVisibility);
+
+  $ham.show(); // 초기 표시
 
   $('.dot_ham').click(() => {
     $('header').toggleClass('on');
@@ -188,25 +264,25 @@ $(function () {
   }, 1000);
 
 
-function updateContainerBgVisibility() {
-  const wrapper = document.querySelector('#wrapper');
-  const bg = document.querySelector('.container_bg');
-  const rect = wrapper.getBoundingClientRect();
+  function updateContainerBgVisibility() {
+    const wrapper = document.querySelector('#wrapper');
+    const bg = document.querySelector('.container_bg');
+    const rect = wrapper.getBoundingClientRect();
 
-  const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+    const isInView = rect.top < window.innerHeight && rect.bottom > 0;
 
-  if (isInView) {
-    bg.style.opacity = '1';
-    bg.style.zIndex = '10';
-  } else {
-    bg.style.opacity = '0';
-    bg.style.zIndex = '-1';
+    if (isInView) {
+      bg.style.opacity = '1';
+      bg.style.zIndex = '10';
+    } else {
+      bg.style.opacity = '0';
+      bg.style.zIndex = '-1';
+    }
   }
-}
 
-window.addEventListener('scroll', updateContainerBgVisibility);
-window.addEventListener('resize', updateContainerBgVisibility);
-document.addEventListener('DOMContentLoaded', updateContainerBgVisibility);
+  window.addEventListener('scroll', updateContainerBgVisibility);
+  window.addEventListener('resize', updateContainerBgVisibility);
+  document.addEventListener('DOMContentLoaded', updateContainerBgVisibility);
 
 
 
