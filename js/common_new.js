@@ -60,79 +60,79 @@ $(function () {
 
 
 
-pageBtns.forEach((btn, idx) => {
-  const circle = btn.querySelector('.circle-border circle');
-  const num = btn.querySelector('.page-num');
-  const color = btn.dataset.color || "#ffcc00";
-  if (!circle) return;
-  const length = 2 * Math.PI * 18;
-  circle.style.stroke = color;
+  pageBtns.forEach((btn, idx) => {
+    const circle = btn.querySelector('.circle-border circle');
+    const num = btn.querySelector('.page-num');
+    const color = btn.dataset.color || "#ffcc00";
+    if (!circle) return;
+    const length = 2 * Math.PI * 18;
+    circle.style.stroke = color;
 
-  btn.addEventListener('mouseenter', () => {
-    animateCircle(circle, 0, 400);
-  });
+    btn.addEventListener('mouseenter', () => {
+      animateCircle(circle, 0, 400);
+    });
 
-  btn.addEventListener('mouseleave', () => {
-    if (btn === lockedBtn || btn.classList.contains('active')) return;
-    animateCircle(circle, length, 400);
-    btn.classList.remove('glow');
-    btn.querySelector('.circle-border').style.filter = 'none';
-    /* num.style.color = ''; */
-  });
+    btn.addEventListener('mouseleave', () => {
+      if (btn === lockedBtn || btn.classList.contains('active')) return;
+      animateCircle(circle, length, 400);
+      btn.classList.remove('glow');
+      btn.querySelector('.circle-border').style.filter = 'none';
+      /* num.style.color = ''; */
+    });
 
-  btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    lockedBtn = btn;
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      lockedBtn = btn;
 
-    num.style.animation = 'none';
-    void num.offsetWidth;
-    num.style.animation = '';
-    num.style.animation = 'scaleClick 0.25s';
-
-    btn.classList.add('glow');
-    animateCircle(circle, 0, 400);
-
-    // 글로우 효과 동적 적용
-    btn.querySelector('.circle-border').style.filter =
-      `drop-shadow(0 0 6px ${color}) drop-shadow(0 0 16px ${color}) drop-shadow(0 0 32px ${color})`;
-    /* num.style.color = color; */
-
-    goToSection(idx);
-  });
-});
-
- function setActivePageBtn(newIdx) {
-  const length = 2 * Math.PI * 18;
-  pageBtns.forEach((b, idx) => {
-    const num = b.querySelector('.page-num');
-    const circle = b.querySelector('.circle-border circle');
-    const color = b.dataset.color || "#ffcc00";
-    b.classList.toggle('active', idx === newIdx);
-
-    if (lockedBtn === b) lockedBtn = null;
-
-    if (idx === newIdx) {
       num.style.animation = 'none';
       void num.offsetWidth;
       num.style.animation = '';
-      num.style.animation = 'jump 0.7s forwards';
+      num.style.animation = 'scaleClick 0.25s';
+
+      btn.classList.add('glow');
       animateCircle(circle, 0, 400);
-      b.classList.add('glow');
-      b.querySelector('.circle-border').style.filter =
+
+      // 글로우 효과 동적 적용
+      btn.querySelector('.circle-border').style.filter =
         `drop-shadow(0 0 6px ${color}) drop-shadow(0 0 16px ${color}) drop-shadow(0 0 32px ${color})`;
       /* num.style.color = color; */
-    } else {
-      num.style.animation = 'none';
-      void num.offsetWidth;
-      num.style.animation = '';
-      num.style.animation = 'jumpDown 0.4s';
-      animateCircle(circle, length, 400);
-      b.classList.remove('glow');
-      b.querySelector('.circle-border').style.filter = 'none';
-    /*   num.style.color = ''; */
-    }
+
+      goToSection(idx);
+    });
   });
-}
+
+  function setActivePageBtn(newIdx) {
+    const length = 2 * Math.PI * 18;
+    pageBtns.forEach((b, idx) => {
+      const num = b.querySelector('.page-num');
+      const circle = b.querySelector('.circle-border circle');
+      const color = b.dataset.color || "#ffcc00";
+      b.classList.toggle('active', idx === newIdx);
+
+      if (lockedBtn === b) lockedBtn = null;
+
+      if (idx === newIdx) {
+        num.style.animation = 'none';
+        void num.offsetWidth;
+        num.style.animation = '';
+        num.style.animation = 'jump 0.7s forwards';
+        animateCircle(circle, 0, 400);
+        b.classList.add('glow');
+        b.querySelector('.circle-border').style.filter =
+          `drop-shadow(0 0 6px ${color}) drop-shadow(0 0 16px ${color}) drop-shadow(0 0 32px ${color})`;
+        /* num.style.color = color; */
+      } else {
+        num.style.animation = 'none';
+        void num.offsetWidth;
+        num.style.animation = '';
+        num.style.animation = 'jumpDown 0.4s';
+        animateCircle(circle, length, 400);
+        b.classList.remove('glow');
+        b.querySelector('.circle-border').style.filter = 'none';
+        /*   num.style.color = ''; */
+      }
+    });
+  }
 
   setActivePageBtn(0);
 
@@ -171,12 +171,12 @@ pageBtns.forEach((btn, idx) => {
       .to(sections[currentSection], {
         scale: 0.5,
         opacity: 0.5,
-        duration: 0.3,
+        duration: 0.5,
         ease: "power2.out"
       })
       .to(wrapper, {
         x: targetX,
-        duration: 0.8,
+        duration: 1.2,
         ease: "power2.inOut",
         onStart: () => {
           console.log(`✅ goToSection 실행됨 → ${index}`);
@@ -185,7 +185,7 @@ pageBtns.forEach((btn, idx) => {
       .to(sections[index], {
         scale: 1,
         opacity: 1,
-        duration: 0.5,
+        duration: 0.7,
         ease: "power2.out"
       }, "<"); // ✅ 동시에 실행 (전환 자연스럽게)
 
@@ -230,79 +230,130 @@ pageBtns.forEach((btn, idx) => {
     const valuesRect = values.getBoundingClientRect();
     const footerRect = footer.getBoundingClientRect();
 
-    // values → container 진입
     if (!document.body.classList.contains('in') && valuesRect.top < 10 && delta > 0) {
+      isTransitioning = true;
       container.scrollIntoView({ behavior: 'smooth' });
       document.body.classList.add('in');
       updatePaginationVisibility();
-      isTransitioning = true;
+      setActivePageBtn(0);
+
+
+      let called = false;
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && !called) {
+          called = true;
+          isTransitioning = false;
+          updatePaginationVisibility();
+          setActivePageBtn(0);
+          observer.disconnect();
+        }
+      }, { threshold: 0.6 });
+      observer.observe(container);
+
+      // Fallback: 1초 뒤 강제 해제 (observer가 안 불릴 때만)
       setTimeout(() => {
-        isTransitioning = false;
-        updatePaginationVisibility();
-      }, 1000);
+        if (!called) {
+          isTransitioning = false;
+          updatePaginationVisibility();
+          setActivePageBtn(0);
+        }
+      }, 500);
       return;
     }
 
     // container 마지막 → footer 진입
     if (currentSection === sections.length - 1 && delta > 0) {
+      isTransitioning = true;
       document.body.classList.remove('in');
       footer.scrollIntoView({ behavior: 'smooth' });
-      isTransitioning = true;
+      updatePaginationVisibility();
+
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          isTransitioning = false;
+          updatePaginationVisibility();
+          observer.disconnect();
+        }
+      }, { threshold: 0.2 });
+      observer.observe(footer);
+
       setTimeout(() => {
-        isTransitioning = false;
-        updatePaginationVisibility(); // ← 추가!
+        if (isTransitioning) {
+          isTransitioning = false;
+          updatePaginationVisibility();
+        }
       }, 1000);
       return;
     }
 
     // container 첫 섹션 → values 복귀
     if (currentSection === 0 && delta < 0 && document.body.classList.contains('in')) {
+      isTransitioning = true;
       document.body.classList.remove('in');
       values.scrollIntoView({ behavior: 'smooth' });
-      isTransitioning = true;
+      updatePaginationVisibility();
+
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          isTransitioning = false;
+          updatePaginationVisibility();
+          observer.disconnect();
+        }
+      }, { threshold: 0.6 });
+      observer.observe(values);
+
       setTimeout(() => {
-        isTransitioning = false;
-        updatePaginationVisibility(); // ← 추가!
+        if (isTransitioning) {
+          isTransitioning = false;
+          updatePaginationVisibility();
+        }
       }, 1000);
       return;
     }
 
-    // ✅ footer → container 복귀
-    // ✅ footer → container 복귀
+    // footer → container 복귀
     if (
       !document.body.classList.contains('in') &&
       footerRect.top < window.innerHeight &&
       footerRect.top > -300 &&
       delta < 0
     ) {
-      console.log("🔥 footer → container 복귀 조건 발동");
       e.preventDefault();
       isTransitioning = true;
-
-      // ✅ container 영역까지 부드럽게 스크롤 이동
       container.scrollIntoView({ behavior: 'smooth' });
 
-      // ✅ 슬라이드 복귀는 약간 늦춰서 실행
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          document.body.classList.add('in');
+          goToSection(sections.length - 1);
+          isTransitioning = false;
+          updatePaginationVisibility();
+          observer.disconnect();
+        }
+      }, { threshold: 0.6 });
+      observer.observe(container);
+
       setTimeout(() => {
-        document.body.classList.add('in');
-        goToSection(sections.length - 1);
-        isTransitioning = false;
-        updatePaginationVisibility(); // ← 추가!
-      }, 600);// 👈 스크롤 완료 예상 시간
+        if (isTransitioning) {
+          document.body.classList.add('in');
+          goToSection(sections.length - 1);
+          isTransitioning = false;
+          updatePaginationVisibility();
+        }
+      }, 600);
       return;
     }
 
-
-    // container 내에서만 슬라이드 작동
     if (document.body.classList.contains('in')) {
       e.preventDefault();
+      if (isTransitioning) return; // ★ 애니메이션 중엔 이동 금지
       if (delta > 0) {
         goToSection(currentSection + 1);
       } else {
         goToSection(currentSection - 1);
       }
     }
-  }, { passive: false });
+  }); // <-- 이 줄을 추가하여 wheel 이벤트 핸들러를 닫습니다.
 
   window.addEventListener('keydown', (e) => {
     if (isTransitioning) return;
