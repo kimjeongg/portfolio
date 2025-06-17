@@ -8,6 +8,8 @@ $(function () {
   const footer = document.querySelector('footer');
   const splash = document.getElementById('splash');
 
+
+
   const $ham = $('header .dot_ham');
   $ham.hide();
 
@@ -17,63 +19,139 @@ $(function () {
 
   // 페이지네이션 생성 및 제어
   const pagination = document.querySelector('.pagination');
- function createPagination() {
-  pagination.innerHTML = '';
-  sections.forEach((_, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'page-btn' + (i === 0 ? ' active' : '');
-    btn.textContent = (i - 1); // 숫자 대신 원하는 텍스트로 변경 가능
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      goToSection(i);
-    });
-    pagination.appendChild(btn);
-  });
-}
-function updatePagination(index) {
-  document.querySelectorAll('.pagination .page-btn').forEach((btn, i) => {
-    btn.classList.toggle('active', i === index);
-  });
-}
 
+  const pageBtns = document.querySelectorAll('.page-btn');
+  let lockedBtn = null;
 
-
-
-  // 페이지네이션 보이기/숨기기
-  function showPagination(show) {
-    pagination.style.display = show ? 'flex' : 'none';
+  /*  */
+  function animateCircle(circle, to, duration) {
+    const from = parseFloat(circle.style.strokeDashoffset);
+    const start = performance.now();
+    function animate(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      // easeInOutQuad
+      const eased = progress < 0.5
+        ? 2 * progress * progress
+        : -1 + (4 - 2 * progress) * progress;
+      circle.style.strokeDashoffset = from + (to - from) * eased;
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        circle.style.strokeDashoffset = to;
+      }
+    }
+    requestAnimationFrame(animate);
   }
 
-  // 초기화
-  createPagination();
-  showPagination(false);
 
-  // goToSection에서 페이지네이션 업데이트
-  const originalGoToSection = goToSection;
-  goToSection = function (index) {
-    if (index < 0 || index >= sections.length) return;
-    originalGoToSection(index);
-    updatePagination(index);
-  };
 
-  // 가로 섹션 진입/이탈 시 페이지네이션 표시
-  function handlePaginationVisibility() {
+
+  function updatePaginationVisibility() {
     if (document.body.classList.contains('in')) {
-      showPagination(true);
+      pagination.classList.add('visible');
     } else {
-      showPagination(false);
+      pagination.classList.remove('visible');
     }
   }
-  document.addEventListener('DOMContentLoaded', handlePaginationVisibility);
-  window.addEventListener('scroll', handlePaginationVisibility);
-  window.addEventListener('resize', handlePaginationVisibility);
-
-  // body의 class 변경 시에도 감지
-  const bodyObserver = new MutationObserver(handlePaginationVisibility);
-  bodyObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 
 
 
+
+
+
+pageBtns.forEach((btn, idx) => {
+  const circle = btn.querySelector('.circle-border circle');
+  const num = btn.querySelector('.page-num');
+  const color = btn.dataset.color || "#ffcc00";
+  if (!circle) return;
+  const length = 2 * Math.PI * 18;
+  circle.style.stroke = color;
+
+  btn.addEventListener('mouseenter', () => {
+    animateCircle(circle, 0, 400);
+  });
+
+  btn.addEventListener('mouseleave', () => {
+    if (btn === lockedBtn || btn.classList.contains('active')) return;
+    animateCircle(circle, length, 400);
+    btn.classList.remove('glow');
+    btn.querySelector('.circle-border').style.filter = 'none';
+    /* num.style.color = ''; */
+  });
+
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    lockedBtn = btn;
+
+    num.style.animation = 'none';
+    void num.offsetWidth;
+    num.style.animation = '';
+    num.style.animation = 'scaleClick 0.25s';
+
+    btn.classList.add('glow');
+    animateCircle(circle, 0, 400);
+
+    // 글로우 효과 동적 적용
+    btn.querySelector('.circle-border').style.filter =
+      `drop-shadow(0 0 6px ${color}) drop-shadow(0 0 16px ${color}) drop-shadow(0 0 32px ${color})`;
+    /* num.style.color = color; */
+
+    goToSection(idx);
+  });
+});
+
+ function setActivePageBtn(newIdx) {
+  const length = 2 * Math.PI * 18;
+  pageBtns.forEach((b, idx) => {
+    const num = b.querySelector('.page-num');
+    const circle = b.querySelector('.circle-border circle');
+    const color = b.dataset.color || "#ffcc00";
+    b.classList.toggle('active', idx === newIdx);
+
+    if (lockedBtn === b) lockedBtn = null;
+
+    if (idx === newIdx) {
+      num.style.animation = 'none';
+      void num.offsetWidth;
+      num.style.animation = '';
+      num.style.animation = 'jump 0.7s forwards';
+      animateCircle(circle, 0, 400);
+      b.classList.add('glow');
+      b.querySelector('.circle-border').style.filter =
+        `drop-shadow(0 0 6px ${color}) drop-shadow(0 0 16px ${color}) drop-shadow(0 0 32px ${color})`;
+      /* num.style.color = color; */
+    } else {
+      num.style.animation = 'none';
+      void num.offsetWidth;
+      num.style.animation = '';
+      num.style.animation = 'jumpDown 0.4s';
+      animateCircle(circle, length, 400);
+      b.classList.remove('glow');
+      b.querySelector('.circle-border').style.filter = 'none';
+    /*   num.style.color = ''; */
+    }
+  });
+}
+
+  setActivePageBtn(0);
+
+
+  // ⬇️ 콘솔에서도 사용 가능하게 전역 등록
+  window.goToSection = goToSection;
+
+  function updateScales(index) {
+    sections.forEach((sec, i) => {
+      sec.style.transform = i === index ? 'scale(1)' : 'scale(0.5)';
+      sec.style.opacity = i === index ? '1' : '0.5';
+    });
+  }
+
+  try {
+    updateScales(0);
+  } catch (e) {
+    console.warn('updateScales 실패:', e);
+  }
 
   // 👇 전역에서 디버깅 가능하도록 등록할 함수
   function goToSection(index) {
@@ -86,6 +164,7 @@ function updatePagination(index) {
       onComplete: () => {
         currentSection = index;
         isTransitioning = false;
+        setActivePageBtn(index);  // ← 이 줄 추가!
         console.log(`🎯 이동 완료 → 현재 섹션: ${index}`);
       }
     })
@@ -109,47 +188,12 @@ function updatePagination(index) {
         duration: 0.5,
         ease: "power2.out"
       }, "<"); // ✅ 동시에 실행 (전환 자연스럽게)
+
   }
 
 
-  // ⬇️ 콘솔에서도 사용 가능하게 전역 등록
-  window.goToSection = goToSection;
 
-  function updateScales(index) {
-    sections.forEach((sec, i) => {
-      sec.style.transform = i === index ? 'scale(1)' : 'scale(0.5)';
-      sec.style.opacity = i === index ? '1' : '0.5';
-    });
-  }
 
-  try {
-    updateScales(0);
-  } catch (e) {
-    console.warn('updateScales 실패:', e);
-  }
-/*   const observer = new IntersectionObserver(
-    ([entry]) => {
-      const isSplashVisible = splash.getBoundingClientRect().bottom > 0;
-      if (entry.isIntersecting && !isSplashVisible) {
-        $ham.fadeIn(300);
-      } else {
-        $ham.fadeOut(300);
-      }
-    },
-    { threshold: 0.2 }
-  );
-  observer.observe(values);
-
-  const valuesRect = values.getBoundingClientRect();
-  const splashRect = splash.getBoundingClientRect();
-  const isSplashVisible = splashRect.bottom > 0;
-  if (
-    valuesRect.top < window.innerHeight &&
-    valuesRect.bottom > 0 &&
-    !isSplashVisible
-  ) {
-    $ham.show();
-  } */
   function updateHamVisibility() {
     const footerRect = footer.getBoundingClientRect();
     // footer가 화면에 100px 이상 보이면 숨김
@@ -190,8 +234,12 @@ function updatePagination(index) {
     if (!document.body.classList.contains('in') && valuesRect.top < 10 && delta > 0) {
       container.scrollIntoView({ behavior: 'smooth' });
       document.body.classList.add('in');
+      updatePaginationVisibility();
       isTransitioning = true;
-      setTimeout(() => isTransitioning = false, 1000);
+      setTimeout(() => {
+        isTransitioning = false;
+        updatePaginationVisibility();
+      }, 1000);
       return;
     }
 
@@ -200,7 +248,10 @@ function updatePagination(index) {
       document.body.classList.remove('in');
       footer.scrollIntoView({ behavior: 'smooth' });
       isTransitioning = true;
-      setTimeout(() => isTransitioning = false, 1000);
+      setTimeout(() => {
+        isTransitioning = false;
+        updatePaginationVisibility(); // ← 추가!
+      }, 1000);
       return;
     }
 
@@ -209,7 +260,10 @@ function updatePagination(index) {
       document.body.classList.remove('in');
       values.scrollIntoView({ behavior: 'smooth' });
       isTransitioning = true;
-      setTimeout(() => isTransitioning = false, 1000);
+      setTimeout(() => {
+        isTransitioning = false;
+        updatePaginationVisibility(); // ← 추가!
+      }, 1000);
       return;
     }
 
@@ -231,10 +285,10 @@ function updatePagination(index) {
       // ✅ 슬라이드 복귀는 약간 늦춰서 실행
       setTimeout(() => {
         document.body.classList.add('in');
-        console.log("📌 복귀 시 이동할 슬라이드:", sections.length - 1);
-        goToSection(sections.length - 1); // 보통 인덱스 2
+        goToSection(sections.length - 1);
         isTransitioning = false;
-      }, 600); // 👈 스크롤 완료 예상 시간
+        updatePaginationVisibility(); // ← 추가!
+      }, 600);// 👈 스크롤 완료 예상 시간
       return;
     }
 

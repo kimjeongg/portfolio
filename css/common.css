@@ -47,6 +47,7 @@ body {
     /* Firefox */
     -ms-overflow-style: none;
     /* IE 10+ */
+    font-family: var(--pretend);
 }
 
 body::-webkit-scrollbar {
