@@ -271,7 +271,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   const sectionObservers = {
-    design_skill: () => {
+ /*    design_skill: () => {
       const target = document.getElementById("design_skill");
       const text = target.querySelector(".txt");
       const icons = target.querySelectorAll("#design_skill li");
@@ -292,7 +292,7 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         });
       });
-    },
+    }, */
     experience: () => {
       const target = document.getElementById("experience");
       const text = target.querySelector(".txt");
@@ -432,11 +432,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
   
-  Object.entries(sectionObservers).forEach(([id, fn]) => {
-    const el = document.getElementById(id);
-    if (el) fn().observe(el, { attributes: true, attributeFilter: ["class"] });
-  });
-  
+  Object.entries(sectionObservers).forEach(([id,fn])=>{
+    const el = 
+    Document.getElementById(id);
+    if(el) fn().observe(el,
+      {attributes:true, attributeFilter: ["class"]}
+    );
+  })
 
 
 
