@@ -6,6 +6,25 @@ document.addEventListener("DOMContentLoaded", function () {
   const handClosed = document.getElementById("hand-closed");
   const btnGroup = document.querySelector('.btn-group');
 
+
+  (function hideSkillContentsInitially() {
+    const target = document.getElementById("design_skill");
+    if (!target) return;
+    const ai = target.querySelector(".ai");
+    const coding = target.querySelector(".coding");
+    const design = target.querySelector(".design");
+    const sections = [ai, coding, design];
+    sections.forEach(section => {
+      if (!section) return;
+      const txt = section.querySelector(":scope > .txt");
+      const top = section.querySelector(":scope > .tol, :scope > .go_trip, :scope > .aiImg, :scope > .deImg, :scope > .coImg");
+      const bottom = section.querySelector(":scope > .vid, :scope > .re_movie");
+      if (txt) gsap.set(txt, { autoAlpha: 0, y: -60 });
+      if (top) gsap.set(top, { autoAlpha: 0, y: 30 });
+      if (bottom) gsap.set(bottom, { autoAlpha: 0, y: 30 });
+    });
+  })();
+
   let isDragging = false, startX, startY, initialX = 0, initialY = 0;
   let lastX = 0;
   let clickStartX = 0;
@@ -271,28 +290,130 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   const sectionObservers = {
- /*    design_skill: () => {
+    /*    design_skill: () => {
+         const target = document.getElementById("design_skill");
+         const text = target.querySelector(".txt");
+         const icons = target.querySelectorAll("#design_skill li");
+         return new MutationObserver((mutations) => {
+           mutations.forEach(() => {
+             if (target.classList.contains("active")) {
+               text.classList.add("glow");
+               icons.forEach((icon, i) => {
+                 const angle = getComputedStyle(icon).getPropertyValue("--angle");
+                 gsap.fromTo(icon,
+                   { autoAlpha: 0, y: -150, rotation: parseFloat(angle) - 5 },
+                   { autoAlpha: 1, y: 0, rotation: parseFloat(angle), duration: 0.9, ease: "bounce.out", delay: 0.3 + i * 0.15 }
+                 );
+               });
+             } else {
+               text.classList.remove("glow");
+               icons.forEach((icon) => gsap.set(icon, { autoAlpha: 0, y: -100, rotation: -5 }));
+             }
+           });
+         });
+       }, */
+    design_skill: () => {
       const target = document.getElementById("design_skill");
-      const text = target.querySelector(".txt");
-      const icons = target.querySelectorAll("#design_skill li");
-      return new MutationObserver((mutations) => {
-        mutations.forEach(() => {
-          if (target.classList.contains("active")) {
-            text.classList.add("glow");
-            icons.forEach((icon, i) => {
-              const angle = getComputedStyle(icon).getPropertyValue("--angle");
-              gsap.fromTo(icon,
-                { autoAlpha: 0, y: -150, rotation: parseFloat(angle) - 5 },
-                { autoAlpha: 1, y: 0, rotation: parseFloat(angle), duration: 0.9, ease: "bounce.out", delay: 0.3 + i * 0.15 }
-              );
-            });
-          } else {
-            text.classList.remove("glow");
-            icons.forEach((icon) => gsap.set(icon, { autoAlpha: 0, y: -100, rotation: -5 }));
-          }
-        });
+      const mainTxt = target.querySelector(":scope > .txt"); // Dev Tools
+      const ai = target.querySelector(".ai");
+      const coding = target.querySelector(".coding");
+      const design = target.querySelector(".design");
+      const sections = [ai, coding, design];
+
+      // 각 섹션의 txt, tol, img(wrapper)
+      const sectionData = [
+        {
+          txt: ai?.querySelector(":scope > .txt"),
+          tol: ai?.querySelector(".tol"),
+          imgs: ai?.querySelectorAll(".aiImg > *")
+        },
+        {
+          txt: coding?.querySelector(":scope > .txt"),
+          tol: coding?.querySelector(".tol"),
+          imgs: coding?.querySelectorAll(".coImg > *, .vid")
+        },
+        {
+          txt: design?.querySelector(":scope > .txt"),
+          tol: design?.querySelector(".tol"),
+          imgs: design?.querySelectorAll(".deImg > *, .vid")
+        }
+      ];
+
+      // 초기 상태: Dev Tools만 보이고 나머지 숨김
+      gsap.set(mainTxt, { autoAlpha: 1, y: 0 });
+      sectionData.forEach(({ txt, tol, imgs }) => {
+        if (txt) gsap.set(txt, { autoAlpha: 0, y: -60 });
+        if (tol) gsap.set(tol, { autoAlpha: 0, y: 0 });
+        if (imgs) gsap.set(imgs, { autoAlpha: 0, y: 40 });
       });
-    }, */
+
+      // tol 둥둥 애니메이션 함수
+      function floatTol(tol) {
+        if (!tol) return;
+        gsap.to(tol, {
+          y: -15,
+          duration: 1.2,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut"
+        });
+      }
+      function stopFloatTol(tol) {
+        if (!tol) return;
+        gsap.killTweensOf(tol);
+        gsap.set(tol, { y: 0 });
+      }
+
+      return new MutationObserver(() => {
+        if (target.classList.contains("active")) {
+          // Dev Tools 글로우
+          mainTxt.classList.add("glow");
+
+          // 각 섹션 순차 등장
+          sectionData.forEach(({ txt, tol, imgs }, i) => {
+            // txt 떨어짐
+            if (txt) {
+              gsap.to(txt, {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.7,
+                delay: i * 0.9,
+                ease: "bounce.out",
+                onStart: () => {
+                  // tol 둥둥 애니메이션 시작
+                  if (tol) {
+                    gsap.to(tol, { autoAlpha: 1, duration: 0.3 });
+                    floatTol(tol);
+                  }
+                }
+              });
+            }
+            // img들 아래에서 위로 자연스럽게 페이드인 (hobby와 유사)
+            if (imgs) {
+              gsap.to(imgs, {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.7,
+                delay: (i * 0.9) + 0.5,
+                stagger: 0.17,
+                ease: "power2.out"
+              });
+            }
+          });
+        } else {
+          mainTxt.classList.remove("glow");
+          // Dev Tools만 보이고 나머지 숨김
+          sectionData.forEach(({ txt, tol, imgs }) => {
+            if (txt) gsap.set(txt, { autoAlpha: 0, y: -60 });
+            if (tol) {
+              gsap.set(tol, { autoAlpha: 0, y: 0 });
+              stopFloatTol(tol);
+            }
+            if (imgs) gsap.set(imgs, { autoAlpha: 0, y: 40 });
+          });
+        }
+      });
+    },
     experience: () => {
       const target = document.getElementById("experience");
       const text = target.querySelector(".txt");
@@ -328,16 +449,16 @@ document.addEventListener("DOMContentLoaded", function () {
     hobby: () => {
       const hobby = document.getElementById("hobby");
       const hobbyText = hobby.querySelector(".txt");
-  
+
       return new MutationObserver((mutations) => {
         mutations.forEach(() => {
           const isActive = hobby.classList.contains("active");
-  
+
           if (isActive) {
             hobbyText.classList.add("glow");
-  
+
             const tl = gsap.timeline();
-  
+
             tl.fromTo("#hobby .go_trip .txt", { autoAlpha: 0, y: -200, rotation: -5 }, { autoAlpha: 1, y: 0, rotation: 0, duration: 0.9, ease: "bounce.out" })
               .fromTo("#hobby .go_trip img", { autoAlpha: 0, y: 30 }, {
                 autoAlpha: 1,
@@ -348,7 +469,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 onComplete: () => {
                   const target = document.querySelector('#hobby .go_trip .two');
                   const crown = document.querySelector('#hobby .go_trip .na');
-  
+
                   if (!target.dataset.animated) {
                     const tl = gsap.timeline({ repeat: -1 });
                     tl.to(target, { x: -3, y: -3, duration: 0.01, delay: 0.3 })
@@ -358,7 +479,7 @@ document.addEventListener("DOMContentLoaded", function () {
                       .to(target, { x: 0, y: 0, duration: 0.01, delay: 0.2 });
                     target.dataset.animated = true;
                   }
-  
+
                   if (!crown.dataset.animated) {
                     const tl = gsap.timeline({ repeat: -1 });
                     tl.to(crown, { y: -5, rotation: -5, duration: 0.01, delay: 0.3 })
@@ -379,7 +500,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 onComplete: () => {
                   const poster = document.querySelector('#hobby .re_movie ul .begin img.seco');
                   const conanTape = document.querySelector('#hobby .re_movie ul .conan .sticker_txt');
-  
+
                   if (!poster.dataset.animated) {
                     const tl = gsap.timeline({ repeat: -1 });
                     tl.to(poster, { rotation: -2, x: -1, y: 1, duration: 0.01, delay: 0.4 })
@@ -388,7 +509,7 @@ document.addEventListener("DOMContentLoaded", function () {
                       .to(poster, { rotation: 0, x: 0, y: 0, duration: 0.01, delay: 0.4 });
                     poster.dataset.animated = true;
                   }
-  
+
                   if (!conanTape.dataset.animated) {
                     const tl = gsap.timeline({ repeat: -1 });
                     tl.to(conanTape, { rotation: 2, x: 1, y: -0.5, duration: 0.01, delay: 0.35 })
@@ -407,10 +528,10 @@ document.addEventListener("DOMContentLoaded", function () {
               "#hobby .re_movie ul .begin img.seco",
               "#hobby .re_movie ul .conan .sticker_txt"
             ];
-  
+
             gsap.killTweensOf(jitterTargets);
             gsap.set(jitterTargets, { x: 0, y: 0, rotation: 0 });
-  
+
             jitterTargets.forEach(sel => {
               const el = document.querySelector(sel);
               if (el && el.dataset.animated) delete el.dataset.animated;
@@ -431,14 +552,14 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   };
-  
-  Object.entries(sectionObservers).forEach(([id,fn])=>{
-    const el = 
-    Document.getElementById(id);
-    if(el) fn().observe(el,
-      {attributes:true, attributeFilter: ["class"]}
-    );
-  })
+
+  Object.entries(sectionObservers).forEach(([id, fn]) => {
+    const el = document.getElementById(id); // ← 소문자 document로 수정
+    if (el) fn().observe(el, {
+      attributes: true,
+      attributeFilter: ["class"]
+    });
+  });
 
 
 
