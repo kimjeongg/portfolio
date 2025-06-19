@@ -115,40 +115,40 @@ document.addEventListener("DOMContentLoaded", function () {
     'main': 'ma',
   };
 
-  view.addEventListener('click', (e) => {
-    const section = e.target.closest('.section');
-    if (!section || section.classList.contains('active')) return;
-    const allBtn = document.querySelector('.btn-group .all');
-    const isAllView = allBtn && allBtn.classList.contains('on');
-    if (!isAllView || section.id === 'main') return;
+view.addEventListener('click', (e) => {
+  const section = e.target.closest('.section');
+  if (!section || section.classList.contains('active')) return;
+  const allBtn = document.querySelector('.btn-group .all');
+  const isAllView = allBtn && allBtn.classList.contains('on');
+  if (!isAllView) return; // ← '|| section.id === 'main'' 부분 삭제
 
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    section.classList.add('active');
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  section.classList.add('active');
 
-    const targetClass = sectionToBtnClass[section.id];
-    document.querySelectorAll('.btn-group button, .btn-group a').forEach(btn => {
-      btn.classList.remove('on');
-      if (btn.classList.contains(targetClass)) btn.classList.add('on');
-    });
-
-    const rect = section.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const offsetX = window.innerWidth / 2 - centerX;
-    const offsetY = window.innerHeight / 2 - centerY;
-    initialX += offsetX;
-    initialY += offsetY;
-
-    gsap.to(canvas, {
-      x: initialX,
-      y: initialY,
-      duration: 1,
-      ease: "power2.out",
-      onUpdate: () => {
-        canvas.style.transform = `translate(${initialX}px, ${initialY}px)`;
-      }
-    });
+  const targetClass = sectionToBtnClass[section.id];
+  document.querySelectorAll('.btn-group button, .btn-group a').forEach(btn => {
+    btn.classList.remove('on');
+    if (btn.classList.contains(targetClass)) btn.classList.add('on');
   });
+
+  const rect = section.getBoundingClientRect();
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
+  const offsetX = window.innerWidth / 2 - centerX;
+  const offsetY = window.innerHeight / 2 - centerY;
+  initialX += offsetX;
+  initialY += offsetY;
+
+  gsap.to(canvas, {
+    x: initialX,
+    y: initialY,
+    duration: 1,
+    ease: "power2.out",
+    onUpdate: () => {
+      canvas.style.transform = `translate(${initialX}px, ${initialY}px)`;
+    }
+  });
+});
 
   function zoomFromMain(targetId, pathId) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -278,40 +278,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   window.onload = () => {
-    resetView();
+    // 모든 section에서 active 제거
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    // main만 active로
+    const mainSection = document.getElementById('main');
+    if (mainSection) mainSection.classList.add('active');
+
+    // main 버튼 on
+    const mainBtn = document.querySelector('.btn-group .ma');
+    if (mainBtn) {
+      document.querySelectorAll('.btn-group button, .btn-group a').forEach(btn => btn.classList.remove('on'));
+      mainBtn.classList.add('on');
+    }
+
+    // main이 중앙에 오도록 위치 이동
     setTimeout(() => {
       zoomTo('main');
-      const mainBtn = document.querySelector('.btn-group .ma');
-      if (mainBtn) {
-        btnGroup.querySelectorAll('button, a').forEach(btn => btn.classList.remove('on'));
-        mainBtn.classList.add('on');
-      }
-    }, 1000);
+    }, 100); // 100ms 후에 실행(렌더링 보장)
   };
 
   const sectionObservers = {
-    /*    design_skill: () => {
-         const target = document.getElementById("design_skill");
-         const text = target.querySelector(".txt");
-         const icons = target.querySelectorAll("#design_skill li");
-         return new MutationObserver((mutations) => {
-           mutations.forEach(() => {
-             if (target.classList.contains("active")) {
-               text.classList.add("glow");
-               icons.forEach((icon, i) => {
-                 const angle = getComputedStyle(icon).getPropertyValue("--angle");
-                 gsap.fromTo(icon,
-                   { autoAlpha: 0, y: -150, rotation: parseFloat(angle) - 5 },
-                   { autoAlpha: 1, y: 0, rotation: parseFloat(angle), duration: 0.9, ease: "bounce.out", delay: 0.3 + i * 0.15 }
-                 );
-               });
-             } else {
-               text.classList.remove("glow");
-               icons.forEach((icon) => gsap.set(icon, { autoAlpha: 0, y: -100, rotation: -5 }));
-             }
-           });
-         });
-       }, */
+
+
     design_skill: () => {
       const target = document.getElementById("design_skill");
       const mainTxt = target.querySelector(":scope > .txt"); // Dev Tools
@@ -402,7 +390,6 @@ document.addEventListener("DOMContentLoaded", function () {
           });
         } else {
           mainTxt.classList.remove("glow");
-          // Dev Tools만 보이고 나머지 숨김
           sectionData.forEach(({ txt, tol, imgs }) => {
             if (txt) gsap.set(txt, { autoAlpha: 0, y: -60 });
             if (tol) {
@@ -418,16 +405,94 @@ document.addEventListener("DOMContentLoaded", function () {
       const target = document.getElementById("experience");
       const text = target.querySelector(".txt");
       const uls = target.querySelectorAll("ul");
-      return new MutationObserver((mutations) => {
-        mutations.forEach(() => {
-          if (target.classList.contains("active")) {
-            text.classList.add("glow");
-            uls.forEach((ul, i) => setTimeout(() => ul.classList.add("reveal"), i * 400));
-          } else {
-            text.classList.remove("glow");
-            uls.forEach((ul) => ul.classList.remove("reveal"));
-          }
-        });
+      // 각 ul의 li 안 h3, p, span의 원본 텍스트 저장
+      const ulTexts = Array.from(uls).map(ul =>
+        Array.from(ul.querySelectorAll("li")).map(li => {
+          const h3 = li.querySelector("h3");
+          const p = li.querySelector("p");
+          const span = li.querySelector("span");
+          return {
+            h3: h3 ? h3.innerHTML : null,
+            p: p ? p.innerHTML : null,
+            span: span ? span.innerHTML : null,
+          };
+        })
+      );
+      let typingTweens = [];
+
+      return new MutationObserver(() => {
+        if (target.classList.contains("active")) {
+          text.classList.add("glow");
+          typingTweens.forEach(t => t.kill());
+          typingTweens = [];
+          let totalDelay = 0;
+          const liCounts = Array.from(uls).map(ul => ul.querySelectorAll("li").length);
+
+          uls.forEach((ul, ulIdx) => {
+            setTimeout(() => {
+              ul.classList.add("reveal");
+              const lis = ul.querySelectorAll("li");
+              lis.forEach((li, liIdx) => {
+                const h3 = li.querySelector("h3");
+                const p = li.querySelector("p");
+                const span = li.querySelector("span");
+                // h3, p, span 비우기
+                if (h3) h3.innerHTML = "";
+                if (p) p.innerHTML = "";
+                if (span) span.innerHTML = "";
+                // 타이핑 효과
+                if (h3 && ulTexts[ulIdx][liIdx].h3) {
+                  typingTweens.push(
+                    gsap.to(h3, {
+                      duration: 1,
+                      text: { value: ulTexts[ulIdx][liIdx].h3, delimiter: "" },
+                      ease: "none"
+                    })
+                  );
+                }
+                if (p && ulTexts[ulIdx][liIdx].p) {
+                  typingTweens.push(
+                    gsap.to(p, {
+                      duration: 1,
+                      text: { value: ulTexts[ulIdx][liIdx].p, delimiter: "" },
+                      ease: "none"
+                    })
+                  );
+                }
+                if (span && ulTexts[ulIdx][liIdx].span) {
+                  typingTweens.push(
+                    gsap.to(span, {
+                      duration: 1,
+                      text: { value: ulTexts[ulIdx][liIdx].span, delimiter: "" },
+                      ease: "none"
+                    })
+                  );
+                }
+              });
+            }, totalDelay);
+            totalDelay += liCounts[ulIdx] * 400 + 400;
+          });
+        } else {
+          // ⬇️ 여기!
+          // 1. 애니메이션 즉시 중단
+          typingTweens.forEach(t => t.kill());
+          typingTweens = [];
+          // 2. reveal/active/glow 클래스 제거
+          text.classList.remove("glow");
+          uls.forEach((ul, ulIdx) => {
+            ul.classList.remove("reveal");
+            // 3. 텍스트/이미지/컨텐츠 원본 복구
+            const lis = ul.querySelectorAll("li");
+            lis.forEach((li, liIdx) => {
+              const h3 = li.querySelector("h3");
+              const p = li.querySelector("p");
+              const span = li.querySelector("span");
+              if (h3 && ulTexts[ulIdx][liIdx].h3) h3.innerHTML = ulTexts[ulIdx][liIdx].h3;
+              if (p && ulTexts[ulIdx][liIdx].p) p.innerHTML = ulTexts[ulIdx][liIdx].p;
+              if (span && ulTexts[ulIdx][liIdx].span) span.innerHTML = ulTexts[ulIdx][liIdx].span;
+            });
+          });
+        }
       });
     },
     character: () => {
@@ -522,20 +587,8 @@ document.addEventListener("DOMContentLoaded", function () {
               });
           } else {
             hobbyText.classList.remove("glow");
-            const jitterTargets = [
-              "#hobby .go_trip .na",
-              "#hobby .go_trip .two",
-              "#hobby .re_movie ul .begin img.seco",
-              "#hobby .re_movie ul .conan .sticker_txt"
-            ];
-
-            gsap.killTweensOf(jitterTargets);
-            gsap.set(jitterTargets, { x: 0, y: 0, rotation: 0 });
-
-            jitterTargets.forEach(sel => {
-              const el = document.querySelector(sel);
-              if (el && el.dataset.animated) delete el.dataset.animated;
-            });
+            if (hobbyTimeline) hobbyTimeline.kill();
+            gsap.set("#hobby .go_trip .txt, #hobby .go_trip img, #hobby .re_movie .txt, #hobby .re_movie .sticker_txt, #hobby .re_movie img", { autoAlpha: 0, y: 0, rotation: 0 });
           }
         });
       });
@@ -543,14 +596,47 @@ document.addEventListener("DOMContentLoaded", function () {
     main: () => {
       const target = document.getElementById("main");
       const content = target.querySelector(".content");
-      return new MutationObserver((mutations) => {
-        mutations.forEach(() => {
-          if (!content) return;
-          if (target.classList.contains("active")) content.classList.add("glow");
-          else content.classList.remove("glow");
-        });
+      const botTxt = target.querySelector(".bot_txt h2");
+      const botP = target.querySelector(".bot_txt p");
+      let typingTween1 = null;
+      let typingTween2 = null;
+
+      const h2Text = "“당연한 것을 의심하고, <span>사용자의 시선</span>으로 다시 설계합니다.”";
+      const pText = '틀을 깨는 창의적인 시도도, 결국은<span> 고객을 위한 방향</span>으로<br>나아가야<span> 진짜 디자인</span>이라 생각합니다.';
+
+      // 초기 상태: 텍스트 비우기
+      if (botTxt) botTxt.innerHTML = "";
+      if (botP) botP.innerHTML = "";
+
+      return new MutationObserver(() => {
+        if (target.classList.contains("active")) {
+          content.classList.add("glow");
+          if (botTxt && botP) {
+            botTxt.innerHTML = "";
+            botP.innerHTML = "";
+            typingTween1 = gsap.to(botTxt, {
+              duration: 0.8,
+              text: { value: h2Text, delimiter: "" },
+              ease: "none",
+              onComplete: () => {
+                typingTween2 = gsap.to(botP, {
+                  duration: 1.2,
+                  text: { value: pText, delimiter: "" },
+                  ease: "none"
+                });
+              }
+            });
+          }
+        } else {
+          content.classList.remove("glow");
+          // 액티브 해제 시 텍스트 비우기
+          if (botTxt) botTxt.innerHTML = "";
+          if (botP) botP.innerHTML = "";
+          if (typingTween1) typingTween1.kill();
+          if (typingTween2) typingTween2.kill();
+        }
       });
-    }
+    },
   };
 
   Object.entries(sectionObservers).forEach(([id, fn]) => {

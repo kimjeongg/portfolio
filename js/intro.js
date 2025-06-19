@@ -20,6 +20,8 @@ $(function () {
     const container = document.querySelector('.splash .txt');
     const splash = document.querySelector('.splash');
     const values = document.querySelector('.values');
+    
+    text.innerHTML = text.innerText.split('').map(char => `<span class="char">${char}</span>`).join('');
 
     setTimeout(() => {
         // 글자만 서서히 등장
@@ -31,7 +33,7 @@ $(function () {
         });
     }, 500);
 
-    text.innerHTML = text.innerText.split('').map(char => `<span class="char">${char}</span>`).join('');
+
     const chars = document.querySelectorAll('.char');
 
     function resizeCanvas() {

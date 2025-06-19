@@ -99,32 +99,59 @@
    justify-content: center;
    gap: 50px;
    width: 650px;
+   position: relative;
 
  }
 
  #main .content .left img {
    width: 320px;
-   height: 500px;
+ }
+
+ #main .content .left .star1-1 {
+   position: absolute;
+   left: 440px;
+   top: 100px;
+   width: 90px;
+ }
+
+ #main .content .left .star1-2 {
+   position: absolute;
+   left: 70px;
+   top: 480px;
+   width: 70px;
+   opacity: .5;
+ }
+
+ #main .content .left .star1-3 {
+   position: absolute;
+   left: 120px;
+   top: 510px;
+   width: 100px;
  }
 
  #main .content .left .bot_txt {
    font-weight: 400;
-   font-size: 27px;
+   font-size: 25px;
    display: flex;
    flex-direction: column;
    justify-content: flex-start;
    gap: 20px;
+   min-height: 130px;
 
  }
+
+
 
  #main .content .left .bot_txt p {
    font-size: 24px;
    line-height: 1.5;
+   text-align: center;
  }
 
  #main .content .left .bot_txt span {
-   font-weight: 800;
-   color: var(--main)
+   font-weight: 700;
+   color: var(--main);
+   font-size: 26px;
  }
 
 
@@ -134,7 +161,7 @@
  #main .content .right ul {
    display: flex;
    flex-direction: column;
-   gap: 80px;
+   gap: 60px;
    width: 500px;
  }
 
@@ -146,14 +173,24 @@
    color: var(--main);
  }
 
+
  #main .content .right p {
    font-size: 29px;
    font-weight: 400;
    margin-left: 50px;
+   margin-top: 20px;
+ }
+
+ #main .content .right ul li:first-child .th {
    margin-top: 10px;
  }
 
-
+ #main .content .right p a {
+   display: block;
+   cursor: pointer;
+   text-decoration: underline;
+   text-underline-offset: 6px;
+ }
 
  .btn-group {
    position: fixed;
@@ -289,9 +326,9 @@
    position: absolute;
    opacity: 0;
    pointer-events: none;
-    display: none;
+   display: none;
  }
- 
+
 
  #path1 {
    stroke: #FFD700;
@@ -375,17 +412,17 @@
 
 
  .cursor-tooltip {
-  position: absolute;
-  top: -50px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(105, 157, 0, 0.85);
-  color: #fff;
-  font-size: 20px;
-  padding: 10px 20px;
-  border-radius: 8px;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
+   position: absolute;
+   top: -50px;
+   left: 50%;
+   transform: translateX(-50%);
+   background: rgba(105, 157, 0, 0.85);
+   color: #fff;
+   font-size: 20px;
+   padding: 10px 20px;
+   border-radius: 8px;
+   white-space: nowrap;
+   opacity: 0;
+   pointer-events: none;
+   transition: opacity 0.3s ease;
+ }

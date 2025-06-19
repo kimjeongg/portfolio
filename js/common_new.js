@@ -391,31 +391,41 @@ $(function () {
 
 
 
-/* document.addEventListener("DOMContentLoaded", function () {
-  if (location.hash === "#wrapper") {
-    // splash가 있다면 숨기기
+  /* document.addEventListener("DOMContentLoaded", function () {
+    if (location.hash === "#wrapper") {
+      // splash가 있다면 숨기기
+      var splash = document.getElementById("splash");
+      if (splash) splash.style.display = "none";
+      // wrapper로 바로 이동
+      var wrapper = document.getElementById("wrapper");
+      if (wrapper) wrapper.scrollIntoView({ behavior: "auto" });
+    }
+  }); */
+  document.addEventListener("DOMContentLoaded", function () {
     var splash = document.getElementById("splash");
-    if (splash) splash.style.display = "none";
-    // wrapper로 바로 이동
-    var wrapper = document.getElementById("wrapper");
-    if (wrapper) wrapper.scrollIntoView({ behavior: "auto" });
-  }
-}); */
-    document.addEventListener("DOMContentLoaded", function () {
-        var splash = document.getElementById("splash");
-        // 1. 해시 방식
-        if (location.hash === "#wrapper") {       
-            console.log("해시로 스플래시 스킵");
-            if (splash) splash.style.display = "none";
-            var wrapper = document.getElementById("wrapper");
-            if (wrapper) wrapper.scrollIntoView({ behavior: "auto" });
-        }
-        // 2. 쿼리스트링 방식 (둘 중 하나만 써도 됨)
-        // if (location.search.includes("skipSplash=1")) {
-        //     var splash = document.getElementById("splash");
-        //     if (splash) splash.style.display = "none";
-        //     var wrapper = document.getElementById("wrapper");
-        //     if (wrapper) wrapper.scrollIntoView({ behavior: "auto" });
-        // }
-    });
+    // 1. 해시 방식
+    if (location.hash === "#wrapper") {
+      console.log("해시로 스플래시 스킵");
+      if (splash) splash.style.display = "none";
+      var wrapper = document.getElementById("wrapper");
+      if (wrapper) wrapper.scrollIntoView({ behavior: "auto" });
+    }
+    // 2. 쿼리스트링 방식 (둘 중 하나만 써도 됨)
+    // if (location.search.includes("skipSplash=1")) {
+    //     var splash = document.getElementById("splash");
+    //     if (splash) splash.style.display = "none";
+    //     var wrapper = document.getElementById("wrapper");
+    //     if (wrapper) wrapper.scrollIntoView({ behavior: "auto" });
+    // }
+  });
+  $('.gnb_overlay ul.gnb li a[href="#footer"]').on('click', function (e) {
+    e.preventDefault();
+    // 부드럽게 스크롤
+    document.getElementById('footer').scrollIntoView({ behavior: 'smooth' });
+
+    // footer 모션 트리거 (스크롤 완료 후 실행)
+    setTimeout(() => {
+      if (typeof window.triggerFooterMotion === 'function') window.triggerFooterMotion();
+    }, 700); // 스크롤 애니메이션 시간에 맞춰 조정
+  });
 });

@@ -24,7 +24,7 @@ $(function () {
         [...text].forEach(char => {
           const span = document.createElement("span");
           span.classList.add("char");
-          
+
 
           // 공백은 그대로 삽입하되 스타일은 별도로 빼기 위해 클래스 추가
           if (char === " ") {
@@ -167,6 +167,9 @@ $(function () {
     });
 
   });
+  // ✅ 여기 아래에 추가!
+  window.Body = Body;
+  window.bodies = bodies;
 
   // 업데이트마다 DOM 위치 반영
   Events.on(engine, 'afterUpdate', () => {
@@ -221,6 +224,30 @@ $(function () {
     },
     toggleActions: "restart none none reset"
   });
+  window.triggerFooterMotion = function () {
+    // 글자 모션
+    const chars = document.querySelectorAll(".footer_top .char");
+    chars.forEach((char, i) => {
+      char.style.transitionDelay = `${i * 0.01}s`;
+      char.classList.add("on");
+    });
+
+    // 프레임(태그) 떨어뜨리기
+    const tags = document.querySelectorAll(".tag");
+    if (window.Body && window.bodies) {
+      tags.forEach(tag => tag.style.opacity = 1);
+      window.bodies.forEach((body, i) => {
+        const tag = tags[i];
+        window.Body.setPosition(body, {
+          x: gsap.utils.random(tag.offsetWidth / 2, canvas.width - tag.offsetWidth / 2),
+          y: -gsap.utils.random(100, 300)
+        });
+        window.Body.setVelocity(body, { x: 0, y: 0 });
+        window.Body.setAngle(body, 0);
+        window.Body.setAngularVelocity(body, 0);
+      });
+    }
+  };
 
 
 });

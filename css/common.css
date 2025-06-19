@@ -13,10 +13,10 @@
     --light-black: #0F0F0F;
     --font-yellow: #FED128;
     --first-radial: radial-gradient(94.25% 94.25% at 94.25% 50%, #6F6F6F 0%, #FFF 48.36%, #999 100%);
-    --red: #E15231;
+    --red: #FF9967;
     --light-orange: #DD9013;
     --beige: #EDDFBE;
-    --navy: #1C2934;
+    --navy: #676767;
     --bora: #39244C;
     --orang: #FF9B28;
     --mint: #00FFE0;
@@ -36,7 +36,10 @@
     padding: 0;
     box-sizing: border-box;
 }
-html, body, a, button, input, textarea, select, label {
+body, html, a, button, input, textarea, select, label {
+  cursor: none !important;
+}
+.splash, .main, .wrap, .view, .canvas {
   cursor: none !important;
 }
 html,
@@ -121,7 +124,7 @@ header .dot_ham ul li {
 }
 
 header button:hover ul li {
-    background-color: var(--beige);
+    background-color: #FDF4DE;
 }
 
 
@@ -193,8 +196,7 @@ header.on .dot_ham ul li:nth-child(3) {
     flex-direction: column;
     align-items: flex-end;
     justify-content: center;
-    gap: 20px;
-    color: var(--white-color);
+    gap: 25px;
     font-family: var(--Orbitron);
     font-size: 24px;
     font-weight: 900;
@@ -217,12 +219,19 @@ header.on .dot_ham ul li:nth-child(3) {
 
 .gnb_overlay ul.gnb li.red {
     background-color: var(--red);
+    color: #393939;
 }
 
 .gnb_overlay ul.gnb li.navy {
     background-color: var(--navy);
-
+    color: var(--white-color);
 }
+
+.gnb_overlay ul.gnb li.white {
+   color: var(--navy);
+    background-color: var(--white-color);
+}
+
 
 .gnb_overlay ul.gnb li:hover {
     transform: translateY(-8px) rotate(5deg);
