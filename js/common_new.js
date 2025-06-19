@@ -391,6 +391,31 @@ $(function () {
 
 
 
-
-
+/* document.addEventListener("DOMContentLoaded", function () {
+  if (location.hash === "#wrapper") {
+    // splash가 있다면 숨기기
+    var splash = document.getElementById("splash");
+    if (splash) splash.style.display = "none";
+    // wrapper로 바로 이동
+    var wrapper = document.getElementById("wrapper");
+    if (wrapper) wrapper.scrollIntoView({ behavior: "auto" });
+  }
+}); */
+    document.addEventListener("DOMContentLoaded", function () {
+        var splash = document.getElementById("splash");
+        // 1. 해시 방식
+        if (location.hash === "#wrapper") {       
+            console.log("해시로 스플래시 스킵");
+            if (splash) splash.style.display = "none";
+            var wrapper = document.getElementById("wrapper");
+            if (wrapper) wrapper.scrollIntoView({ behavior: "auto" });
+        }
+        // 2. 쿼리스트링 방식 (둘 중 하나만 써도 됨)
+        // if (location.search.includes("skipSplash=1")) {
+        //     var splash = document.getElementById("splash");
+        //     if (splash) splash.style.display = "none";
+        //     var wrapper = document.getElementById("wrapper");
+        //     if (wrapper) wrapper.scrollIntoView({ behavior: "auto" });
+        // }
+    });
 });

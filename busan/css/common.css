@@ -332,11 +332,11 @@ main section.main_visual {
         }
 
         & li.main1 a {
-            background-image: url(../img/bg1.png);
+            background-image: url(../img/main1.png);
         }
 
         & li.main2 a {
-            background-image: url(../img/bg2.png);
+            background-image: url(../img/main2.png);
         }
 
         & li.main3 a {

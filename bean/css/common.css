@@ -23,9 +23,9 @@
     --point-orange: #E58600;
     --point-gray: #F4F4F4;
     --point-red: #9C0000;
-    --point-bo: #A98FBF;
+    --point-bo: #a496aa;
     --font-3: #333;
-    --font-0: #000;
+    --font-0: #0f0f0f;
     --font-5: #555;
     --font-y: #E9C46A;
     --font-gr: #A7A967;
@@ -46,7 +46,8 @@
 
 body {
     width: 100%;
-    color: var(--main-w);
+        color: var(--font-0);
+    font-family: var(--pretend);
 }
 
 .inner {

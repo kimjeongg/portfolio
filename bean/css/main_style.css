@@ -237,6 +237,7 @@
 .main_visual .side_icon a img {
     width: 45px;
 }
+
 /* 모바일 고정 사이드 */
 .main_visual .side_icon a.mobile {
     /* display: block; */
@@ -248,11 +249,13 @@
     justify-content: center;
     align-items: center;
     display: none;
-    
+
 }
-.main_visual .side_icon a.mobile img{
+
+.main_visual .side_icon a.mobile img {
     width: 35px;
 }
+
 .main_visual .side_icon a.mobile p {
     font-family: var(--Gmarket);
     color: var(--main-w);
@@ -753,6 +756,7 @@
 .menu .right ul.right_con>li ul.swiper-wrapper {
     display: flex;
     align-items: end;
+     overflow: visible !important;
 }
 
 .menu .right ul.right_con>li.on {
@@ -761,12 +765,23 @@
 }
 
 .menu .right ul.right_con>li .swiper-slide {
-    width: 239px;
+    /*     width: auto !important;
     height: 266px;
     border-radius: 20px;
     object-fit: contain;
     opacity: .5;
-    transition: opacity 1s;
+    transition: opacity 1s; */
+    width: 280px !important;
+    height: 330px;
+    border-radius: 20px;
+    object-fit: contain;
+    opacity: .5;
+    transition: opacity 1s, transform 0.5s, min-width 0.5s;
+    transform: scale(0.7);
+    margin-right: 0 !important;
+  display: flex;
+  justify-content: center;
+    z-index: 1;
 }
 
 .menu .right ul.right_con>li img {
@@ -778,15 +793,29 @@
 }
 
 .menu .right ul.right_con>li .swiper-slide-active {
-    width: 385px;
+    /*    width: 385px !important;
+    height: 480px;
+    border-radius: 270px 270px 20px 20px;
+    overflow: hidden;
+    opacity: 1; */
+    /*  min-width: 385px !important; */
+       width: 385px !important;
     height: 480px;
     border-radius: 270px 270px 20px 20px;
     overflow: hidden;
     opacity: 1;
+    transform: scale(1);
+    transition: opacity 1s, transform 0.5s;
+    margin-right: 0 !important;
 }
 
 .menu .right ul.right_con>li .swiper-slide-active img {
-    border-radius: 0;
+    display: block;
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  border-radius: 20px;
+  object-fit: cover;
 }
 
 .swiper-pagination-wrap {

@@ -207,13 +207,14 @@ $(function () {
                     // 다시 허용
                     window.removeEventListener("wheel", preventScroll);
                     window.removeEventListener("touchmove", preventScroll);
-                     ScrollTrigger.refresh();
+                    ScrollTrigger.refresh();
                 }
             }, "-=0.5");
 
 
 
     });
+
 
 
 });

@@ -562,7 +562,16 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
-
+  //  document.addEventListener("DOMContentLoaded", function () {
+  //       if (location.hash === "#wrapper") {
+  //           // splash가 있다면 숨기기
+  //           var splash = document.getElementById("splash");
+  //           if (splash) splash.style.display = "none";
+  //           // wrapper로 바로 이동
+  //           var wrapper = document.getElementById("wrapper");
+  //           if (wrapper) wrapper.scrollIntoView({ behavior: "auto" });
+  //       }
+  //   });
 
 
 });

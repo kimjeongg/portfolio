@@ -29,8 +29,8 @@ $(function () {
 
 
 
-/* 모바일 서브바 */
-  $(' header .Tablet_nav ul.gnb>li>a button').on('click',function(){
+  /* 모바일 서브바 */
+  $(' header .Tablet_nav ul.gnb>li>a button').on('click', function () {
     $(this).toggleClass('rotated');
     $(this).siblings('span').toggleClass('active');
     $(this).parent('a').siblings('ul.sub').slideToggle('slow');
@@ -56,34 +56,36 @@ $(function () {
   function updateSlidePosition(swiper, selector, conName) {
     let activeIndex = swiper.realIndex;
     document.querySelector(`${selector} .swiper-pagination-wrap span`).innerText = right_con_txt[conName][activeIndex];
-
-    let activeSlide = swiper.slides[swiper.activeIndex];
-    if (activeSlide) {
-      let slideOffset = activeSlide.offsetLeft;
-      // console.log(`[${conName}] 현재 이동 거리:`, slideOffset);
-
-      if (swiper.touches?.diff > 0) {
-        // console.log(`[${conName}] 정방향 이동: 추가 보정 필요`);
-        swiper.setTransition(500);
-        slideOffset = -slideOffset - 50;
-        swiper.setTranslate(slideOffset, 0);
-      } else {
-        console.log(`[${conName}] 역방향 이동: 기본 이동`);
-        swiper.setTranslate(-slideOffset, 0);
-      }
-    }
+    /* 
+        let activeSlide = swiper.slides[swiper.activeIndex];
+        if (activeSlide) {
+          let slideOffset = activeSlide.offsetLeft;
+          // console.log(`[${conName}] 현재 이동 거리:`, slideOffset);
+    
+          if (swiper.touches?.diff > 0) {
+            // console.log(`[${conName}] 정방향 이동: 추가 보정 필요`);
+            swiper.setTransition(500);
+            slideOffset = -slideOffset - 50;
+            swiper.setTranslate(slideOffset, 0);
+          } else {
+            console.log(`[${conName}] 역방향 이동: 기본 이동`);
+            swiper.setTranslate(-slideOffset, 0);
+          }
+        } */
   }
 
   function initSwiper(selector, conName) {
     if (swipers[conName]) {
-      swipers[conName].destroy(true, true); // 기존 Swiper 완전 제거
+      swipers[conName].destroy(true, true);
     }
 
     swipers[conName] = new Swiper(`${selector} .swiper`, {
       slidesPerView: 'auto',
-      spaceBetween: 30,
-      freeMode: true,
+      centeredSlides: false,
       loop: true,
+      loopedSlides: 5,
+      speed: 700,
+      spaceBetween: 30,
       navigation: {
         nextEl: `${selector} .swiper-button-next`,
         prevEl: `${selector} .swiper-button-prev`,
@@ -93,7 +95,10 @@ $(function () {
         transitionEnd: function () { updateSlidePosition(this, selector, conName); },
       }
     });
-
+    const prevBtn = document.querySelector('.swiper-button-prev');
+    prevBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+    });
     return swipers[conName];
   }
 
@@ -113,8 +118,8 @@ $(function () {
 
     // ✅ Swiper를 리셋 (첫 번째 슬라이드로 이동 & 업데이트)
     if (swipers[swiperKey]) {
-      swipers[swiperKey].slideTo(0, 0); // 첫 번째 슬라이드로 이동
-      swipers[swiperKey].update(); // Swiper 업데이트
+      swipers[swiperKey].slideToLoop(0, 700); // 자연스럽게 첫 슬라이드로 이동
+      swipers[swiperKey].update();
     } else {
       // Swiper가 없으면 새로 초기화
       initSwiper(swiperClass, swiperKey);
