@@ -171,12 +171,12 @@ $(function () {
       .to(sections[currentSection], {
         scale: 0.5,
         opacity: 0.5,
-        duration: 0.5,
+        duration: 0.6,
         ease: "power2.out"
       })
       .to(wrapper, {
         x: targetX,
-        duration: 1.2,
+        duration: .8,
         ease: "power2.inOut",
         onStart: () => {
           console.log(`✅ goToSection 실행됨 → ${index}`);
@@ -263,26 +263,34 @@ $(function () {
 
     // container 마지막 → footer 진입
     if (currentSection === sections.length - 1 && delta > 0) {
-      isTransitioning = true;
-      document.body.classList.remove('in');
-      footer.scrollIntoView({ behavior: 'smooth' });
-      updatePaginationVisibility();
-
-      const observer = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          isTransitioning = false;
+      // 1. 프로젝트 마지막 섹션에서 휠을 내릴 때
+      if (!isTransitioning) {
+        isTransitioning = true;
+        // goToSection의 onComplete에서 footer로 이동
+        goToSection(currentSection); // 이미 마지막이므로 자기 자신 호출
+        setTimeout(() => {
+          // goToSection 애니메이션이 끝난 뒤 footer로 이동
+          document.body.classList.remove('in');
+          footer.scrollIntoView({ behavior: 'smooth' });
           updatePaginationVisibility();
-          observer.disconnect();
-        }
-      }, { threshold: 0.2 });
-      observer.observe(footer);
 
-      setTimeout(() => {
-        if (isTransitioning) {
-          isTransitioning = false;
-          updatePaginationVisibility();
-        }
-      }, 1000);
+          const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+              isTransitioning = false;
+              updatePaginationVisibility();
+              observer.disconnect();
+            }
+          }, { threshold: 0.2 });
+          observer.observe(footer);
+
+          setTimeout(() => {
+            if (isTransitioning) {
+              isTransitioning = false;
+              updatePaginationVisibility();
+            }
+          }, 1000);
+        }, 800); // goToSection duration(.8초)과 맞춰서 조정
+      }
       return;
     }
 
