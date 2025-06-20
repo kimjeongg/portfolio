@@ -428,4 +428,10 @@ $(function () {
       if (typeof window.triggerFooterMotion === 'function') window.triggerFooterMotion();
     }, 700); // 스크롤 애니메이션 시간에 맞춰 조정
   });
+  document.querySelectorAll('.project#bloop .not-ready').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      alert('6월23일에 오픈 예정입니다! \n\n많은 기대 부탁드립니다 :)');
+    });
+  });
 });

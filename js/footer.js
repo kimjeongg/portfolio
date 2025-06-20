@@ -196,8 +196,18 @@ $(function () {
   let isHoveringButton = false;
   const button = document.querySelector('.botton a');
 
-  button.addEventListener("mouseenter", () => isHoveringButton = true);
-  button.addEventListener("mouseleave", () => isHoveringButton = false);
+  button.addEventListener("mouseenter", () => {
+    isHoveringButton = true;
+    // 버튼 위에 올 때 태그와 캔버스 클릭 막기
+    document.querySelectorAll('.tag').forEach(tag => tag.style.pointerEvents = "none");
+    canvas.style.pointerEvents = "none";
+  });
+  button.addEventListener("mouseleave", () => {
+    isHoveringButton = false;
+    // 버튼에서 나가면 다시 태그와 캔버스 클릭 가능
+    document.querySelectorAll('.tag').forEach(tag => tag.style.pointerEvents = "auto");
+    canvas.style.pointerEvents = "auto";
+  });
 
   Events.on(mouseConstraint, "startdrag", (event) => {
     if (isHoveringButton) {

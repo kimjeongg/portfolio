@@ -615,12 +615,12 @@ view.addEventListener('click', (e) => {
             botTxt.innerHTML = "";
             botP.innerHTML = "";
             typingTween1 = gsap.to(botTxt, {
-              duration: 0.8,
+              duration: 1,
               text: { value: h2Text, delimiter: "" },
               ease: "none",
               onComplete: () => {
                 typingTween2 = gsap.to(botP, {
-                  duration: 1.2,
+                  duration: 1.5,
                   text: { value: pText, delimiter: "" },
                   ease: "none"
                 });
