@@ -54,8 +54,23 @@ $(function () {
       const chars = document.querySelectorAll(".footer_top .char");
       chars.forEach((char, i) => {
         char.style.transitionDelay = `${i * 0.01}s`;
-        char.classList.add("on"); // ✅ 각 char에 on 클래스 개별 적용!
+        char.classList.add("on");
       });
+      tags.forEach(tag => tag.style.opacity = 1);
+
+      // ★ 태그의 Matter.js body 위치/속도 리셋 (여기 추가!)
+      if (window.Body && window.bodies) {
+        window.bodies.forEach((body, i) => {
+          const tag = tags[i];
+          window.Body.setPosition(body, {
+            x: gsap.utils.random(tag.offsetWidth / 2, canvas.width - tag.offsetWidth / 2),
+            y: -gsap.utils.random(100, 300)
+          });
+          window.Body.setVelocity(body, { x: 0, y: 0 });
+          window.Body.setAngle(body, 0);
+          window.Body.setAngularVelocity(body, 0);
+        });
+      }
     },
     onLeaveBack: () => {
       const chars = document.querySelectorAll(".footer_top .char");
@@ -63,6 +78,7 @@ $(function () {
         char.classList.remove("on");
         char.style.transitionDelay = "0s";
       });
+      tags.forEach(tag => tag.style.opacity = 0);
     },
     toggleActions: "play none none reset"
   });
@@ -143,6 +159,7 @@ $(function () {
   tags.forEach(tag => {
     tag.style.position = 'absolute';
     tag.style.pointerEvents = 'auto';
+    tag.style.opacity = 0;
 
     const rect = tag.getBoundingClientRect();
     const x = gsap.utils.random(rect.width / 2, canvas.width - rect.width / 2);
@@ -220,19 +237,22 @@ $(function () {
     trigger: ".footer_top",
     start: "top bottom",
     onEnter: () => {
-      tags.forEach(tag => tag.style.opacity = 1);
-      bodies.forEach((body, i) => {
-        const tag = tags[i];
-        Body.setPosition(body, {
-          x: gsap.utils.random(tag.offsetWidth / 2, canvas.width - tag.offsetWidth / 2),
-          y: -gsap.utils.random(100, 300)
-        });
-        Body.setVelocity(body, { x: 0, y: 0 });
-        Body.setAngle(body, 0);
-        Body.setAngularVelocity(body, 0);
+      const chars = document.querySelectorAll(".footer_top .char");
+      chars.forEach((char, i) => {
+        char.style.transitionDelay = `${i * 0.01}s`;
+        char.classList.add("on");
       });
+      tags.forEach(tag => tag.style.opacity = 1); // ← 진입 시 보이게
     },
-    toggleActions: "restart none none reset"
+    onLeaveBack: () => {
+      const chars = document.querySelectorAll(".footer_top .char");
+      chars.forEach((char) => {
+        char.classList.remove("on");
+        char.style.transitionDelay = "0s";
+      });
+      tags.forEach(tag => tag.style.opacity = 0); // ← 이탈 시 숨김
+    },
+    toggleActions: "play none none reset"
   });
   window.triggerFooterMotion = function () {
     // 글자 모션
@@ -243,20 +263,23 @@ $(function () {
     });
 
     // 프레임(태그) 떨어뜨리기
-    const tags = document.querySelectorAll(".tag");
-    if (window.Body && window.bodies) {
-      tags.forEach(tag => tag.style.opacity = 1);
-      window.bodies.forEach((body, i) => {
-        const tag = tags[i];
-        window.Body.setPosition(body, {
-          x: gsap.utils.random(tag.offsetWidth / 2, canvas.width - tag.offsetWidth / 2),
-          y: -gsap.utils.random(100, 300)
+    setTimeout(() => {
+      const tags = document.querySelectorAll(".tag");
+      if (window.Body && window.bodies) {
+        tags.forEach(tag => tag.style.opacity = 1);
+        window.bodies.forEach((body, i) => {
+          const tag = tags[i];
+          window.Body.setPosition(body, {
+            x: gsap.utils.random(tag.offsetWidth / 2, canvas.width - tag.offsetWidth / 2),
+            y: -gsap.utils.random(100, 300)
+          });
+          window.Body.setVelocity(body, { x: 0, y: 0 });
+          window.Body.setAngle(body, 0);
+          window.Body.setAngularVelocity(body, 0);
         });
-        window.Body.setVelocity(body, { x: 0, y: 0 });
-        window.Body.setAngle(body, 0);
-        window.Body.setAngularVelocity(body, 0);
-      });
-    }
+      }
+    }, 300);
+
   };
 
 

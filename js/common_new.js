@@ -268,28 +268,33 @@ $(function () {
         isTransitioning = true;
         // goToSection의 onComplete에서 footer로 이동
         goToSection(currentSection); // 이미 마지막이므로 자기 자신 호출
-        setTimeout(() => {
-          // goToSection 애니메이션이 끝난 뒤 footer로 이동
-          document.body.classList.remove('in');
-          footer.scrollIntoView({ behavior: 'smooth' });
-          updatePaginationVisibility();
+       setTimeout(() => {
+  // goToSection 애니메이션이 끝난 뒤 footer로 이동
+  document.body.classList.remove('in');
+  footer.scrollIntoView({ behavior: 'smooth' });
+  updatePaginationVisibility();
 
-          const observer = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-              isTransitioning = false;
-              updatePaginationVisibility();
-              observer.disconnect();
-            }
-          }, { threshold: 0.2 });
-          observer.observe(footer);
+  // ★ footer 모션 트리거 추가
+  setTimeout(() => {
+    if (typeof window.triggerFooterMotion === 'function') window.triggerFooterMotion();
+  }, 700); // 스크롤 애니메이션 시간에 맞춰 조정
 
-          setTimeout(() => {
-            if (isTransitioning) {
-              isTransitioning = false;
-              updatePaginationVisibility();
-            }
-          }, 1000);
-        }, 800); // goToSection duration(.8초)과 맞춰서 조정
+  const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      isTransitioning = false;
+      updatePaginationVisibility();
+      observer.disconnect();
+    }
+  }, { threshold: 0.2 });
+  observer.observe(footer);
+
+  setTimeout(() => {
+    if (isTransitioning) {
+      isTransitioning = false;
+      updatePaginationVisibility();
+    }
+  }, 1000);
+}, 800); // goToSection duration(.8초)과 맞춰서 조정
       }
       return;
     }
