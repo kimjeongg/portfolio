@@ -1,5 +1,11 @@
 $(function () {
+    if (location.hash === "#wrapper") {
+        $('#splash').hide();
+        return;
+    }
 
+
+    
     function preventScroll(e) {
         e.preventDefault();
     }
@@ -20,7 +26,7 @@ $(function () {
     const container = document.querySelector('.splash .txt');
     const splash = document.querySelector('.splash');
     const values = document.querySelector('.values');
-    
+
     text.innerHTML = text.innerText.split('').map(char => `<span class="char">${char}</span>`).join('');
 
     setTimeout(() => {
