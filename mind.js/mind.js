@@ -115,40 +115,40 @@ document.addEventListener("DOMContentLoaded", function () {
     'main': 'ma',
   };
 
-view.addEventListener('click', (e) => {
-  const section = e.target.closest('.section');
-  if (!section || section.classList.contains('active')) return;
-  const allBtn = document.querySelector('.btn-group .all');
-  const isAllView = allBtn && allBtn.classList.contains('on');
-  if (!isAllView) return; // ← '|| section.id === 'main'' 부분 삭제
+  view.addEventListener('click', (e) => {
+    const section = e.target.closest('.section');
+    if (!section || section.classList.contains('active')) return;
+    const allBtn = document.querySelector('.btn-group .all');
+    const isAllView = allBtn && allBtn.classList.contains('on');
+    if (!isAllView) return; // ← '|| section.id === 'main'' 부분 삭제
 
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  section.classList.add('active');
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    section.classList.add('active');
 
-  const targetClass = sectionToBtnClass[section.id];
-  document.querySelectorAll('.btn-group button, .btn-group a').forEach(btn => {
-    btn.classList.remove('on');
-    if (btn.classList.contains(targetClass)) btn.classList.add('on');
+    const targetClass = sectionToBtnClass[section.id];
+    document.querySelectorAll('.btn-group button, .btn-group a').forEach(btn => {
+      btn.classList.remove('on');
+      if (btn.classList.contains(targetClass)) btn.classList.add('on');
+    });
+
+    const rect = section.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const offsetX = window.innerWidth / 2 - centerX;
+    const offsetY = window.innerHeight / 2 - centerY;
+    initialX += offsetX;
+    initialY += offsetY;
+
+    gsap.to(canvas, {
+      x: initialX,
+      y: initialY,
+      duration: 1,
+      ease: "power2.out",
+      onUpdate: () => {
+        canvas.style.transform = `translate(${initialX}px, ${initialY}px)`;
+      }
+    });
   });
-
-  const rect = section.getBoundingClientRect();
-  const centerX = rect.left + rect.width / 2;
-  const centerY = rect.top + rect.height / 2;
-  const offsetX = window.innerWidth / 2 - centerX;
-  const offsetY = window.innerHeight / 2 - centerY;
-  initialX += offsetX;
-  initialY += offsetY;
-
-  gsap.to(canvas, {
-    x: initialX,
-    y: initialY,
-    duration: 1,
-    ease: "power2.out",
-    onUpdate: () => {
-      canvas.style.transform = `translate(${initialX}px, ${initialY}px)`;
-    }
-  });
-});
 
   function zoomFromMain(targetId, pathId) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -253,6 +253,32 @@ view.addEventListener('click', (e) => {
     btnGroup.querySelectorAll('button, a').forEach(btn => btn.classList.remove('on'));
     e.target.classList.add('on');
 
+    // ★ 모든 섹션의 active 제거 + 컨텐츠 강제 초기화
+    document.querySelectorAll('.section').forEach(section => {
+      section.classList.remove('active');
+      // 아래는 각 섹션별로 초기화 코드 추가
+      // 예시: design_skill
+      if (section.id === "design_skill") {
+        const mainTxt = section.querySelector(":scope > .txt");
+        const ai = section.querySelector(".ai");
+        const coding = section.querySelector(".coding");
+        const design = section.querySelector(".design");
+        const sections = [ai, coding, design];
+        if (mainTxt) gsap.set(mainTxt, { autoAlpha: 1, y: 0 });
+        sections.forEach(sec => {
+          if (!sec) return;
+          const txt = sec.querySelector(":scope > .txt");
+          const tol = sec.querySelector(".tol");
+          const imgs = sec.querySelectorAll(".aiImg > *, .coImg > *, .deImg > *, .vid");
+          if (txt) gsap.set(txt, { autoAlpha: 0, y: -60 });
+          if (tol) gsap.set(tol, { autoAlpha: 0, y: 0 });
+          if (imgs) gsap.set(imgs, { autoAlpha: 0, y: 40 });
+        });
+      }
+      // 다른 section도 필요하다면 유사하게 초기화
+    });
+
+    // 이후 기존 코드 유지
     const action = e.target.innerText.trim().toLowerCase().replace(/\s/g, "");
 
     switch (action) {
@@ -269,13 +295,11 @@ view.addEventListener('click', (e) => {
         zoomFromMain('hobby', '#path4');
         break;
       case "mainview": zoomFromMain('main', '#pathMain'); break;
-
       case "allview":
         resetView();
         break;
     }
   });
-
 
   window.onload = () => {
     // 모든 section에서 active 제거
