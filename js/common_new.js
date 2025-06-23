@@ -224,14 +224,61 @@ $(function () {
 
   let lastScrollTime = 0;
   window.addEventListener('wheel', (e) => {
+
     const now = Date.now();
     if (now - lastScrollTime < 100 || isTransitioning) return;
     lastScrollTime = now;
 
     const delta = e.deltaY;
     const valuesRect = values.getBoundingClientRect();
-    const footerRect = footer.getBoundingClientRect();
+    const footerRect = footer.getBoundingClientRect(); // ← 이 줄을 가장 먼저!
+    const footerVisibleRatio = Math.max(
+      0,
+      Math.min(footerRect.bottom, window.innerHeight) - Math.max(footerRect.top, 0)
+    ) / footerRect.height;
+    const isFooterMostlyVisible = (footerRect.top < window.innerHeight && footerRect.bottom > 0);
+    console.log('isFooterMostlyVisible:', isFooterMostlyVisible, 'currentSection:', currentSection, 'delta:', delta);
+    // ★★★ 푸터 → 프로젝트 복귀 (위로 스크롤만 허용, 아래로는 아무 동작도 하지 않음)
+    // ★★★ 푸터 → 프로젝트 복귀 (위로 스크롤만 허용, 아래로는 아무 동작도 하지 않음)
+    if (
+      !document.body.classList.contains('in') &&
+      isFooterMostlyVisible
+    ) {
+      if (e.deltaY > 0) {
+        console.log('footer에서 아래로 스크롤: 아무 동작도 하지 않음');
+        return;
+      }
+      if (e.deltaY < 0) {
+        console.log('footer에서 위로 스크롤: 프로젝트로 복귀');
+        e.preventDefault();
+        isTransitioning = true;
+        container.scrollIntoView({ behavior: 'smooth' });
 
+        const observer = new IntersectionObserver((entries) => {
+          if (entries[0].isIntersecting) {
+            document.body.classList.add('in');
+            goToSection(sections.length - 1);
+            setActivePageBtn(sections.length - 1);
+            isTransitioning = false;
+            updatePaginationVisibility();
+            observer.disconnect();
+          }
+        }, { threshold: 0.6 });
+        observer.observe(container);
+
+        setTimeout(() => {
+          if (isTransitioning) {
+            document.body.classList.add('in');
+            goToSection(sections.length - 1);
+            setActivePageBtn(sections.length - 1);
+            isTransitioning = false;
+            updatePaginationVisibility();
+          }
+        }, 600);
+        return;
+      }
+    }
+    console.log('isFooterMostlyVisible:', isFooterMostlyVisible, 'currentSection:', currentSection, 'delta:', delta);
     // values → 프로젝트 진입
     if (!document.body.classList.contains('in') && valuesRect.top < 10 && delta > 0) {
       isTransitioning = true;
@@ -269,6 +316,7 @@ $(function () {
         goToSection(currentSection);
         setTimeout(() => {
           document.body.classList.remove('in');
+          console.log('footer 진입: body.classList', document.body.classList);
           footer.scrollIntoView({ behavior: 'smooth' });
           updatePaginationVisibility();
 
@@ -297,7 +345,12 @@ $(function () {
     }
 
     // 프로젝트 첫 섹션 → values 복귀
-    if (currentSection === 0 && delta < 0 && document.body.classList.contains('in')) {
+    if (
+      currentSection === 0 &&
+      delta < 0 &&
+      document.body.classList.contains('in') &&
+      values.getBoundingClientRect().top > -10 && values.getBoundingClientRect().top < 10
+    ) {
       isTransitioning = true;
       document.body.classList.remove('in');
       values.scrollIntoView({ behavior: 'smooth' });
@@ -321,60 +374,26 @@ $(function () {
       return;
     }
 
-    // ★★★ 푸터 → 프로젝트 복귀 (위로 스크롤만 허용, 아래로는 아무 동작도 하지 않음)
-    if (
-      !document.body.classList.contains('in') &&
-      footerRect.top < window.innerHeight && footerRect.bottom > 0
-    ) {
-      console.log('🟠 푸터 조건 진입', { delta: e.deltaY, footerRect });
-      if (e.deltaY > 0) {
-        console.log('🟡 아래로 스크롤 - return!');
-        return;
-      }
-      if (e.deltaY < 0) {
-        // 위로 스크롤 시에만 프로젝트 마지막 섹션으로 이동
-        console.log('🔵 위로 스크롤 - 프로젝트로 복귀!');
-        e.preventDefault();
-        isTransitioning = true;
-        container.scrollIntoView({ behavior: 'smooth' });
-
-        const observer = new IntersectionObserver((entries) => {
-          if (entries[0].isIntersecting) {
-            document.body.classList.add('in');
-            goToSection(sections.length - 1); // 마지막 섹션으로 이동
-            setActivePageBtn(sections.length - 1); // 페이지네이션도 마지막으로
-            isTransitioning = false;
-            updatePaginationVisibility();
-            observer.disconnect();
-          }
-        }, { threshold: 0.6 });
-        observer.observe(container);
-
-        setTimeout(() => {
-          if (isTransitioning) {
-            document.body.classList.add('in');
-            goToSection(sections.length - 1);
-            setActivePageBtn(sections.length - 1);
-            isTransitioning = false;
-            updatePaginationVisibility();
-          }
-        }, 600);
-        return;
-      }
-    }
 
     // ★★★ 가로 스크롤(프로젝트 내에서 좌우 이동)
-    if (document.body.classList.contains('in')) {
+    if (
+      document.body.classList.contains('in') &&
+      !isFooterMostlyVisible
+    ) {
+      // 마지막 섹션에서 아래로 스크롤 + 푸터가 이미 보이면 아무 동작도 하지 않음
+      if (currentSection >= sections.length - 1 && delta > 0) return;
+
       e.preventDefault();
       if (isTransitioning) return;
       if (delta > 0) {
+        if (currentSection >= sections.length - 1) return;
         goToSection(currentSection + 1);
       } else {
+        if (currentSection <= 0) return;
         goToSection(currentSection - 1);
       }
     }
   }, { passive: false });
-
   window.addEventListener('keydown', (e) => {
     if (isTransitioning) return;
     if (e.key === 'ArrowRight') goToSection(currentSection + 1);
@@ -459,3 +478,4 @@ $(function () {
   });
 
 });
+
