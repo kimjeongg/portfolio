@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/main_style2.css">
+    <link rel="stylesheet" href="css/main_style.css">
     <link rel="stylesheet" href="css/media.css">
 
     <script src="https://kit.fontawesome.com/e1144d3087.js" crossorigin="anonymous"></script>
@@ -23,27 +23,18 @@
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <script src="js/main2.js"></script>
+    <script src="js/main.js"></script>
     <script src="js/product.js"></script>
 </head>
 
 <body>
     <div class="wrap">
-        <div class="side_icon">
-            <a href="#">
-                <p>온라인 상점</p>
-                <img src="img/side 쇼핑.png" alt="온라인 쇼핑 바로가기">
-            </a>
-            <a href="#">
-                <p>직영점 문의</p>
-                <img src="img/side 협력.png" alt="직영점 문의 바로가기">
-            </a>
-            <a href="#" class="mobile">
-                <img src="img/side 쇼핑.png" alt="온라인 쇼핑 바로가기">
-                <p>shop</p>
-            </a>
-        </div>
+
         <header class="">
+            <div class="top">
+                <p class="top_ft">커피빈몰 가입하고 10% 쿠폰 받으세요.</p>
+                <button type="button" class="x"><i class="fa-solid fa-xmark"></i></button>
+            </div>
             <div class="inner">
                 <h1 class="logo">
                     <img src="img/logo.png" alt="">
@@ -107,11 +98,11 @@
                             <li><a href="#">cart</a></li>
                         </ul>
                     </div>
-                </div><!-- //.Tablet_nav -->
+                </div>
 
                 <nav>
                     <ul class="gnb">
-                        <li><a href="#">online shop</a>
+                        <li><a href="#">온라인 몰</a>
                             <ul class="sub">
                                 <li><a href="">coffee beans</a></li>
                                 <li><a href="">coffee packs</a></li>
@@ -120,7 +111,7 @@
                                 <li><a href="">product</a></li>
                             </ul><!-- //.sub -->
                         </li>
-                        <li><a href="#">menu</a>
+                        <li><a href="#">메뉴</a>
                             <ul class="sub">
                                 <li><a href="">coffee</a></li>
                                 <li><a href="">none-coffee</a></li>
@@ -129,14 +120,14 @@
                                 <li><a href="">product</a></li>
                             </ul><!-- //.sub -->
                         </li>
-                        <li><a href="#">membership</a>
+                        <li><a href="#">커피콩</a>
                             <ul class="sub">
                                 <li><a href="">나의 리저브</a></li>
                                 <li><a href="">온 & 오프라인 혜택</a></li>
                                 <li><a href="">기프트 카드</a></li>
                             </ul><!-- //.sub -->
                         </li>
-                        <li><a href="#">the coffee bean</a>
+                        <li><a href="#">브랜드 소개</a>
                             <ul class="sub">
                                 <li><a href="">공지사항</a></li>
                                 <li><a href="">이벤트</a></li>
@@ -148,11 +139,8 @@
                 </nav>
                 <div class="h_mini">
                     <ul class="side_bar">
-                        <li><a href="#">login</a></li>
-                        <li><a href="#">join</a></li>
-                        <li><a href="#">cart</a></li>
-                        <li><a href="#"><i class="fa-solid fa-globe"></i></a></li>
-                        <li><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                        <li><a href="#"><img src="img/user_icon.png" alt=""></a></li>
+                        <li><a href="#"><img src="img/cart_icon.png" alt=""></a></li>
                     </ul><!-- //.side_bar -->
                     <div class="h_right">
                         <button type="button" class="hambtn on "><i class="fa-solid fa-bars"></i></button>
@@ -161,35 +149,46 @@
                 </div>
             </div><!-- //.inner -->
         </header>
-        <section class="main_visual swiper">
+        <section class="main_visual inner swiper">
             <ul class="main_visual_wrap swiper-wrapper">
                 <li class="main1 swiper-slide">
                     <a href="#">
-                        <div class="inner">
+                        <div>
                             <h2 data-aos="fade-left" data-aos-delay="300" data-aos-duration="600">
-                                <strong class="sw">Sweet</strong>
-                                <span>&</span>
-                                <strong class="be">Beauti<strong class="ff">fall</strong></strong>
+                                여름의 달콤한 순간,<Br>
+                                수박으로 채우다
                             </h2>
+                            <p>시원함이 터지는 커피빈 썸머 드링크<br>
+                                지금, 커피빈에서 상큼한 수박 주스를 만나보세요.</p>
                         </div>
                     </a>
                 </li>
                 <li class="main2 swiper-slide">
                     <a href="#">
-                        <div class="inner">
-                            <div class="txt" data-aos="fade-right" data-aos-delay="2800" data-aos-duration="600">
-                                <p>Harmony</p>
-                                <h2>of
-                                    <strong>matcha</strong>
-                                </h2>
-                                <button class="main_btn">자세히 보기</button>
-                            </div><!-- //.txt -->
+                        <div>
+                            <span>~2025.07.31까지 가입 시 제공</span>
+                            <h2 data-aos="fade-left" data-aos-delay="300" data-aos-duration="600">
+                                집에서도, 커피빈처럼<br>
+                                홈카페 스타터 키트 런칭!
+                            </h2>
+                            <p>신규 가입 고객 대상<br>
+                                커피머신 전용 캡슐 무료 증정 이벤트</p>
+                        </div><!-- //.inner -->
+                    </a>
+                </li>
+                <li class="main3 swiper-slide">
+                    <a href="#">
+                        <div>
+                            <h2 data-aos="fade-left" data-aos-delay="300" data-aos-duration="600">
+                                커피빈의 가족이 된다면,<br>
+                                랜덤 기프트 박스 쿠폰 즉시 지급!
+                            </h2>
+                            <p>음료 쿠폰, 생일 쿠폰, 멤버십 포인트 적립까지<Br>
+                                지금 가입하면 특별한 선물이 기다려요.</p>
                         </div><!-- //.inner -->
                     </a>
                 </li>
             </ul><!-- //.main_visual_wrap -->
-            <div class="swiper-pagination"></div>
-
         </section>
         <section class="product">
             <div class="inner">

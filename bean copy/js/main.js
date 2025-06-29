@@ -39,17 +39,11 @@ $(function () {
 
 
   /* heart */
-/*   $('.product ul.card li a i').click(function (e) {
+  $('.product ul.card li a i').click(function (e) {
     e.preventDefault();
     $(this).toggleClass('active');
   });
- */
 
-
-
-
-
-  
   /* menu */
   let right_con_txt = {
     con1: ['캐러멜 아이스 블렌디드', '브라운 마끼아토네', '카페 라떼', '제주 첫물 말차 라떼', '아이스 헤이즐넛 라떼'],

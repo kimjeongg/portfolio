@@ -27,7 +27,7 @@
     --point-bo: #a496aa;
     --font-3: #333;
     --font-0: #0f0f0f;
-    --font-5: #696969;
+    --font-5: #555;
     --font-y: #E9C46A;
     --font-gr: #A7A967;
     --font-ww: #F4F0E7;
@@ -73,7 +73,7 @@ body {
 
 header {
     width: 100%;
-    height: 120px;
+    height: 119px;
     background-color: var(--main-w);
     font-family: var(--Suit);
     position: fixed;

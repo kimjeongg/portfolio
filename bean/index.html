@@ -22,81 +22,27 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/product.js"></script>
+    <script src="js/menu.js"></script>
 </head>
 
 <body>
     <div class="wrap">
+
         <header class="">
+            <div class="top">
+                <p class="top_ft">커피빈몰 가입하고 10% 쿠폰 받으세요.</p>
+                <button type="button" class="x"><i class="fa-solid fa-xmark"></i></button>
+            </div>
             <div class="inner">
                 <h1 class="logo">
                     <img src="img/logo.png" alt="">
                 </h1>
-
-                <div class="Tablet_nav">
-                    <ul class="gnb">
-                        <li>
-                            <a href="#">
-                                <span>online shop</span>
-                                <button type="button"> <i class="fa-solid fa-chevron-down"></i></button>
-                            </a>
-                            <ul class="sub">
-                                <li><a href="#">coffee beans</a></li>
-                                <li><a href="#">tea bag</a></li>
-                                <li><a href="#">coffee packs</a></li>
-                                <li><a href="#">desert</a></li>
-                                <li><a href="#">product</a></li>
-                            </ul><!--  -->
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span>menu</span>
-                                <button type="button"> <i class="fa-solid fa-chevron-down"></i></button>
-                            </a>
-                            <ul class="sub">
-                                <li><a href="#">coffee </a></li>
-                                <li><a href="#">tea</a></li>
-                                <li><a href="#">none-coffee</a></li>
-                                <li><a href="#">desert</a></li>
-                                <li><a href="#">product</a></li>
-                            </ul><!--  -->
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span>membership</span>
-                                <button type="button"> <i class="fa-solid fa-chevron-down"></i></button>
-                            </a>
-                            <ul class="sub">
-                                <li><a href="#">나의 리저브</a></li>
-                                <li><a href="#">온&오프라인 헤택</a></li>
-                                <li><a href="#">키프트 카드</a></li>
-                            </ul><!--  -->
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span>the coffee bean</span>
-                                <button type="button"> <i class="fa-solid fa-chevron-down"></i></button>
-                            </a>
-                            <ul class="sub">
-                                <li><a href="#">소식</a></li>
-                                <li><a href="#">채용 & 입점 문의</a></li>
-                                <li><a href="#">매장 찾기 & 매장 예약</a></li>
-                            </ul><!--  -->
-                        </li>
-                    </ul><!-- //.gnb -->
-                    <div class="bottom_txt">
-                        <ul>
-                            <li><a href="#">login</a></li>
-                            <li><a href="#">join</a></li>
-                            <li><a href="#">cart</a></li>
-                        </ul>
-                    </div>
-                </div><!-- //.Tablet_nav -->
-                
                 <nav>
                     <ul class="gnb">
-                        <li><a href="#">online shop</a>
+                        <li><a href="#">온라인 몰</a>
                             <ul class="sub">
                                 <li><a href="">coffee beans</a></li>
                                 <li><a href="">coffee packs</a></li>
@@ -105,7 +51,7 @@
                                 <li><a href="">product</a></li>
                             </ul><!-- //.sub -->
                         </li>
-                        <li><a href="#">menu</a>
+                        <li><a href="#">메뉴</a>
                             <ul class="sub">
                                 <li><a href="">coffee</a></li>
                                 <li><a href="">none-coffee</a></li>
@@ -114,14 +60,14 @@
                                 <li><a href="">product</a></li>
                             </ul><!-- //.sub -->
                         </li>
-                        <li><a href="#">membership</a>
+                        <li><a href="#">커피콩</a>
                             <ul class="sub">
                                 <li><a href="">나의 리저브</a></li>
                                 <li><a href="">온 & 오프라인 혜택</a></li>
                                 <li><a href="">기프트 카드</a></li>
                             </ul><!-- //.sub -->
                         </li>
-                        <li><a href="#">the coffee bean</a>
+                        <li><a href="#">브랜드 소개</a>
                             <ul class="sub">
                                 <li><a href="">공지사항</a></li>
                                 <li><a href="">이벤트</a></li>
@@ -133,489 +79,212 @@
                 </nav>
                 <div class="h_mini">
                     <ul class="side_bar">
-                        <li><a href="#">login</a></li>
-                        <li><a href="#">join</a></li>
-                        <li><a href="#">cart</a></li>
-                        <li><a href="#"><i class="fa-solid fa-globe"></i></a></li>
-                        <li><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                        <li><a href="#"><img src="img/user_icon.png" alt=""></a></li>
+                        <li><a href="#"><img src="img/cart_icon.png" alt=""></a></li>
                     </ul><!-- //.side_bar -->
-                    <div class="h_right">
-                        <button type="button" class="hambtn on "><i class="fa-solid fa-bars"></i></button>
-                        <button type="button" class="xbtn "><i class="fa-solid fa-xmark"></i></button>
-                    </div><!-- //.h_left -->
                 </div>
             </div><!-- //.inner -->
         </header>
-        <section class="main_visual swiper">
-            <ul class="main_visual_wrap swiper-wrapper">
-                <li class="main1 swiper-slide">
-                    <a href="#">
-                        <div class="inner">
-                            <h2 data-aos="fade-left" data-aos-delay="300" data-aos-duration="600">
-                                <strong class="sw">Sweet</strong>
-                                <span>&</span>
-                                <strong class="be">Beauti<strong class="ff">fall</strong></strong>
-                            </h2>
-                        </div>
-                    </a>
-                </li>
-                <li class="main2 swiper-slide">
-                    <a href="#">
-                        <div class="inner">
-                            <div class="txt" data-aos="fade-right" data-aos-delay="2800" data-aos-duration="600">
-                                <p>Harmony</p>
-                                <h2>of
-                                    <strong>matcha</strong>
+        <div class="all">
+            <section class="main_visual  swiper">
+                <ul class="main_visual_wrap  swiper-wrapper">
+                    <li class="main1 swiper-slide ">
+                        <a href="#" class=" inner">
+                            <div>
+                                <h2 data-aos="fade-left" data-aos-delay="300" data-aos-duration="600">
+                                    여름의 달콤한 순간,<Br>
+                                    수박으로 채우다
                                 </h2>
-                                <button class="main_btn">자세히 보기</button>
-                            </div><!-- //.txt -->
-                        </div><!-- //.inner -->
-                    </a>
-                </li>
-            </ul><!-- //.main_visual_wrap -->
-            <div class="swiper-pagination"></div>
-            <div class="side_icon">
-                <a href="#">
-                    <p>온라인 상점</p>
-                    <img src="img/side 쇼핑.png" alt="온라인 쇼핑 바로가기">
-                </a>
-                <a href="#">
-                    <p>직영점 문의</p>
-                    <img src="img/side 협력.png" alt="직영점 문의 바로가기">
-                </a>
-                <a href="#" class="mobile">
-                    <img src="img/side 쇼핑.png" alt="온라인 쇼핑 바로가기">
-                    <p>shop</p>
-                </a>
-
-            </div>
-        </section>
-        <section class="product">
-            <div class="inner">
-                <div class="big_txt">
-                    <h2 data-aos="fade-up" data-aos-duration="600">
-                        <p>home </p>
-                        <strong>cafe</strong>
-                    </h2>
-                    <p data-aos="fade-up" data-aos-delay="300" data-aos-duration="600">집에서도 즐기는 커피빈 !</p>
-                </div><!-- //.big_txt -->
-                <div class="go">
-                    <a href="#">
-                        <p>MORE</p>
-                        <i class="fa-solid fa-plus"></i>
-                    </a>
-                </div><!-- //.go -->
-                <ul class="card">
-                    <li data-aos="flip-left" data-aos-delay="0" data-aos-duration="1000">
-                        <a href="#">
-                            <div class="img_box">
-                                <img src="img/capsul.jpg" alt="캡슐커피">
-                                <i class="fa-solid fa-heart"></i>
+                                <p>시원함이 터지는 커피빈 썸머 드링크<br>
+                                    지금, 커피빈에서 상큼한 수박 주스를 만나보세요.</p>
                             </div>
-                            <div class="txt">
-                                <div class="top_txt">
-                                    <span>캡슐 커피</span>
-                                    <p>[네스프레소] 콜롬비아 다크 10t</p>
-                                </div>
-                                <div class="under_txt">
-                                    <span>29%</span>
-                                    <p>7,500<span>원</span></p>
-                                </div>
-                            </div><!-- //.txt -->
                         </a>
                     </li>
-                    <li data-aos="flip-left" data-aos-delay="200" data-aos-duration="1000">
-                        <a href="#">
-                            <div class="img_box">
-                                <img src="img/drip.jpg" alt="드립백">
-                                <i class="fa-solid fa-heart"></i>
-                            </div>
-                            <div class="txt">
-                                <div class="top_txt">
-                                    <span>드립백</span>
-                                    <p>커피빈 디카페인 드립백 5t</p>
-                                </div>
-                                <div class="under_txt">
-                                    <span>29%</span>
-                                    <p>4,000<span>원</span></p>
-                                </div>
-                            </div><!-- //.txt -->
+                    <li class="main2 swiper-slide">
+                        <a href="#" class=" inner">
+                            <div>
+                                <span>~2025.07.31까지 가입 시 제공</span>
+                                <h2 data-aos="fade-left" data-aos-delay="300" data-aos-duration="600">
+                                    집에서도, 커피빈처럼<br>
+                                    홈카페 스타터 키트 런칭!
+                                </h2>
+                                <p>신규 가입 고객 대상<br>
+                                    커피머신 전용 캡슐 무료 증정 이벤트</p>
+                            </div><!-- //.inner -->
                         </a>
                     </li>
-
-                    <li data-aos="flip-left" data-aos-delay="400" data-aos-duration="1000">
-                        <a href="#">
-                            <div class="img_box">
-                                <img src="img/pack.jpg" alt="커피팩">
-                                <i class="fa-solid fa-heart"></i>
-                            </div>
-                            <div class="txt">
-                                <div class="top_txt">
-                                    <span>커피 파우치</span>
-                                    <p>디카페인 아메리카노 파우치 10t </p>
-                                </div>
-                                <div class="under_txt">
-                                    <span>27%</span>
-                                    <p>11,000<span>원</span></p>
-                                </div>
-                            </div><!-- //.txt -->
+                    <li class="main3 swiper-slide">
+                        <a href="#" class=" inner">
+                            <div>
+                                <h2 data-aos="fade-left" data-aos-delay="300" data-aos-duration="600">
+                                    커피빈의 가족이 된다면,<br>
+                                    랜덤 기프트 박스 쿠폰 즉시 지급!
+                                </h2>
+                                <p>음료 쿠폰, 생일 쿠폰, 멤버십 포인트 적립까지<Br>
+                                    지금 가입하면 특별한 선물이 기다려요.</p>
+                            </div><!-- //.inner -->
                         </a>
                     </li>
+                </ul><!-- //.main_visual_wrap -->
+                <div class="swiper-button-next "></div>
+                <div class="swiper-button-prev "></div>
 
-                    <li data-aos="flip-left" data-aos-delay="600" data-aos-duration="1000">
-                        <a href="#">
-                            <div class="img_box">
-                                <img src="img/powder.jpg" alt="파우더 커피">
-                                <i class="fa-solid fa-heart"></i>
+
+            </section>
+            <section class="product">
+                <div class="inner">
+                    <div class="big_txt">
+                        <div class="left">
+                            <h2 data-aos="fade-up" data-aos-duration="600">
+                                <strong>HOME</strong>
+                                CAFE
+                            </h2>
+                            <p>집에서도 즐기는 커피빈 !</p>
+                        </div>
+                        <a href="#" class="more">전체 보기
+                            <div class="icon">
+                                <i class="fa-solid fa-plus"></i>
                             </div>
-                            <div class="txt">
-                                <div class="top_txt">
-                                    <span>파우더 커피</span>
-                                    <p>커피빈 바닐라 라떼 12T</p>
-                                </div>
-                                <div class="under_txt">
-                                    <span>48%</span>
-                                    <p>3,900<span>원</span></p>
-                                </div>
-                            </div><!-- //.txt -->
                         </a>
-                    </li>
-                </ul>
-            </div><!-- //.inner -->
-        </section><!-- //.product -->
-        <div class="banner swiper">
-            <ul class="txt_img_box swiper-wrapper">
-                <li class="txt_img1  swiper-slide ">
-                    <div class="inner">
-                        <img src="img/qr.png" alt="qr">
-                        <div class="txt">
-                            <h3>
-                                <strong>앱 다운</strong><br>
-                                <span>받고</span><br>
-                                <strong>아메리카노<span>받자!</span></strong>
-
-                            </h3>
-                            <p>
-                                기간 : 2025.03.15~03.31
-                                <span>※멤버쉽 가입 시, 증정</span>
-                            </p>
-                        </div><!-- //.txt -->
-                    </div><!-- //.inner -->
-                </li><!-- //.txt_img -->
-                <li class="txt_img2  swiper-slide ">
-                    <div class="inner">
-                        <img src="img/banner2.png" alt="" class="left">
-                        <img src="img/banner2-2.png" alt="" class="right">
-                        <div class="txt">
-                            <h3>오늘 주문하면</h3>
-                            <h4>내일 도착!</h4>
-                            <p>※커피빈 공식몰은 1시간마다 출고 작업이 진행됩니다.</p>
-                            <p>※결제 후 1시간 이후 건은 취소 및 배송지 변경이 불가할 수 있습니다.</p>
-                        </div><!-- //.txt -->
-                    </div><!-- //.inner -->
-                </li><!-- //.txt_img -->
-            </ul><!-- //.inner -->
-        </div><!-- //.banner -->
-        <section class="menu">
-            <div class="big_txt">
-                <h2 data-aos="fade-up" data-aos-duration="600">
-                    menu
-                    <strong>best</strong>
-                </h2>
-            </div><!-- //.big_txt -->
-            <div class="rt_lt">
-                <div class="left">
-                    <div class="sub">
-                        <ul>
-                            <li class="on" data-aos="fade-down-right" data-aos-duration="600">
-                                <p>#원두의_섬세한_향기</p>
-                                <span>drink</span>
-                            </li>
-                            <li class="" data-aos="fade-down-right" data-aos-duration="600" data-aos-delay="300">
-                                <p> #스위트_모먼트</p>
-                                <span> desert</span>
-                            </li>
-                            <li class="" data-aos="fade-down-right" data-aos-duration="600" data-aos-delay="400">
-                                <p>#맛있는_순간</p>
-                                <span>food</span>
-                            </li>
-                        </ul>
-                    </div><!-- //.txt -->
-                </div><!-- //.left -->
-                <div class=" right">
-                    <ul class="right_con">
-                        <li class="right_con1 on">
-                            <div class="swiper">
-                                <ul class="swiper-wrapper">
-                                    <li class="swiper-slide">
-                                        <a href="#"><img src=" img/menu_coffee_2.jpg" alt=""></a>
-                                    </li>
-                                    <li class="swiper-slide">
-                                        <a href="#"><img src="img/menu_coffee_1.jpg" alt=""></a>
-                                    </li>
-                                    <li class="swiper-slide">
-                                        <a href="#"><img src="img/menu_coffee_3.jpg" alt=""></a>
-                                    </li>
-                                    <li class="swiper-slide">
-                                        <a href="#"><img src="img/menu_coffee_4.jpg" alt=""></a>
-                                    </li>
-                                    <li class="swiper-slide">
-                                        <a href="#"><img src="img/menu_coffee_5.jpg" alt=""></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="swiper-pagination-wrap">
-                                <div class="swiper-button-next"></div>
-                                <span></span>
-                                <div class="swiper-button-prev"></div>
-                            </div>
-                        </li>
-                        <li class="right_con2">
-                            <div class="swiper">
-                                <ul class="swiper-wrapper">
-                                    <li class="swiper-slide">
-                                        <a href="#"><img src="img/menu_de_1.jpg" alt=""></a>
-                                    </li>
-                                    <li class="swiper-slide">
-                                        <a href="#"><img src="img/menu_de_2.jpg" alt=""></a>
-                                    </li>
-                                    <li class="swiper-slide">
-                                        <a href="#"><img src="img/menu_de_3.jpg" alt=""></a>
-                                    </li>
-                                    <li class="swiper-slide">
-                                        <a href="#"><img src="img/menu_de_4.jpg" alt=""></a>
-                                    </li>
-                                    <li class="swiper-slide">
-                                        <a href="#"><img src="img/menu_de_5.jpg" alt=""></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="swiper-pagination-wrap">
-                                <div class="swiper-button-next"></div>
-                                <span></span>
-                                <div class="swiper-button-prev"></div>
-                            </div>
-                        </li>
-                        <li class="right_con3">
-                            <div class="swiper">
-                                <ul class="swiper-wrapper">
-                                    <li class="swiper-slide">
-                                        <a href="#"><img src="img/menu_fo_1.jpg" alt=""></a>
-                                    </li>
-                                    <li class="swiper-slide">
-                                        <a href="#"><img src="img/menu_fo_2.jpg" alt=""></a>
-                                    </li>
-                                    <li class="swiper-slide">
-                                        <a href="#"><img src="img/menu_fo_3.jpg" alt=""></a>
-                                    </li>
-                                    <li class="swiper-slide">
-                                        <a href="#"><img src="img/menu_fo_4.jpg" alt=""></a>
-                                    </li>
-                                    <li class="swiper-slide">
-                                        <a href="#"><img src="img/menu_fo_5.jpg" alt=""></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="swiper-pagination-wrap">
-                                <div class="swiper-button-next"></div>
-                                <span></span>
-
-                                <div class="swiper-button-prev"></div>
-                            </div>
-                        </li>
-                    </ul>
-                </div><!-- //.right -->
-            </div><!-- //.rt_lt -->
-        </section><!-- //.menu -->
-        <section class="review">
-            <div class="inner">
-                <div class="sticky">
-                    <h3>coffee bean
-                        <span>coffee bean</span>
-                    </h3>
-
-                    <h3>Real
-                        <span>Real</span>
-                    </h3>
-
-                    <h3>Reviews
-                        <span>Reviews</span>
-                    </h3>
-                    <a href="#" class="btn">
-                        <p>more review</p>
-                        <i class="fa-solid fa-plus"></i>
-                    </a>
-
-                </div>
-                <div class="right">
-                    <ul>
-                        <li data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-                            <a href="#">
-                                <div class="top_txt">
-                                    <div class="star">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                    </div><!-- //.star -->
-                                    <span>온라인 사용자 박0수님</span>
-                                    <span>25.01.15</span>
-                                </div><!-- //.top_txt -->
-                                <img src="img/re1.jpg" alt="">
-                                <div class="bottom_txt">
-                                    <h4>오피스룸 예약</h4>
-                                    <p>홈페이지에서 미리 오피스룸 예약을 하고 갔더니 너무 편하더군요. 미팅이나 회의를 카페에서 하는 경우가 많아서 항상 카페에 가면 자리가 꽉
-                                        차있거나ㅠㅠ 사용을 못 하는 경우가 많았는데, 커피빈에선 따로 오피스룸을 예약할 수 있는 홈페이지가 있어서 너무 편했습니다.</p>
-                                </div><!-- //.bottom_txt -->
-                            </a>
-                        </li>
-                        <li data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
-                            <a href="#">
-                                <div class="top_txt">
-                                    <div class="star">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                    </div><!-- //.star -->
-                                    <span>온라인 사용자 박0수님</span>
-                                    <span>25.01.15</span>
-                                </div><!-- //.top_txt -->
-                                <img src="img/re2.jpg" alt="">
-                                <div class="bottom_txt">
-                                    <h4>드립백 구매 후기</h4>
-                                    <p>왜 다들 커피빈 드립백을 먹는 지 알겠네요....최근에 먹은 드립백중에 제일 매장에서 먹는 기분이였습니다. 회사에서도 집에서도 간단하게카페 커피를
-                                        먹을 수 있어서 좋았어요!!</p>
-                                </div><!-- //.bottom_txt -->
-                            </a>
-                        </li>
-                        <li data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
-                            <a href="#">
-                                <div class="top_txt">
-                                    <div class="star">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                    </div><!-- //.star -->
-                                    <span>온라인 사용자 박0수님</span>
-                                    <span>25.01.15</span>
-                                </div><!-- //.top_txt -->
-                                <img src="img/re3.jpg" alt="">
-                                <div class="bottom_txt">
-                                    <h4>집에서 즐기는 카페 !</h4>
-                                    <p>집에서 커피를 즐기는 1인 입니다 ... 그래서 종종 블렌드를 사서 집에서 커피를 내려먹는데, 커피빈에 마침 블렌드를 판매하고 있어서 구매했습니다
-                                        !! <br>
-                                        웬걸..........커피빈 블렌드 너무 맛있네요 저는 산미가 강한 원두를 구매했습니다... 카페에서 먹는 것 보다 더 맛있네요 ㅋㅋ 다들
-                                        한번.. 즐겨 보시길...!</p>
-                                </div><!-- //.bottom_txt -->
-                            </a>
-                        </li>
-                        <li data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500">
-                            <a href="#">
-                                <div class="top_txt">
-                                    <div class="star">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                    </div><!-- //.star -->
-                                    <span>온라인 사용자 박0수님</span>
-                                    <span>25.01.15</span>
-                                </div><!-- //.top_txt -->
-                                <img src="img/re4.jpg" alt="">
-                                <div class="bottom_txt">
-                                    <h4>미팅 예약 후기</h4>
-                                    <p>주변에 미팅이 있어서 빠르게 빈 시간대로 홈페이지에서 예약했습니다. 예약하고나서도 편하게 체크인처럼 qr이 와서 편하게 있다가 가네요. 보통
-                                        카페들은 예약이 아니라서 미팅할 때마다 불편했는데 예약 시스템이라 자주 이용할 것 같네요 !! 번창하세요 ㅎㅎ</p>
-                                </div><!-- //.bottom_txt -->
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section><!-- //.review -->
-        <section class="sns">
-            <div class="inner">
-                <h2 data-aos="zoom-out-down">coffee bean sns</h2>
-                <ul>
-                    <li><a href="#" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="200" offset: 200>
-                            <img src="img/sns1.jpg" alt="" class="img_sns">
-                            <img src="img/insta_sns.png" alt="" class="sn_icon">
-                        </a></li>
-                    <li><a href="#" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="400">
-                            <img src="img/sns5.jpg" alt="" class="img_sns">
-                            <img src="img/blog_sns.png" alt="" class="sn_icon">
-                        </a></li>
-                    <li><a href="#" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="600">
-                            <img src="img/sns3.jpg" alt="" class="img_sns">
-                            <img src="img/blog_sns.png" alt="" class="sn_icon">
-                        </a></li>
-                    <li><a href="#" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="800">
-                            <img src="img/sns4.jpg" alt="" class="img_sns">
-                            <img src="img/twitter_sns.png" alt="" class="sn_icon">
-                        </a></li>
-                    <li><a href="#" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="1000"><img
-                                src="img/sns2.jpg" alt="" class="img_sns">
-                            <img src="img/insta_sns.png" alt="" class="sn_icon">
-                        </a></li>
-                </ul>
-            </div><!-- //.inner -->
-        </section><!-- //.sns -->
-        <footer>
-            <div class="inner">
-                <div class="top_txt">
-                    <h1><img src="img/logo_f.png" alt=""></h1>
-                    <div class="menu_bar">
-                        <ul>
-                            <li><a href="#">online shop</a></li>
-                            <li><a href="#">menu</a></li>
-                            <li><a href="#">membership</a></li>
-                            <li><a href="#">the coffee bean</a></li>
-                        </ul>
-                    </div><!-- //.menu_bar -->
-                </div><!-- //.top_txt -->
-                <div class="middle_txt">
-                    <ul>
-                        <li><a href="#"><img src="img/bandIcon.png" alt="blog"></a></li>
-                        <li><a href="#"><img src="img/facebook_icon.png" alt="facebook"></a></li>
-                        <li><a href="#"><img src="img/instagram_icon.png" alt="instagram"></a></li>
-                        <li><a href="#"><img src="img/twitter_icon.png" alt="twitter"></a></li>
-                    </ul>
-                </div><!-- //.middle_txt -->
-                <div class="bottom_txt">
-                    <div class="top">
-                        <ul>
-                            <li><a href="#">홈페이지 이용약관</a></li>
-                            <li><a href="#">개인정보처리방침</a></li>
-                            <li><a href="#">멤버스이용약관</a></li>
-                            <li><a href="#">위치기반서비스 이용약관</a></li>
-                        </ul>
-                    </div><!-- //.top -->
-                    <div class="middle">
-                        <ul id="top">
-                            <li>(주)커피빈코리아 대표이사 김종철</li>
-                            <li>사업자등록번호120-86-07029</li>
-                            <li>통신판매업신고 제2010-서울강남-00560</li>
-                        </ul>
-                        <ul id="bot">
-                            <li>서울시 강남구 봉은사로 99길 7</li>
-                            <li>E-mail : cbk@coffeebaenkorea.com</li>
-                            <li>tel : 02-1577-4708</li>
-                        </ul>
-                    </div><!-- //.middle -->
-                    <div class="bottom">
-                        <ul>
-                            <li>2021.the coffee bean.all right reserved</li>
-                        </ul>
                     </div>
-                </div><!-- //.bottom_txt -->
-            </div><!-- //.inner -->
-        </footer>
+                    <div class="product-flex">
+                        <!-- 왼쪽 큰 스와이퍼 -->
+                        <div class="left-swiper">
+                            <div class="swiper main-product-swiper">
+                                <div class="swiper-wrapper" id="main-product-wrapper"></div>
+                                <div class="swiper-pagination"></div>
+                            </div>
+                        </div>
+                        <!-- 오른쪽 고정 4개 -->
+                        <div class="right-grid">
+                            <div class="grid-item" id="grid-1"></div>
+                            <div class="grid-item" id="grid-2"></div>
+                            <div class="grid-item" id="grid-3"></div>
+                            <div class="grid-item" id="grid-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="banner">
+                <h2></h2>
+                <p></p>
+                <div class="btn"></div>
+            </section>
+
+            <section class="menu">
+                <div class="inner">
+                    <div class="menu-header">
+                        <h2>BEST MENU</h2>
+                        <p>취향 저격, 베스트 메뉴만 골라 담았어요.</p>
+                        <a href="#" class="more-btn">전체 보기
+                            <div class="icon">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="menu-swiper-container">
+                        <div class="swiper menu-swiper">
+                            <div class="swiper-wrapper" id="menu-wrapper"></div>
+                        </div>
+                        <div class="swiper-button-prev menu-prev"></div>
+                        <div class="swiper-button-next menu-next"></div>
+                    </div>
+                </div>
+            </section>
+            <div class="contents">
+                <div class="inner">
+                    <section class="notice_event">
+
+                        <div class="notice">
+                            <h2>공지사항</h2>
+                            <ul>
+                                <li><a href="#">커피빈몰 가입하고 10% 쿠폰 받으세요. <span>2025.05.08</span></a></li>
+                                <li><a href="#">커피빈몰 가입하고 10% 쿠폰 받으세요. <span>2025.05.08</span></a></li>
+                                <li><a href="#">커피빈몰 가입하고 10% 쿠폰 받으세요. <span>2025.05.08</span></a></li>
+                                <li><a href="#">커피빈몰 가입하고 10% 쿠폰 받으세요. <span>2025.05.08</span></a></li>
+                                <li><a href="#">커피빈몰 가입하고 10% 쿠폰 받으세요. <span>2025.05.08</span></a></li>
+                            </ul>
+                        </div><!-- //.notice -->
+                        <div class="event">
+                            <h2>이벤트</h2>
+                            <ul>
+                                <li><a href="#">커피빈몰 가입하고 10% 쿠폰 받으세요<div class="span">2025.08.08</div></a></li>
+                                <li><a href="#">커피빈몰 가입하고 10% 쿠폰 받으세요<div class="span">2025.08.08</div></a></li>
+                                <li><a href="#">커피빈몰 가입하고 10% 쿠폰 받으세요<div class="span">2025.08.08</div></a></li>
+                                <li><a href="#">커피빈몰 가입하고 10% 쿠폰 받으세요<div class="span">2025.08.08</div></a></li>
+                                <li><a href="#">커피빈몰 가입하고 10% 쿠폰 받으세요<div class="span">2025.08.08</div></a></li>
+                            </ul>
+                        </div><!-- //.event -->
+
+                    </section>
+                    <section class="ba">
+                        <article class="office"></article>
+                        <article class="shop"></article>
+                    </section>
+                </div>
+
+
+            </div>
+            <section class="memvership">
+                <div class="inner">
+                    <h2>MEMBERSHIP</h2>
+                    <p>커피빈 멤버십에 가입하고 다양한 혜택을 누리세요.</p>
+                    <a href="#" class="btn">멤버십 가입하기</a>
+                </div><!-- //.inner -->
+                <div class="bg"></div>
+            </section>
+            <footer>
+                <div class="inner">
+                    <div class="top_txt">
+                        <h1><img src="img/logo_f.png" alt=""></h1>
+                        <div class="menu_bar">
+                            <ul>
+                                <li><a href="#">online shop</a></li>
+                                <li><a href="#">menu</a></li>
+                                <li><a href="#">membership</a></li>
+                                <li><a href="#">the coffee bean</a></li>
+                            </ul>
+                        </div><!-- //.menu_bar -->
+                    </div><!-- //.top_txt -->
+                    <div class="middle_txt">
+                        <ul>
+                            <li><a href="#"><img src="img/bandIcon.png" alt="blog"></a></li>
+                            <li><a href="#"><img src="img/facebook_icon.png" alt="facebook"></a></li>
+                            <li><a href="#"><img src="img/instagram_icon.png" alt="instagram"></a></li>
+                            <li><a href="#"><img src="img/twitter_icon.png" alt="twitter"></a></li>
+                        </ul>
+                    </div><!-- //.middle_txt -->
+                    <div class="bottom_txt">
+                        <div class="top">
+                            <ul>
+                                <li><a href="#">홈페이지 이용약관</a></li>
+                                <li><a href="#">개인정보처리방침</a></li>
+                                <li><a href="#">멤버스이용약관</a></li>
+                                <li><a href="#">위치기반서비스 이용약관</a></li>
+                            </ul>
+                        </div><!-- //.top -->
+                        <div class="middle">
+                            <ul id="top">
+                                <li>(주)커피빈코리아 대표이사 김종철</li>
+                                <li>사업자등록번호120-86-07029</li>
+                                <li>통신판매업신고 제2010-서울강남-00560</li>
+                            </ul>
+                            <ul id="bot">
+                                <li>서울시 강남구 봉은사로 99길 7</li>
+                                <li>E-mail : cbk@coffeebaenkorea.com</li>
+                                <li>tel : 02-1577-4708</li>
+                            </ul>
+                        </div><!-- //.middle -->
+                        <div class="bottom">
+                            <ul>
+                                <li>2021.the coffee bean.all right reserved</li>
+                            </ul>
+                        </div>
+                    </div><!-- //.bottom_txt -->
+                </div><!-- //.inner -->
+            </footer>
+        </div>
+
     </div><!-- //.wrap -->
 </body>
 

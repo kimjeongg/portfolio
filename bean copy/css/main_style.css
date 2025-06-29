@@ -10,17 +10,11 @@
     margin: 0 auto;
 }
 
-.inner {
-    max-width: 1520px;
-    margin: 0 auto;
-
-}
-
 /* main_visual */
 .main_visual {
     width: 100%;
-    height: 100vh;
-    padding-top: 100px;
+    height: 650px;
+    padding-top: 119px;
 }
 
 .main_visual ul.main_visual_wrap {
@@ -197,331 +191,216 @@
     height: 16px;
 }
 
-/* 사이드 */
-.side_icon {
-    width: 320px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    position: fixed;
-    right: -90px;
-    bottom: 60px;
-    z-index: 100000;
-}
-
-.side_icon a {
-    display: flex;
-    width: 180px;
-    border-radius: 95px;
-    padding: 8px 20px;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.side_icon a:first-child {
-    background: rgba(94, 63, 107, 0.80);
-}
-
-.side_icon a:first-child img {
-    width: 40px;
-}
-
-.side_icon a:nth-child(2) {
-    background: rgba(233, 194, 84, 0.80)
-}
-
-.side_icon a p {
-    font-size: 18px;
-    font-family: var(--Gmarket);
-    color: var(--main-w);
-    font-weight: 500;
-    margin-top: 3px;
-}
-
-.side_icon a img {
-    width: 40px;
-}
-
-/* 모바일 고정 사이드 */
-.side_icon a.mobile {
-    /* display: block; */
-    width: 80px;
-    height: 80px;
-    background: rgba(233, 194, 84, 0.90);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    display: none;
-
-}
-
-.side_icon a.mobile img {
-    width: 35px;
-}
-
-.side_icon a.mobile p {
-    font-family: var(--Gmarket);
-    color: var(--main-w);
-    font-size: 17px;
-    font-weight: 500;
-}
-
 
 
 /* 제품 */
+
 .product {
-    background-color: #FFFCF6;
+    height: 1300px;
+    background-color: var(--main-bgW);
 }
 
 .product .inner {
-    padding: 250px 0 300px 0;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 60px;
+    align-items: center;
+    justify-content: space-around;
+    padding-bottom: 135px;
 }
 
-.product .big_txt {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-}
-
-.product .big_txt .left {
+.product .inner .big_txt {
+    width: 410px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    text-transform: uppercase;
+    padding-top: 190px;
+    gap: 25px;
+    text-align: center;
+
 }
 
-.product .big_txt .left p {
-    font-size: 23px;
-    font-weight: 500;
-    font-family: var(--Gmarket);
-    color: var(--main-color);
-}
-
-.product .big_txt h2 {
-    font-size: 60px;
+.product .inner .big_txt h2 {
+    font-size: 80px;
     font-weight: 900;
     font-family: var(--pretend);
-    position: relative;
     color: var(--main-color);
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    text-transform: uppercase;
+    position: relative;
+    padding-right: 50px;
+
 }
 
-.product .big_txt h2 strong {
+.product .inner .big_txt h2>p {}
+
+.product .inner .big_txt h2 strong {
+    display: flex;
     transform: rotate(23deg);
     color: var(--font-gr);
     position: absolute;
-    right: -40px;
-    top: -40px;
-    font-size: 50px;
+    right: -23px;
+    top: -50px;
+    font-size: 70px;
 }
 
-.product .big_txt .more {
-    font-size: 19px;
-    color: var(--font-0);
-    text-decoration: none;
-    margin-left: 10px;
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    justify-content: center;
+.product .inner .big_txt>p {
+    font-size: 33px;
+    font-weight: 500;
     font-family: var(--Gmarket);
+    color: var(--main-color);
+
 }
 
-.product .big_txt .more .icon {
-    width: 36px;
-    height: 36px;
-    background-color: var(--font-gr);
+.product .inner .go {
+    width: 100%;
+    height: 50px;
     display: flex;
+    justify-content: right;
+    margin-right: 120px;
+}
+
+.product .inner .go a {
+    width: 300px;
+    height: 100%;
+    background-color: var(--point-yellow);
+    color: var(--font-3);
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    color: var(--main-w);
+    padding: 0 30px;
+    border-radius: 30px;
+}
+
+.product .inner .go a p {
     font-size: 25px;
-    /*     font-weight: 200; */
-    border-radius: 50%;
+    font-weight: 400;
+    font-family: var(--pretend);
 }
 
-.product-flex {
+.product .inner .go a i {
+    font-size: 25px;
+    font-weight: normal;
+}
+
+
+
+
+.product ul.card {
+    width: 1400px;
+    height: 520px;
     display: flex;
-    gap: 48px;
-    align-items: flex-start;
-    width: 100%;
-    height: 464px;
-}
-
-.product-img-area {
-    width: 35%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #f7f7f2;
-    border-radius: 5px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-}
-
-.product-img-area img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 5px;
-}
-
-.product-swiper {
-    padding-bottom: 30px;
-    flex: 1;
-    margin-left: 0 !important;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    padding-bottom: 50px;
-    height: 100%;
-}
-
-.product-swiper .swiper-wrapper {
-    display: flex;
-    /* Swiper 기본 구조 유지 */
-    min-height: 380px;
-    height: 100%;
-}
-
-.product-swiper .swiper-slide {
-    display: flex;
-    align-items: stretch;
-    justify-content: stretch;
-    box-sizing: border-box;
-    height: 100%;
-    /* 내부 그리드만 적용 */
-}
-
-.product-row {
-    display: flex;
-    gap: 32px;
-}
-
-.product-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    /* 2열 */
-    grid-template-rows: 1fr 1fr;
-    /* 2행 */
-    gap: 32px;
-    width: 100%;
-    height: 100%;
-}
-
-.product-card {
-    width: 100%;
-    height: 100%;
-    min-width: 0;
-    min-height: 0;
-    display: flex;
-    gap: 18px;
-    /*     align-items: flex-start; */
-    padding: 0;
-    box-shadow: none;
-    box-sizing: border-box;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.product-card img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    /* 정사각형 비율 유지 */
-    object-fit: cover;
-    border-radius: 5px;
-    margin: 0;
-    max-width: 180px;
-    /* 필요시 최대 크기 제한 */
-    max-height: 180px;
-}
-
-.prod-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-width: 0;
     gap: 20px;
 }
 
-.prod-top {
+.product ul.card li {
+    width: 335px;
+    height: 100%;
+    background-color: var(--main-w);
+    border-radius: 18px;
+    transition: .6s;
+}
+
+.product ul.card li:hover {
+    box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.25);
+}
+
+.product ul.card li a {
+    width: 100%;
+    height: 100%;
     display: flex;
-    align-items: start;
     flex-direction: column;
 }
 
-.prod-subtitle {
-    font-size: 16px;
+.product ul.card li a .img_box {
+    width: 335px;
+    height: 335px;
+    position: relative;
+    border-radius: 18px 18px 0 0;
+
+}
+
+.product ul.card li a img {
+    width: 335px;
+    height: 335px;
+    display: block;
+    border-radius: 18px 18px 0 0;
+    object-fit: cover;
+}
+
+.product ul.card li a i {
+    font-size: 35px;
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+    color: var(--point-gray);
+    transition: color 0.3s ease;
+    animation: floatUp 1s ease-out forwards;
+}
+
+.product ul.card li a i.active {
+    color: var(--point-red);
+}
+
+.product ul.card li a .txt {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px 0 15px 15px;
+}
+
+.product ul.card li a .txt .top_txt {
+    font-family: var(--pretend);
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+
+}
+
+.product ul.card li a .txt .top_txt span {
+    font-size: 20px;
+    font-weight: 700;
     color: var(--font-5);
-    margin-bottom: 2px;
+}
+
+.product ul.card li a .txt .top_txt p {
+    font-size: 25px;
+    font-weight: 300;
+    color: var(--font-0);
+}
+
+.product ul.card li a .txt .under_txt {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 15px;
+
+}
+
+.product ul.card li a .under_txt>span {
+    font-size: 26px;
+    font-weight: 400;
+    font-family: var(--Cafe);
+    color: var(--font-y);
+}
+
+.product ul.card li a .under_txt p {
+    font-size: 35px;
+    font-weight: 400;
+    font-family: var(--Cafe);
+    color: var(--font-3);
+}
+
+.product ul.card li a .under_txt p>span {
+    font-family: var(--Suit);
     font-weight: 500;
 }
 
-.prod-title {
-    font-size: 21px;
 
-    font-weight: 700;
-    line-height: 1.2;
-    /*     word-break: keep-all; */
-}
 
-.prod-price-wrap {
-    display: flex;
-    align-items: baseline;
-    gap: 3px;
-    flex-direction: column;
-}
 
-.prod-origin {
-    font-size: 16px;
-    color: var(--font-5);
-    margin-bottom: 2px;
-    font-weight: 400;
-    text-decoration-line: line-through;
-}
 
-.prod-price-wrap-txt {
-    display: flex;
-    align-items: end;
-    justify-content: center;
-    gap: 10px;
-}
 
-.prod-sale {
-    color: var(--point-yellow);
-    font-size: 18px;
-    font-weight: 600;
-}
 
-.prod-cost {
-    font-size: 24px;
-    font-weight: 700;
-}
-
-.product-swiper .swiper-pagination-progressbar {
-    position: absolute !important;
-    left: 0;
-    right: 0;
-    top: 450px;
-    margin-top: 0 !important;
-    background: var(--main-bgD);
-    height: 4px !important;
-    border-radius: 2px !important;
-    z-index: 10;
-}
-
-.product-swiper .swiper-pagination-progressbar-fill {
-    background: var(--font-bora) !important;
-    border-radius: 2px;
-}
 
 /* banner */
 .banner {
@@ -805,7 +684,7 @@
 .menu .right ul.right_con>li ul.swiper-wrapper {
     display: flex;
     align-items: end;
-    overflow: visible !important;
+     overflow: visible !important;
 }
 
 .menu .right ul.right_con>li.on {
@@ -828,8 +707,8 @@
     transition: opacity 1s, transform 0.5s, min-width 0.5s;
     transform: scale(0.7);
     margin-right: 0 !important;
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
     z-index: 1;
 }
 
@@ -848,7 +727,7 @@
     overflow: hidden;
     opacity: 1; */
     /*  min-width: 385px !important; */
-    width: 385px !important;
+       width: 385px !important;
     height: 480px;
     border-radius: 270px 270px 20px 20px;
     overflow: hidden;
@@ -856,16 +735,15 @@
     transform: scale(1);
     transition: opacity 1s, transform 0.5s;
     margin-right: 0 !important;
-    z-index: 2;
 }
 
 .menu .right ul.right_con>li .swiper-slide-active img {
     display: block;
-    height: 100%;
-    width: auto;
-    max-width: 100%;
-    border-radius: 20px;
-    object-fit: cover;
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  border-radius: 20px;
+  object-fit: cover;
 }
 
 .swiper-pagination-wrap {
