@@ -12,21 +12,24 @@
 
 
 :root {
+    --marquee-speed: 60s;
     --main-color: #482765;
-    --font-bora: #402359;
+    --font-bora: #5E3F6B;
+    --font-light-bora: #705979;
     --main-w: #ffffff;
     --main-bgW: #FAFAFA;
     --main-bgD: #F4F0E7;
     --point-yellow: #E9C254;
     --point-bora: #671987;
+    --point-light-bora: #A47DAB;
     --point-greenD: #71774A;
     --point-greenW: #888A4A;
     --point-orange: #E58600;
     --point-gray: #F4F4F4;
     --point-red: #9C0000;
     --point-bo: #a496aa;
-    --font-3: #333;
-    --font-0: #0f0f0f;
+    --font-5c: #5C5C5C;
+    --font-0: #2B2B2B;
     --font-5: #696969;
     --font-y: #E9C46A;
     --font-gr: #A7A967;
@@ -52,7 +55,7 @@ body {
 }
 
 .inner {
-    width: 1440px;
+    width: 75%;
     margin: 0 auto;
 }
 
@@ -66,7 +69,15 @@ body {
 
 
 
-
+.btn_pc {
+    width: 230px;
+    height: 50px;
+    font-size: 18px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 
 /* header */
@@ -74,12 +85,13 @@ body {
 header {
     width: 100%;
     height: 120px;
-    background-color: var(--main-w);
+    background: rgba(254, 254, 254, 0.5);
     font-family: var(--Suit);
     position: fixed;
     z-index: 999;
     display: flex;
     flex-direction: column;
+    backdrop-filter: blur(5px);
 }
 
 header .top {
@@ -107,6 +119,7 @@ header .inner {
     align-items: center;
     justify-content: space-between;
     text-transform: uppercase;
+
 }
 
 /* 태블릿 */
@@ -235,7 +248,6 @@ header .h_right button {
     font-size: 27px;
     cursor: pointer;
     display: none;
-    color: var(--main-w);
     /* width: 40px;
     height: 40px; */
     position: relative;
@@ -405,10 +417,12 @@ header ul.side_bar>li {
     cursor: pointer;
 
 }
+
 header ul.side_bar>li:nth-child(2) {
-      width: 25px;
+    width: 25px;
     height: 25px;
 }
+
 header ul.side_bar>li a {
     width: 100%;
     height: 100%;
@@ -419,4 +433,163 @@ header ul.side_bar>li a img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+
+
+
+
+/* 태블릿 */
+
+header .Tablet_nav {
+    width: 100%;
+    flex: 1;
+    background-color: #FDFDFD;
+    position: fixed;
+    right: -100%;
+    top: 120px;
+    transition: .6s;
+    padding: 0 20px;
+    gap: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+header.on .Tablet_nav {
+    right: 0;
+    text-transform: uppercase;
+    font-family: var(--Suit);
+    color: var(--main-color);
+    padding-top: 50px;
+}
+
+header .Tablet_nav ul.gnb {
+    display: flex;
+    flex-direction: column;
+    height: 114px;
+    gap: 50px;
+    width: 100%;
+
+}
+
+header .Tablet_nav ul.gnb>li {
+    border-bottom: .5px solid #e2e2e2;
+    display: flex;
+    padding-bottom: 40px;
+    width: 100%;
+}
+
+/* header .Tablet_nav ul.gnb>li:last-child {
+    border-bottom: 0;
+} */
+
+header .Tablet_nav ul.gnb>li>a {
+ width: 25%;
+    font-size: 22px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    margin-right: 60px;
+    border-right: 1px solid #e2e2e2;
+}
+
+header .Tablet_nav ul.gnb>li>a span {
+   
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    display: block;
+}
+
+header .Tablet_nav ul.gnb>li>a button {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    display: none;
+}
+
+header .Tablet_nav ul.gnb>li>ul.sub {
+    flex: 1;
+    font-size: 19px;
+    font-weight: 300;
+    display: flex;
+    width: auto;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: 64px;
+    gap: 12px;
+}
+
+header .Tablet_nav .gnb ul.sub li {
+    height: 26px;
+    cursor: pointer;
+    width: 280px;
+}
+
+/* 태블릿 로그인 */
+
+header .Tablet_nav .bottom_txt {
+    margin-bottom: 100px;
+    display: none;
+}
+
+header .Tablet_nav .bottom_txt>ul {
+    display: flex;
+    width: 100%;
+    /* padding-left: 30px */
+    font-size: 14px;
+    font-weight: 400;
+    align-items: center;
+
+}
+
+header .Tablet_nav .bottom_txt>ul li {
+    border-right: .5px solid var(--font-bora);
+    padding: 0 10px;
+    text-align: center;
+    line-height: 1;
+}
+
+header .Tablet_nav .bottom_txt>ul li:last-child {
+    border-right: 0;
+}
+
+/*  테브릿 서브바 버튼 */
+
+header .h_right {
+    display: none;
+}
+
+header .h_right button {
+    border: 0;
+    background: transparent;
+    font-size: 27px;
+    cursor: pointer;
+    display: none;
+    /* width: 40px;
+    height: 40px; */
+    position: relative;
+    transition: .6s;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+header .h_right button.xbtn {
+    font-size: 33px;
+    font-weight: 300;
+}
+
+header .inner .h_right button.on {
+    display: block;
+}
+
+
+header.on .h_mini {
+    margin-left: auto;
+}
+
+header.on ul.side_bar {
+    display: none;
 }

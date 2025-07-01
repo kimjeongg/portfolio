@@ -32,34 +32,34 @@ $(function () {
     {
       img: "img/home_4_1.jpg",
       title: "드립백 콜롬비아",
-      subtitle: "다채로운 향과 블렌딩으로 품격을 높여줄 프리미엄 티 세트",
+      subtitle: "파우더 커피",
       price: "3,900원",
       originalPrice: "29,000원",
-      button: "img/grid-1.jpg",
+      button: "img/go_icon.png",
     },
     {
       img: "img/home_4_2.jpg",
       title: "드립백 콜롬비아",
-      subtitle: "다채로운 향과 블렌딩으로 품격을 높여줄 프리미엄 티 세트",
+      subtitle: "파우더 커피",
       price: "3,900원",
       originalPrice: "29,000원",
-      button: "img/grid-1.jpg",
+      button: "img/go_icon.png",
     },
     {
       img: "img/home_4_3.jpg",
       title: "드립백 콜롬비아",
-      subtitle: "다채로운 향과 블렌딩으로 품격을 높여줄 프리미엄 티 세트",
+      subtitle: "파우더 커피",
       price: "3,900원",
       originalPrice: "29,000원",
-      button: "img/grid-1.jpg",
+      button: "img/go_icon.png",
     },
     {
       img: "img/home_4_4.jpg",
       title: "드립백 콜롬비아",
-      subtitle: "다채로운 향과 블렌딩으로 품격을 높여줄 프리미엄 티 세트",
+      subtitle: "파우더 커피",
       price: "3,900원",
       originalPrice: "29,000원",
-      button: "img/grid-1.jpg",
+      button: "img/go_icon.png",
     }
   ];
 
@@ -91,10 +91,10 @@ $(function () {
     new Swiper('.main-product-swiper', {
       slidesPerView: 1,
       spaceBetween: 0,
-      /*  autoplay: {
-           delay: 4000,
-           disableOnInteraction: false,
-       }, */
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
       pagination: {
         el: '.main-product-swiper .swiper-pagination',
         clickable: true,
@@ -112,12 +112,13 @@ $(function () {
                 <div class="item-info">
                     <div class="item-top">
                      <div class="item-subtitle">${product.subtitle}</div>
-                    <div class="item-title">${product.title}</div>
+                     <div class="item-title">${product.title}</div>
                     </div>
                     <div class="item-bottom">
                     <div class="item-left">
+                    <div class="item-original-price">${product.originalPrice}</div>
                      <div class="item-price">${product.price}</div>
-                      <div class="item-original-price">${product.originalPrice}</div>
+                      
                       </div>
                       <a class="item-button">
                         <img src="${product.button}" alt="자세히보기">
