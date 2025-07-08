@@ -8,23 +8,59 @@
 
 }
 
+@media screen and (min-width : 1025px) {
+
+    header .h_left {
+        display: flex !important;
+    }
+
+    /* 데스크톱 네비게이션 보이게 */
+    header nav {
+        display: flex !important;
+    }
+
+    /* 태블릿 네비게이션 숨기기 */
+    header .Tablet_nav {
+        display: none !important;
+    }
+
+
+}
+
 @media screen and (max-width : 1024px) {
     .inner {
         padding: 0 20px;
         width: 100%;
     }
 
-    header nav {
+    header ul.gnb {
         display: none;
     }
 
-    header .h_right {
-        display: block;
 
+    header {
+        display: flex !important;
+        /*         background: #fff;
+        backdrop-filter: none; */
     }
 
-    header .h_right .xbtn {
-        color: var(--font-y);
+    header nav {
+        display: none !important;
+    }
+
+
+    header .h_left {
+        display: flex !important;
+    }
+
+    header .h_right {
+        display: block !important;
+    }
+
+
+    /* 태블릿 네비게이션 보이기 */
+    header .Tablet_nav {
+        display: flex !important;
     }
 
     header ul.side_bar>li {
@@ -40,4 +76,253 @@
         font-size: 23px;
     }
 
+    .main_visual {
+        height: 450px;
+    }
+
+    .main_visual a {
+        padding: 0 100px;
+    }
+
+    .main_visual h2 {
+        font-size: 32px;
+        line-height: 50px;
+    }
+
+    .main_visual p {
+        font-size: 22px;
+        line-height: 35px;
+    }
+
+    section {
+        padding: 150px 0 0 0 0;
+    }
+
+    .menu {
+        padding-top: 150px;
+    }
+
+    .menu-swiper {
+        width: 85%;
+    }
+
+    .menu-item {
+        width: 290px;
+    }
+
+    .menu-nav-prev {
+        left: 0px;
+    }
+
+    .menu-nav-next {
+        right: 0px;
+    }
+
+    .product-flex {
+        gap: 10px;
+    }
+
+    .main-product-swiper .product-info {
+        padding-left: 0;
+    }
+
+    .main-product-swiper .product-subtitle {
+        font-size: 17px;
+    }
+
+    .main-product-swiper .product-title {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+
+    .main-product-swiper .swiper-pagination {
+        bottom: 8px;
+    }
+
+    .main-product-swiper .swiper-slide {
+        gap: 10px;
+    }
+
+    .main-product-swiper .product-price {
+        gap: 5px;
+    }
+
+    .product-price .original-price {
+        font-size: 16px;
+    }
+
+    .product-price .price {
+        font-size: 20px;
+    }
+
+    .product-price .discount {
+        font-size: 18px;
+    }
+
+    .right-grid {
+        gap: 10px;
+    }
+
+    .grid-item .item-top {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .grid-item .item-subtitle {
+        display: none;
+
+    }
+
+    .grid-item .item-title {
+        font-size: 20px;
+        /*     font-weight: 400; */
+    }
+
+    .grid-item .item-bottom {
+        border-top: none;
+    }
+
+    .grid-item .item-price {
+        font-size: 18px;
+    }
+
+    .item-original-price {
+        font-size: 14px;
+    }
+
+    .item-button img {
+        width: 28px;
+    }
+
+    .grid-item::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        /* 아래쪽 70% 영역 */
+        background: linear-gradient(to bottom,
+                transparent 0%,
+                rgba(0, 0, 0, 0.1) 30%,
+                rgba(0, 0, 0, 0.5) 70%,
+                rgba(0, 0, 0, 0.85) 100%);
+        z-index: 1;
+        border-radius: 0 0 10px 10px;
+        /* 아래쪽 모서리만 둥글게 */
+    }
+
+    .grid-item .item-info {
+        width: 100%;
+        height: auto;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: transparent;
+        /* 배경 제거 */
+        color: white;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        opacity: 1;
+        transition: none;
+        z-index: 2;
+
+    }
+
+    .grid-item:hover {
+        transform: none;
+    }
+
+
+    .notice_event {
+        padding: 150px 0 80px 0;
+    }
+
+
+
+
+
+
+
+    .memvership {
+        background-image: url(../img/member_bg_t.png);
+        margin-top: 0;
+    }
+
+
+
+}
+
+@media screen and (max-width : 767px) {
+    header.on .Tablet_nav {
+        padding: 20px 30px 0 30px;
+    }
+
+    header .Tablet_nav ul.gnb>li {
+        flex-direction: column;
+        transition: all 0.3s ease;
+
+    }
+
+    header .Tablet_nav ul.gnb {
+        gap: 15%;
+    }
+
+    header .Tablet_nav ul.gnb>li>.tit button {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        font-size: 14px;
+    }
+
+    header .Tablet_nav ul.gnb>li>.tit {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 15px 0;
+        border-right: none;
+
+    }
+
+    header .Tablet_nav ul.gnb>li>ul.sub {
+        display: none;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 20px;
+        /* ✅ 밑으로 자연스럽게 나오도록 */
+        margin-top: 10px;
+        /*   transition: .3s; */
+
+    }
+
+    header .Tablet_nav ul.gnb>li>.tit button.rotated {
+        transform: rotate(180deg);
+    }
+
+    header .Tablet_nav ul.gnb>li>.tit a {
+        width: 25%;
+        display: flex;
+        height: 100%;
+    }
+
+    header .Tablet_nav ul.gnb>li>.tit span {
+        justify-content: start;
+    }
+
+    header .Tablet_nav .gnb ul.sub li {
+        height: 40px;
+        padding: 8px 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .memvership {
+        background-image: url(../img/member_bg_m.png);
+    }
 }
