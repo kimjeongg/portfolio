@@ -1,18 +1,47 @@
 $(function () {
-    if (location.hash === "#wrapper") {
+ if (location.hash === "#values") {
         $('#splash').hide();
+
+        // values 섹션으로 이동
+        const valuesSection = document.getElementById('values');
+        if (valuesSection) {
+            valuesSection.scrollIntoView({ behavior: 'auto' });
+        }
+
+        // ✅ 중요: 스크롤 허용 (기존 스크롤 막기 해제)
+        window.removeEventListener("wheel", preventScroll);
+        window.removeEventListener("touchmove", preventScroll);
+
+        // ✅ body에 'in' 클래스 제거 (values에서 wrapper로 스크롤 가능하게)
+        document.body.classList.remove('in');
+
+        // ✅ ScrollTrigger 새로고침
+        if (typeof ScrollTrigger !== 'undefined') {
+            ScrollTrigger.refresh();
+        }
+
+        // 페이지네이션 업데이트 함수가 있다면 실행
+        if (typeof updatePaginationVisibility === 'function') {
+            updatePaginationVisibility();
+        }
+
+        // 첫 번째 프로젝트 섹션 활성화 (wrapper 관련)
+        setTimeout(function () {
+            if (typeof goToSection === "function") goToSection(0);
+            if (typeof setActivePageBtn === "function") setActivePageBtn(0);
+        }, 100);
+
         return;
     }
 
-
-    
+    // 기존 스플래시 애니메이션 코드들...
     function preventScroll(e) {
         e.preventDefault();
     }
 
     window.addEventListener("wheel", preventScroll, { passive: false });
     window.addEventListener("touchmove", preventScroll, { passive: false });
-
+    
     // splash 애니메이션 끝난 뒤에 정확히 해제 가능
     /*    window.removeEventListener("wheel", preventScroll);
        window.removeEventListener("touchmove", preventScroll);

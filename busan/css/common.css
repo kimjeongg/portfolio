@@ -8,17 +8,17 @@
 :root {
     font-size: 16px;
     --header-height: 110px;
-    --white-color: #fff;
+    --white-color: #FDFDFD;
     --font-color: #1A1A1A;
     --sub_font-color: #666666;
     --pd-tb0-lr48: 0 48px;
     --pd-tit: 200px 0 80px 200px;
-    --main-color: #D2D8D2;
-    --main-color-deep: #8DAA91;
-    --sub-color1: #C45D45;
-    --sub-color1-1: rgba(196, 93, 69, 0.80);
-    --sub-color2: #E8D5C4;
-    --color-rgba: rgba(141, 170, 145, 0.50);
+    --main-color: #ffbb83;
+    --main-color-deep: #F4A261;
+    --sub-color1: #FFE066;
+    --sub-color1-1: rgba(255, 224, 102, 0.8);
+    --sub-color2: #E4D9FF;
+    --color-rgba: rgba(255, 161, 78, 0.8);
 }
 
 body {
@@ -488,6 +488,7 @@ section.txt_area h2 {
     font-weight: 200;
     line-height: 1.6;
     color: #ccc;
+    
 }
 
 section.txt_area h2 span {
@@ -516,18 +517,20 @@ section.txt_area h2 .tit {
 .s_tit {
     padding: var(--pd-tit);
     position: relative;
+    color: var(--font-color);
 }
 
 .s_tit h2 {
     font-size: 3.4vw;
     text-transform: uppercase;
     font-weight: 900;
+    line-height: 7rem;
 }
 
 .s_tit p {
     font-size: 0.9vw;
     font-weight: 500;
-    line-height: 1.2;
+    line-height: 1.4;
     margin-top: 20px;
 }
 
@@ -541,7 +544,7 @@ section.txt_area h2 .tit {
 
 .vision {
     height: 130vh;
-    background: var(--main-color-deep);
+    background: #FFF1E3 ;
     color: var(--white-color);
 }
 
@@ -574,14 +577,15 @@ section.txt_area h2 .tit {
     z-index: 5;
     position: relative;
     margin-top: 80px;
+    color: #333;
 }
 
 .sticky_title .list li {
     font-size: 1.8rem;
-    font-weight: 200;
+    font-weight: 300;
     flex-shrink: 0;
     margin-right: 100px;
-    opacity: 0.7;
+    opacity: 0.8;
 }
 
 .sticky_con {
@@ -595,7 +599,7 @@ section.txt_area h2 .tit {
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     position: absolute;
     left: 0;
     top: 40px;
@@ -603,7 +607,7 @@ section.txt_area h2 .tit {
 }
 
 .sticky_con ul li {
-    width: 32%;
+    width: 28%;
     height: 100%;
     position: relative;
     transform-style: preserve-3d;
@@ -683,8 +687,8 @@ section.txt_area h2 .tit {
 }
 
 .sticky_con ul li p {
-    font-size: 1.4rem;
-    line-height: 1.8rem;
+    font-size: 1.6rem;
+    line-height: 2rem;
 }
 
 
@@ -763,7 +767,7 @@ section.txt_area h2 .tit {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    border: 1px solid #333;
+    box-shadow: 0 5px 20px rgba(28, 3, 37, 0.25);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -774,8 +778,9 @@ section.txt_area h2 .tit {
 }
 
 .business .btn span:hover {
-    background: #333;
+    background: var(--main-color-deep);
     color: var(--white-color);
+    transform: scale(1.1);
 }
 
 .business .slide {
@@ -833,13 +838,14 @@ section.txt_area h2 .tit {
     font-weight: 600;
     font-size: 18px;
     margin-bottom: 20px;
+    color: #666666;
 }
 
 .business .slide ul li .txt_box h3 {
     font-size: 1.8rem;
     font-weight: 700;
     margin-bottom: 30px;
-    line-height: 1.2;
+    line-height: 1.4;
 }
 
 .business .slide ul li .txt_box p {
@@ -854,14 +860,15 @@ section.txt_area h2 .tit {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    width: 100%;
 }
 
 .business .slide ul li .txt_box .tag ul li {
-    width: 30%;
+    width: auto;
     text-align: center;
     padding: 10px 20px;
     border-radius: 20px;
-    background: #eee;
+    background: #F2F2F2;
     font-size: 15px;
     color: #333;
 }
@@ -979,6 +986,7 @@ section.txt_area h2 .tit {
 
 .news .s_tit h2 {
     font-size: 45px;
+    line-height: normal;
 }
 
 .news .more {
@@ -1069,9 +1077,12 @@ section.txt_area h2 .tit {
 footer {
     width: 100%;
     height: 60vh;
-    background: radial-gradient(circle at top right,
-            var(--main-color) 0%,
+    background: radial-gradient(circle at top right, 
+            var(--main-color) 20%,
             var(--main-color-deep) 30%);
+/*     background: radial-gradient(circle at bottom left,
+            var(--main-color) 20%,
+            var(--main-color-deep) 30%); */
     color: #1A1A1A;
     display: flex;
     flex-direction: column;
