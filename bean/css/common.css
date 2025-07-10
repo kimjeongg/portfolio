@@ -151,13 +151,17 @@ header .inner h1 img {
     object-fit: cover;
 }
 
-header ul.gnb {
-    display: flex;
+header .nav {
     width: 55%;
+    height: 100%;
+}
+
+header .nav ul.gnb {
+    display: flex;
+    width: 100%;
     height: 100%;
     align-items: center;
     justify-content: space-between;
-    font-family: var(--Suit);
     cursor: pointer;
     text-align: center;
 }
@@ -173,12 +177,29 @@ header ul.gnb {
 
 
 
-header  ul.gnb>li {
+header .nav ul.gnb>li {
     flex: 1;
     position: relative;
 }
 
-header  ul.gnb>li::after {
+header .nav ul.gnb>li:first-child>a p {
+    display: flex;
+    height: 40px;
+    width: 125px;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--point-light-bora);
+    color: var(--main-w);
+    border-radius: 50px;
+    transition: all 0.2s ease-out
+}
+
+header .nav ul.gnb>li:first-child:hover>a p {
+    transform: scale(1.05);
+    background-color: var(--point-bora);
+}
+
+header .nav ul.gnb>li::after {
     content: '';
     background: var(--point-yellow);
     width: 100%;
@@ -192,11 +213,15 @@ header  ul.gnb>li::after {
     z-index: 9999;
 }
 
-header ul.gnb>li:hover:after {
+header .nav ul.gnb>li:first-child::after {
+    content: none;
+}
+
+header .nav ul.gnb>li:hover:after {
     transform: scale(1);
 }
 
-header ul.gnb>li>a {
+header .nav ul.gnb>li>a {
     width: 100%;
     height: 100%;
     display: flex;
@@ -208,11 +233,11 @@ header ul.gnb>li>a {
     transition: .6s;
 }
 
-header ul.gnb>li:hover>a {
+header .nav ul.gnb>li:hover>a {
     color: var(--point-yellow);
 }
 
-header ul.gnb>li ul.sub {
+header .nav ul.gnb>li ul.sub {
     width: 100%;
     position: absolute;
     left: 0;
@@ -222,10 +247,14 @@ header ul.gnb>li ul.sub {
     color: #fff;
 }
 
+header .nav ul.gnb>li:first-child ul.sub {
+    top: 60px;
+}
+
 /* header nav ul.gnb>li:hover ul.sub{
     display: block;
 } */
-header ul.gnb>li ul.sub>li {
+header .nav ul.gnb>li ul.sub>li {
     width: 100%;
     height: 70px;
     line-height: 60px;
@@ -235,20 +264,20 @@ header ul.gnb>li ul.sub>li {
     font-weight: 200;
 }
 
-header ul.gnb>li ul.sub>li:last-child {
+header .nav ul.gnb>li ul.sub>li:last-child {
     border-radius: 0 0 10px 10px;
 }
 
-header ul.gnb>li ul.sub>li:hover {
+header .nav ul.gnb>li ul.sub>li:hover {
     color: var(--font-y);
     font-weight: 300;
 }
 
-header ul.gnb>li ul.sub>li:hover a {
+header .nav ul.gnb>li ul.sub>li:hover a {
     scale: 1.1;
 }
 
-header ul.gnb>li ul.sub>li a {
+header .nav ul.gnb>li ul.sub>li a {
     display: block;
     transition: .3s;
 }
@@ -345,10 +374,11 @@ header .Tablet_nav ul.gnb>li {
     display: flex;
     /*     padding-bottom: 40px; */
     width: 100%;
-    gap: 25px;
+    gap: 35px;
     padding-bottom: 5%;
     /*    align-items: center; */
     justify-content: center;
+    flex-direction: row;
 }
 
 /* header .Tablet_nav ul.gnb>li:last-child {
@@ -363,7 +393,7 @@ header .Tablet_nav ul.gnb>li>.tit {
     display: flex;
     /*     margin-right: 60px; */
     border-right: 1px solid #e2e2e2;
-    justify-content: start;
+    justify-content: center;
 }
 
 
@@ -438,7 +468,7 @@ header .h_right {
 }
 
 header .h_right button {
-    border: 0;
+
     background: transparent;
     font-size: 27px;
     cursor: pointer;
@@ -449,12 +479,17 @@ header .h_right button {
     transition: .6s;
     cursor: pointer;
     border-radius: 50%;
+    border: 0;
+}
+header .h_right button.hambtn img{
+ width: 31px;
+ margin-bottom: 3px;
+}
+header .h_right button img {
+   width: 35px;
 }
 
-header .h_right button.xbtn {
-    font-size: 33px;
-    font-weight: 300;
-}
+
 
 header .inner .h_right button.on {
     display: block;

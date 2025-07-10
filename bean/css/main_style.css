@@ -35,33 +35,32 @@
     height: 35px;
 }
 
-.main_visual .swiper-button-next,
-.main_visual .swiper-button-prev {
-    color: var( --font-0);
-    /* 원하는 컬러로 변경 */
+.main_visual .swiper-button-next::after,
+.main_visual .swiper-button-prev::after {
+    font-size: 20px;
+    color: var(--font-0);
 }
 
-@media (min-width: 1200px) {
+.main_visual .swiper-button-next {
+    right: 40px;
+}
+
+.main_visual .swiper-button-prev {
+    left: 40px;
+}
+
+/* @media (min-width: 1200px) {
     .main_visual .swiper-button-next {
         right: calc((100vw - 95%) / 2 + 20px);
-        /* inner 오른쪽 + 여백 */
     }
 
     .main_visual .swiper-button-prev {
         left: calc((100vw - 95%) / 2 + 20px);
-        /* inner 왼쪽 + 여백 */
+       
     }
-}
+} */
 
-@media (max-width: 1199px) {
-    .main_visual .swiper-button-next {
-        right: 20px;
-    }
 
-    .main_visual .swiper-button-prev {
-        left: 20px;
-    }
-}
 
 
 
@@ -455,6 +454,7 @@ section h3 {
     padding-top: 300px;
     background: #f8f9fa;
     background: #f8f9fa;
+
 }
 
 .menu-header {
@@ -486,10 +486,30 @@ section h3 {
     justify-content: space-between;
     padding: 0 20px;
     font-size: 18px;
+    transition: all 0.3s ease
+}
+
+.menu .mov {
+    display: none;
+}
+
+.menu-header .btn_pc:hover {
+    background-color: var(--point-bora);
+    /* 배경색 변화 */
+    transform: translateY(-2px);
+    /* 살짝 위로 이동 */
+    box-shadow: 0 4px 15px rgba(139, 79, 199, 0.3);
+    /* 그림자 효과 */
 }
 
 .menu-header .btn_pc img {
     width: 30px;
+    transition: transform 0.3s ease;
+}
+
+.menu-header .btn_pc:hover img {
+    transform: translateX(8px);
+    /* 오른쪽으로 8px 이동 */
 }
 
 .menu-header .more-btn {
@@ -541,6 +561,17 @@ section h3 {
     transition: transform 0.3s ease;
     position: relative;
     cursor: pointer;
+}
+
+.menu-item .menu-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+    /*   border-radius: 10px; */
+    /*     overflow: hidden; */
 }
 
 .menu-item:hover {
@@ -825,6 +856,7 @@ article span {
     text-overflow: ellipsis;
     white-space: nowrap;
     margin-right: 15px;
+
 }
 
 /* 이모지가 있는 텍스트 스타일 */
@@ -932,7 +964,7 @@ article .left p {
     background-image: url(../img/member_bg.png);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
+    background-position: bottom;
     margin-top: 150px;
 
 }
@@ -974,11 +1006,26 @@ article .left p {
     justify-content: space-between;
     padding: 0 20px;
     height: 55px;
-
+    transition: all 0.3s ease;
 }
 
 .memvership .btn_pc img {
     width: 30px;
+    transition: transform 0.3s ease;
+}
+
+.memvership .btn_pc:hover img {
+    transform: translateX(8px);
+    /* 오른쪽으로 8px 이동 */
+}
+
+.memvership .btn_pc:hover {
+    background-color: var(--point-bora);
+    /* 배경색 변화 */
+    transform: translateY(-2px);
+    /* 살짝 위로 이동 */
+    box-shadow: 0 4px 15px rgba(139, 79, 199, 0.3);
+    /* 그림자 효과 */
 }
 
 .memvership .bg {
@@ -1156,7 +1203,3 @@ footer .bottom_txt .bottom {
     font-size: 16px;
     font-weight: 200;
 }
-
-footer .bottom_txt .bottom ul {}
-
-footer .bottom_txt .bottom ul li {}

@@ -768,19 +768,19 @@
 }
 
 .container .project:nth-child(5) .top h2 {
-    color: #ACCBB0;
+    color: #FFBB83;
 }
 
 .container .project:nth-child(5) .top span {
-    color: #6A8E6F;
+    color: #FFBB83;
 }
 
 .container .project:nth-child(5) .center span {
-    color: #6A8E6F;
+    color: #FFBB83;
 }
 
 .container .project:nth-child(5) .center div {
-    background-color: #6A8E6F;
+    background-color: #FFBB83;
 }
 
 .container .project:nth-child(5) .center p {
@@ -791,11 +791,11 @@
     color: #fff;
     /*  border: 2px solid #fff; */
     transition: .3s;
-    background: #6A8E6F;
+    background: #FFBB83;
 }
 
 .container .project:nth-child(5) .bottom .wep:hover {
-    color: #6A8E6F;
+    color: #FFBB83;
     background-color: #fff;
     border: none;
 }
