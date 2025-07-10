@@ -32,7 +32,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-/*     cursor: pointer; */
+    /*     cursor: pointer; */
 
 }
 
@@ -88,7 +88,7 @@
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-      opacity: 0;
+    opacity: 0;
     transition: opacity 0.3s;
 }
 
@@ -447,11 +447,13 @@
 
     /* 원하는 컬러 배경 */
 }
-.container a{
+
+.container a {
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .container_bg {
     position: fixed;
     top: 0;
@@ -568,7 +570,7 @@
     font-weight: 600;
 }
 
-.text-box  .bottom a{
+.text-box .bottom a {
     width: 220px;
     height: 50px;
     font-weight: bold;
@@ -650,20 +652,22 @@
 }
 
 .container .project:nth-child(2) .bottom .landing {
-    color: #9E3DB3;
+    color: #fff;
     transition: .3s;
-    border: 1px solid #fff;
-    background: #0f0f0f;
+    background-color: #E0A2ED;
+
     /* background: #fff; */
 }
 
 .container .project:nth-child(2) .bottom .landing:hover {
-    color: #fff;
-    background-color: #9E3DB3;
-    border: none;
+    color: #E0A2ED;
+    border: 1px solid #fff;
+    background: #0f0f0f;
 }
 
-.container .project:nth-child(2) .bottom .wep {
+
+
+ .container .project:nth-child(2) .bottom .wep {
     color: #fff;
     background-color: #9E3DB3;
     transition: .3s;
