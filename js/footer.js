@@ -1,5 +1,33 @@
 
 $(function () {
+  // ✅ 의존성 확인
+  if (typeof gsap === 'undefined') {
+    console.error('GSAP이 로드되지 않았습니다.');
+    return;
+  }
+
+  if (typeof ScrollTrigger === 'undefined') {
+    console.error('ScrollTrigger가 로드되지 않았습니다.');
+    return;
+  }
+
+  if (typeof Matter === 'undefined') {
+    console.error('Matter.js가 로드되지 않았습니다.');
+    return;
+  }
+
+  // ✅ GSAP 플러그인 등록
+  gsap.registerPlugin(ScrollTrigger);
+
+  // ✅ 요소 존재 확인
+  const footer = document.querySelector(".footer_top");
+  const canvas = document.getElementById("matter-canvas");
+  const tags = document.querySelectorAll(".tag");
+
+  if (!footer || !canvas || !tags.length) {
+    console.error('Footer 관련 DOM 요소를 찾을 수 없습니다.');
+    return;
+  }
 
   window.addEventListener("wheel", function (e) {
     // console.log("✅ window wheel fired", e.deltaY);
@@ -89,9 +117,7 @@ $(function () {
   /* 떨어지는 프레임 */
   gsap.registerPlugin(ScrollTrigger);
 
-  const footer = document.querySelector(".footer_top");
-  const canvas = document.getElementById("matter-canvas");
-  const tags = document.querySelectorAll(".tag");
+
 
   /* console.log("✅ canvas:", canvas); */
 

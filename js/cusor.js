@@ -22,12 +22,28 @@
 
 
 document.addEventListener("DOMContentLoaded", () => {
+  // ✅ GSAP 로딩 확인
+  if (typeof gsap === 'undefined') {
+    console.error('GSAP이 로드되지 않았습니다.');
+    return;
+  }
+
+  // ✅ 먼저 요소를 정의
   const cursor = document.getElementById("main-cursor");
-  const cursorText = cursor.querySelector(".cursor-text");
   const splash = document.getElementById("splash");
- const hoverTargets = document.querySelectorAll(
-  'button, a, .cursor-button, [data-cursor="hover"]'
-);
+
+  // ✅ 그 다음에 존재 확인
+  if (!cursor || !splash) {
+    console.error('커서 관련 DOM 요소를 찾을 수 없습니다.');
+    return;
+  }
+
+  // ✅ 나머지 요소들
+  const cursorText = cursor.querySelector(".cursor-text");
+  const hoverTargets = document.querySelectorAll(
+    'button, a, .cursor-button, [data-cursor="hover"]'
+  );
+
 
   // 🟡 마우스 이동 시 커서 따라가기
   document.addEventListener("mousemove", (e) => {

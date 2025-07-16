@@ -1,5 +1,21 @@
-$(function () {
- if (location.hash === "#values") {
+document.addEventListener('DOMContentLoaded', function () {
+
+    // ✅ GSAP 로딩 확인
+    if (typeof gsap === 'undefined') {
+        console.error('GSAP이 로드되지 않았습니다.');
+        return;
+    }
+
+    // ✅ 요소 존재 확인
+    const textElement = document.getElementById('text');
+    const particlesCanvas = document.getElementById('particles');
+
+    if (!textElement || !particlesCanvas) {
+        console.error('필요한 DOM 요소를 찾을 수 없습니다.');
+        return;
+    }
+
+    if (location.hash === "#values") {
         $('#splash').hide();
 
         // values 섹션으로 이동
@@ -41,7 +57,7 @@ $(function () {
 
     window.addEventListener("wheel", preventScroll, { passive: false });
     window.addEventListener("touchmove", preventScroll, { passive: false });
-    
+
     // splash 애니메이션 끝난 뒤에 정확히 해제 가능
     /*    window.removeEventListener("wheel", preventScroll);
        window.removeEventListener("touchmove", preventScroll);

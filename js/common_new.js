@@ -1,4 +1,14 @@
 $(function () {
+  if (typeof gsap === 'undefined') {
+    console.error('GSAP이 로드되지 않았습니다.');
+    return;
+  }
+
+  if (typeof ScrollTrigger === 'undefined') {
+    console.error('ScrollTrigger가 로드되지 않았습니다.');
+    return;
+  }
+
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
   const wrapper = document.getElementById('wrapper');
@@ -52,36 +62,36 @@ $(function () {
     const isInWrapper = document.body.classList.contains('in');
     const footerRect = footer.getBoundingClientRect();
     const isFooterVisible = footerRect.top < window.innerHeight * 0.8; // ✅ 조건 완화
-
-    console.log('📊 페이지네이션 상태:', {
-      isInWrapper,
-      isFooterVisible,
-      isTransitioning,
-      footerTop: footerRect.top,
-      windowHeight: window.innerHeight
-    });
+    /* 
+        console.log('📊 페이지네이션 상태:', {
+          isInWrapper,
+          isFooterVisible,
+          isTransitioning,
+          footerTop: footerRect.top,
+          windowHeight: window.innerHeight
+        }); */
 
     // ✅ 조건 수정: footer가 화면 하단 근처에 있을 때만 숨김
     if (isInWrapper && !isFooterVisible) {
       pagination.classList.add('visible');
-      console.log('✅ 페이지네이션 표시');
+      /*  console.log('✅ 페이지네이션 표시'); */
     } else if (isFooterVisible) {
       pagination.classList.remove('visible');
-      console.log('❌ 페이지네이션 숨김 (footer 보임)');
+      /*   console.log('❌ 페이지네이션 숨김 (footer 보임)'); */
     }
     // ✅ isTransitioning 조건 제거로 더 안정적으로 표시
   }
 
   // ✅ 70번째 줄에 상태 확인 함수 추가
   function checkCurrentState() {
-    console.log('🔍 현재 상태 확인:', {
-      currentSection: currentSection,
-      isInWrapper: document.body.classList.contains('in'),
-      isPaginationVisible: pagination.classList.contains('visible'),
-      isTransitioning: isTransitioning,
-      footerTop: footer.getBoundingClientRect().top,
-      windowHeight: window.innerHeight
-    });
+    /*     console.log('🔍 현재 상태 확인:', {
+          currentSection: currentSection,
+          isInWrapper: document.body.classList.contains('in'),
+          isPaginationVisible: pagination.classList.contains('visible'),
+          isTransitioning: isTransitioning,
+          footerTop: footer.getBoundingClientRect().top,
+          windowHeight: window.innerHeight
+        }); */
   }
 
   // 전역 등록
@@ -180,14 +190,14 @@ $(function () {
   try {
     updateScales(0);
   } catch (e) {
-    console.warn('updateScales 실패:', e);
+    /*     console.warn('updateScales 실패:', e); */
   }
 
   // 👇 전역에서 디버깅 가능하도록 등록할 함수
   function goToSection(index) {
     if (index === currentSection || isTransitioning) return; // 중복 방지
     isTransitioning = true;
-    console.log("✅ goToSection 실행됨 ⇒", index);
+    /*  console.log("✅ goToSection 실행됨 ⇒", index); */
     const targetX = -index * window.innerWidth;
 
     gsap.timeline({
@@ -195,7 +205,7 @@ $(function () {
         currentSection = index;
         isTransitioning = false;
         setActivePageBtn(index);  // ← 이 줄 추가!
-        console.log(`🎯 이동 완료 → 현재 섹션: ${index}`);
+        /*  console.log(`🎯 이동 완료 → 현재 섹션: ${index}`); */
       }
     })
       .to(sections[currentSection], {
@@ -209,7 +219,7 @@ $(function () {
         duration: .8,
         ease: "power2.inOut",
         onStart: () => {
-          console.log(`✅ goToSection 실행됨 → ${index}`);
+          /*           console.log(`✅ goToSection 실행됨 → ${index}`); */
         }
       })
       .to(sections[index], {
@@ -247,10 +257,10 @@ $(function () {
 
     // ✅ GNB 열릴 때 스크롤 방지
     if (isOpening) {
-      console.log('🔒 GNB 열림 - 스크롤 방지');
+      /*   console.log('🔒 GNB 열림 - 스크롤 방지'); */
       document.body.style.overflow = 'hidden';
     } else {
-      console.log('🔓 GNB 닫힘 - 스크롤 허용');
+      /* console.log('🔓 GNB 닫힘 - 스크롤 허용'); */
       document.body.style.overflow = '';
     }
   });
@@ -261,7 +271,7 @@ $(function () {
     $('.gnb_overlay').removeClass('on');
 
     // ✅ GNB 닫힐 때 스크롤 허용
-    console.log('🔓 GNB 닫힘 - 스크롤 허용');
+    /*    console.log('🔓 GNB 닫힘 - 스크롤 허용'); */
     document.body.style.overflow = '';
   });
 
@@ -275,11 +285,11 @@ $(function () {
       e.preventDefault();
       return;
     }
-    console.log('📊 wheel 이벤트 - 페이지네이션 상태:', {
-      isPaginationVisible: pagination.classList.contains('visible'),
-      isInWrapper: document.body.classList.contains('in'),
-      currentSection: currentSection
-    });
+    /*  console.log('📊 wheel 이벤트 - 페이지네이션 상태:', {
+       isPaginationVisible: pagination.classList.contains('visible'),
+       isInWrapper: document.body.classList.contains('in'),
+       currentSection: currentSection
+     }); */
 
     const now = Date.now();
     if (now - lastScrollTime < 100 || isTransitioning) return;
@@ -294,16 +304,16 @@ $(function () {
     ) / footerRect.height;
     const isFooterMostlyVisible = (footerRect.top < window.innerHeight && footerRect.bottom > 0);
 
-    console.log('isFooterMostlyVisible:', isFooterMostlyVisible, 'currentSection:', currentSection, 'delta:', delta);
+    /*   console.log('isFooterMostlyVisible:', isFooterMostlyVisible, 'currentSection:', currentSection, 'delta:', delta); */
 
     // ✅ footer에서 위로 스크롤 시 프로젝트 복귀 (조건 수정)
     if (isFooterMostlyVisible && !document.body.classList.contains('in')) {
       if (delta > 0) {
-        console.log('footer에서 아래로 스크롤: 아무 동작도 하지 않음');
+        /*  console.log('footer에서 아래로 스크롤: 아무 동작도 하지 않음'); */
         return;
       }
       if (delta < 0) {
-        console.log('footer에서 위로 스크롤: 프로젝트 마지막 섹션으로 복귀');
+        /*  console.log('footer에서 위로 스크롤: 프로젝트 마지막 섹션으로 복귀'); */
         e.preventDefault();
 
         // ✅ 상태 초기화
@@ -321,7 +331,7 @@ $(function () {
 
         const observer = new IntersectionObserver((entries) => {
           if (entries[0].isIntersecting) {
-            console.log('🎯 container 도착 - 마지막 섹션으로 이동');
+            /* console.log('🎯 container 도착 - 마지막 섹션으로 이동'); */
 
             // ✅ 마지막 섹션으로 이동
             goToSection(sections.length - 1);
@@ -337,7 +347,7 @@ $(function () {
         // ✅ 타임아웃 시간 단축
         setTimeout(() => {
           if (isTransitioning) {
-            console.log('⏰ 타임아웃 - 마지막 섹션으로 이동');
+            /*     console.log('⏰ 타임아웃 - 마지막 섹션으로 이동'); */
 
             goToSection(sections.length - 1);
             setActivePageBtn(sections.length - 1);
@@ -403,7 +413,7 @@ $(function () {
           currentSection = sections.length - 1;
 
           document.body.classList.remove('in');
-          console.log('footer 진입: currentSection =', currentSection);
+          /*   console.log('footer 진입: currentSection =', currentSection); */
 
           footer.scrollIntoView({ behavior: 'smooth' });
           updatePaginationVisibility();
@@ -439,7 +449,7 @@ $(function () {
       document.body.classList.contains('in') &&
       !isFooterMostlyVisible // footer가 보이지 않을 때만
     ) {
-      console.log('wrapper에서 values로 복귀 시도');
+      /*  console.log('wrapper에서 values로 복귀 시도'); */
       e.preventDefault(); // 스크롤 막기
       isTransitioning = true;
       document.body.classList.remove('in');
@@ -448,7 +458,7 @@ $(function () {
 
       const observer = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) {
-          console.log('values 도착 완료');
+          /*   console.log('values 도착 완료'); */
           isTransitioning = false;
           updatePaginationVisibility();
           observer.disconnect();
@@ -458,7 +468,7 @@ $(function () {
 
       setTimeout(() => {
         if (isTransitioning) {
-          console.log('values 복귀 타임아웃');
+          /*    console.log('values 복귀 타임아웃'); */
           isTransitioning = false;
           updatePaginationVisibility();
         }
@@ -521,47 +531,6 @@ $(function () {
 
 
 
-  /* document.addEventListener("DOMContentLoaded", function () {
-    if (location.hash === "#wrapper") {
-      // splash가 있다면 숨기기
-      var splash = document.getElementById("splash");
-      if (splash) splash.style.display = "none";
-      // wrapper로 바로 이동
-      var wrapper = document.getElementById("wrapper");
-      if (wrapper) wrapper.scrollIntoView({ behavior: "auto" });
-    }
-  }); */
-  /*   document.addEventListener("DOMContentLoaded", function () {
-      var splash = document.getElementById("splash");
-      // 1. 해시 방식
-      if (location.hash === "#values") {
-        console.log("해시로 스플래시 스킵");
-        if (splash) splash.style.display = "none";
-        var wrapper = document.getElementById("values");
-        if (wrapper) wrapper.scrollIntoView({ behavior: "auto" });
-  
-        // ★ body에 'in' 클래스 추가 (페이지네이션 바로 보이게)
-        document.body.classList.add('in');
-        updatePaginationVisibility();
-  
-        // ★ 첫 번째 프로젝트 섹션 활성화
-        setTimeout(function () {
-          if (typeof goToSection === "function") goToSection(0);
-          if (typeof setActivePageBtn === "function") setActivePageBtn(0);
-        }, 100);
-      }
-    }); */
-  /*   $('.gnb_overlay ul.gnb li a[href="#footer"]').on('click', function (e) {
-      e.preventDefault();
-      // 부드럽게 스크롤
-      document.getElementById('footer').scrollIntoView({ behavior: 'smooth' });
-  
-      // footer 모션 트리거 (스크롤 완료 후 실행)
-      setTimeout(() => {
-        if (typeof window.triggerFooterMotion === 'function') window.triggerFooterMotion();
-      }, 700); // 스크롤 애니메이션 시간에 맞춰 조정
-    });
-   */
 
   // ✅ GNB 클릭 이벤트 수정 (values 섹션 처리 추가)
   $('.gnb_overlay ul.gnb li a').on('click', function (e) {
@@ -579,11 +548,11 @@ $(function () {
       // ✅ GNB 닫힐 때 스크롤 허용
       document.body.style.overflow = '';
 
-      console.log('🎯 GNB 클릭:', targetId);
+      /*  console.log('🎯 GNB 클릭:', targetId); */
 
       // ✅ values 섹션으로 이동 (대기 없이 바로 이동)
       if (targetId === 'values') {
-        console.log('📍 values 섹션으로 바로 이동');
+        /*    console.log('📍 values 섹션으로 바로 이동'); */
 
         // ✅ wrapper에서 나가기
         document.body.classList.remove('in');
@@ -597,7 +566,7 @@ $(function () {
       }
       // ✅ footer 섹션으로 이동 (대기 없이 바로 이동)
       if (targetId === 'footer') {
-        console.log('📍 footer 섹션으로 바로 이동');
+        /*   console.log('📍 footer 섹션으로 바로 이동'); */
 
         // ✅ currentSection을 마지막 섹션으로 설정 (복귀용)
         currentSection = sections.length - 1;
@@ -625,15 +594,15 @@ $(function () {
       const sectionIndex = sectionNames.indexOf(targetId);
 
       if (sectionIndex !== -1) {
-        console.log(`✅ GNB 클릭: ${targetId} (인덱스: ${sectionIndex})`);
-
+        /*   console.log(`✅ GNB 클릭: ${targetId} (인덱스: ${sectionIndex})`);
+   */
         // footer에서 클릭했는지 확인
         const footerRect = footer.getBoundingClientRect();
         const isInFooter = footerRect.top < window.innerHeight && footerRect.bottom > 0;
 
         // ✅ 해결: 화면도 올바르게 변경됨
         if (isInFooter) {
-          console.log('🔄 footer에서 프로젝트 섹션으로 바로 이동');
+          /*   console.log('🔄 footer에서 프로젝트 섹션으로 바로 이동'); */
 
           isTransitioning = true;
           currentSection = sectionIndex;
@@ -643,7 +612,7 @@ $(function () {
 
           // ✅ 스크롤 완료 후 바로 섹션 이동
           setTimeout(() => {
-            console.log('🎯 container 도착 완료, 섹션 바로 이동');
+            /*       console.log('🎯 container 도착 완료, 섹션 바로 이동'); */
 
             // ✅ 강제로 wrapper transform 설정
             const targetX = -sectionIndex * window.innerWidth;
@@ -665,11 +634,11 @@ $(function () {
             updatePaginationVisibility();
             isTransitioning = false;
 
-            console.log('✅ footer → 프로젝트 이동 완료 - 화면 표시:', sectionIndex);
+            /*   console.log('✅ footer → 프로젝트 이동 완료 - 화면 표시:', sectionIndex); */
           }, 600); // ✅ 600ms로 단축
         } else if (!document.body.classList.contains('in')) {
           // wrapper 밖에 있는 경우 (values 섹션 등)
-          console.log('📍 wrapper 밖에서 프로젝트 섹션으로 바로 이동');
+          /*  console.log('📍 wrapper 밖에서 프로젝트 섹션으로 바로 이동'); */
 
           // ✅ 즉시 body 클래스 추가 및 페이지네이션 표시
           document.body.classList.add('in');
@@ -686,12 +655,12 @@ $(function () {
             pagination.classList.add('visible');
             updatePaginationVisibility();
 
-            console.log('✅ GNB 프로젝트 바로 이동 완료');
+            /*  console.log('✅ GNB 프로젝트 바로 이동 완료'); */
           }, 800);
 
         } else {
           // 이미 wrapper 안에 있는 경우
-          console.log('📍 wrapper 안에서 섹션 바로 이동');
+          /*  console.log('📍 wrapper 안에서 섹션 바로 이동'); */
 
           // ✅ 바로 해당 섹션으로 이동
           goToSection(sectionIndex);
@@ -709,15 +678,15 @@ $(function () {
       const footerRect = footer.getBoundingClientRect();
       const isInWrapper = document.body.classList.contains('in');
       const isPaginationVisible = pagination.classList.contains('visible');
-
-      console.log('🔍 실시간 상태:', {
-        currentSection,
-        isInWrapper,
-        isPaginationVisible,
-        footerTop: Math.round(footerRect.top),
-        windowHeight: window.innerHeight,
-        isTransitioning
-      });
+      /* 
+            console.log('🔍 실시간 상태:', {
+              currentSection,
+              isInWrapper,
+              isPaginationVisible,
+              footerTop: Math.round(footerRect.top),
+              windowHeight: window.innerHeight,
+              isTransitioning
+            }); */
     }, 1000);
 
     // 10초 후 자동 중단
