@@ -36,12 +36,26 @@
     padding: 0;
     box-sizing: border-box;
 }
-body, html, a, button, input, textarea, select, label {
-  cursor: none !important;
+
+body,
+html,
+a,
+button,
+input,
+textarea,
+select,
+label {
+    cursor: none !important;
 }
-.splash, .main, .wrap, .view, .canvas {
-  cursor: none !important;
+
+.splash,
+.main,
+.wrap,
+.view,
+.canvas {
+    cursor: none !important;
 }
+
 html,
 body {
     overflow: hidden;
@@ -59,10 +73,12 @@ body::-webkit-scrollbar {
 }
 
 body.in {
-  overflow: hidden;
+    overflow: hidden;
 }
+
 body:not(.in) {
-  overflow: hidden; /* ✅ auto → hidden 으로 통일 */
+    overflow: hidden;
+    /* ✅ auto → hidden 으로 통일 */
 }
 
 .wrap {
@@ -82,7 +98,8 @@ header {
     z-index: 9999;
     gap: 20px;
 }
-.down_ham{    
+
+/* .down_ham{    
     display: flex;
     width: 50px;
     height: 50px;
@@ -93,7 +110,51 @@ header {
 }
 .down_ham img {
     width: 70%;
+} */
+.down_ham {
+    position: relative;
+    display: flex;
+    width: 50px;
+    height: 50px;
+    background-color: var(--beige);
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    transition: background-color .3s ease;
+    /* 햄버거처럼 배경색만 전환 */
+    overflow: hidden;
 }
+
+.down_ham img {
+    position: absolute;
+    /* 두 이미지를 정확히 겹침 */
+    width: 70%;
+    pointer-events: none;
+    /* 마우스 이벤트로 hover 끊김 방지 */
+    transition: opacity .4s ease-out;
+    /* 부드러운 페이드 */
+}
+
+.down_ham img.default {
+    opacity: 1;
+}
+
+.down_ham img.hover {
+    opacity: 0;
+}
+
+.down_ham:hover {
+    background-color: var(--red);
+}
+
+.down_ham:hover img.default {
+    opacity: 0;
+}
+
+.down_ham:hover img.hover {
+    opacity: 1;
+}
+
 header .dot_ham {
     display: flex;
     width: 50px;
@@ -112,7 +173,7 @@ header .dot_ham {
 
 }
 
-header button:hover{
+header button:hover {
     background-color: var(--red);
 }
 
@@ -240,7 +301,7 @@ header.on .dot_ham ul li:nth-child(3) {
 }
 
 .gnb_overlay ul.gnb li.white {
-   color: var(--navy);
+    color: var(--navy);
     background-color: var(--white-color);
 }
 
@@ -253,11 +314,11 @@ header.on .dot_ham ul li:nth-child(3) {
     display: flex;
     align-items: center;
     justify-content: center;
-/*     width: 100%;
+    /*     width: 100%;
     height: 100%; */
-        border-radius: 50px;
+    border-radius: 50px;
     padding: 15px 40px;
-        width: auto;
+    width: auto;
     height: 60px;
 
 }
