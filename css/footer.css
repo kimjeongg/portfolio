@@ -72,22 +72,24 @@ footer .inner {
 }
 
 .footer_top .left li:nth-child(5) {
-    margin-left: 70px;
+    margin-left: 55px;
 }
 
 .footer_top .left li:nth-child(6) {
-    margin-left: 110px;
+    margin-left: 100px;
     margin-bottom: 50px;
 }
 
 .footer_top .left li:nth-child(8) {
-    margin-left: 100px;
+    margin-left: 125px;
 }
 
 .footer_top .left li:nth-child(9) {
-    margin-left: 140px;
+    margin-left: 165px;
 }
-
+.footer_top .left li:nth-child(10) {
+    margin-left: 30px;
+}
 
 
 .footer_top .center {
