@@ -112,7 +112,7 @@ header .dot_ham {
 
 }
 
-header button:hover {
+header button:hover{
     background-color: var(--red);
 }
 
